@@ -1,7 +1,9 @@
-package com.tzs.eyepetizer;
+package com.tzs.eyepetizer.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.tzs.eyepetizer.R;
 
 public class MainActivity extends AppCompatActivity {
 
