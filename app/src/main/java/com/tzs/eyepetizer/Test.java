@@ -5,5 +5,6 @@ package com.tzs.eyepetizer;
  */
 
 public class Test {
+    int b;
     int a;
 }
