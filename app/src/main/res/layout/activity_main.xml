@@ -39,4 +39,5 @@
             android:text="我的"
             android:drawableTop="@drawable/my_seletor"/>
     </RadioGroup>
+
 </RelativeLayout>
