@@ -28,21 +28,21 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * 初始化view
      */
-    private void initView() {
+    protected void initView() {
 
     }
 
     /**
      * 展示数据
      */
-    private void showData() {
+    protected void showData() {
 
     }
 
     /**
      * 设置事件
      */
-    private void setEvent() {
+    protected void setEvent() {
 
     }
 
