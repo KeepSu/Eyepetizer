@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.tzs.eyepetizer.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/rg"/>
+        android:layout_height="0dp"
+        android:layout_above="@+id/rg"
+        android:layout_weight="1" />
+
+    <include layout="@layout/line_thin" />
+
     <RadioGroup
         android:id="@+id/rg"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
         <RadioButton
             android:id="@+id/rb_select"
             style="@style/RadioButtonStyle"
-            android:text="精选"
+            android:checked="true"
             android:drawableTop="@drawable/select_seletor"
-            android:checked="true"/>
+            android:text="精选" />
+
         <RadioButton
             android:id="@+id/rb_find"
             style="@style/RadioButtonStyle"
-            android:text="发现"
-            android:drawableTop="@drawable/find_seletor"/>
+            android:drawableTop="@drawable/find_seletor"
+            android:text="发现" />
+
         <RadioButton
             android:id="@+id/rb_follow"
             style="@style/RadioButtonStyle"
-            android:text="关注"
-            android:drawableTop="@drawable/follow_seletor"/>
+            android:drawableTop="@drawable/follow_seletor"
+            android:text="关注" />
+
         <RadioButton
             android:id="@+id/rb_my"
             style="@style/RadioButtonStyle"
-            android:text="我的"
-            android:drawableTop="@drawable/my_seletor"/>
+            android:drawableTop="@drawable/my_seletor"
+            android:text="我的" />
     </RadioGroup>
 
-</RelativeLayout>
+</LinearLayout>
