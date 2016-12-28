@@ -3,6 +3,7 @@ package com.tzs.eyepetizer.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+        setEvent();
     }
 
     //初始化view
@@ -38,6 +40,7 @@ public class MainActivity extends BaseActivity
     //设置监听事件
     protected void setEvent() {
         showFragment(0);
+        Log.e("======","-======");
         rg.setOnCheckedChangeListener(this);
     }
 
