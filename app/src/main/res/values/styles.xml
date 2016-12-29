@@ -14,12 +14,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
-        <item name="android:scaleX">0.5</item>
-        <item name="android:scaleY">0.5</item>
-        <item name="android:layout_marginTop">-16dp</item>
-        <item name="android:layout_marginBottom">-16dp</item>
-        <item name="android:textSize">18dp</item>
-        <item name="android:foregroundTint" tools:targetApi="lollipop">#0000</item>
+        <item name="android:textSize">@dimen/textsize_tint</item>
         <item name="android:textColor">@drawable/text_seletor</item>
     </style>
 
