@@ -38,4 +38,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'org.greenrobot:greendao:3.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.youth.banner:banner:1.4.6'
 }
