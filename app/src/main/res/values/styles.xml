@@ -23,4 +23,16 @@
         <item name="android:textColor">@drawable/text_seletor</item>
     </style>
 
+    <style name="textSubtitle">//副标题的风格(16sp,加粗)
+        <item name="android:textSize">@dimen/textsize_subtitle</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textDescription">//描述内容风格(14sp)
+        <item name="android:textSize">@dimen/textsize_description</item>
+        <item name="android:textColor">@color/text_normal</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxEms">14</item>
+    </style>
 </resources>
