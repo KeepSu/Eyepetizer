@@ -2,7 +2,6 @@ package com.tzs.eyepetizer.fragment;
 
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -18,6 +18,7 @@ import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.entity.Discover;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerClickListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -37,7 +38,10 @@ public class DiscoverFragment extends Fragment {
     @BindView(R.id.banner)
     Banner banner;
 
-    private List imageUrls = new ArrayList();
+    private List imageUrls = new ArrayList();//取出的banner图片地址的列表
+    private Discover mDiscover;//解析出来的discover对象
+    private List<Discover.ItemListBeanX> mItemList;//整体的list集合
+    private List<Discover.ItemListBeanX.DataBeanX.ItemListBean> mItemListBeen;//每一条里面的list集合
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -49,62 +53,63 @@ public class DiscoverFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
         ButterKnife.bind(this, view);
-
         download();
-
-        //设置图片加载器
-        banner.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        banner.setImages(imageUrls);//添加图片地址的集合
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
 
         return view;
     }
+
     private void download() {
         OkHttpUtils.get(path).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
+                mDiscover = new Gson().fromJson(s, Discover.class);//解析出来的discover对象
 
-                Discover discover = new Gson().fromJson(s, Discover.class);
-                String nextPageUrl = discover.getNextPageUrl();//下一页的地址
-                List<Discover.ItemListBeanX> itemList = discover.getItemList();//discover整体的list
-                int count = discover.getCount();
+                String nextPageUrl = mDiscover.getNextPageUrl();//下一页的地址
+                mItemList = mDiscover.getItemList();//整体的list
+                int count = mDiscover.getCount();
+                imageUrls.clear();//确保每一次下载数据后，imageUrls集合首先是空的，再填充数据
                 for (int i = 0; i < count; i++) {
-                    List<Discover.ItemListBeanX.DataBeanX.ItemListBean> itemList1
-                            = itemList.get(i).getData().getItemList();//每一条里面的list
-                    for (int j = 0; j < itemList1.size(); j++) {
-                        String imageUrl = itemList1.get(j).getData().getImage();
+                    mItemListBeen = mItemList.get(i).getData().getItemList();//每一条里面的list
+                    for (int j = 0; j < mItemListBeen.size(); j++) {
+                        String imageUrl = mItemListBeen.get(j).getData().getImage();
                         if (i == 0) {
                             imageUrls.add(imageUrl);
-                            Log.e("===1111===", "=========="+imageUrl);
+                            Log.e("===1111===", "===="+imageUrls.size()+"===="+imageUrl);
                         }
                     }
                 }
+                setBanner();
             }
         });
     }
+
+    private void setBanner() {
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片list集合
+        banner.setImages(imageUrls);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+
+        //点击事件，该第三方banner点击事件的下标是从1开始的
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(getActivity(), "点击了第"+position+"条banner", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
 
+/**
+ * 用于加载banner图片的类
+ * 是由第三方中提供的
+ */
 class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        /**
-         注意：
-         1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
-         2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
-         传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
-         切记不要胡乱强转！
-         */
         //Glide 加载图片简单用法
-//        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(context).load(path).into(imageView);
-
-        //Picasso 加载图片简单用法
-        //Picasso.with(context).load(path).into(imageView);
-
-        //用fresco加载图片简单用法，记得要写下面的createImageView方法
-        Uri uri = Uri.parse((String) path);
-        imageView.setImageURI(uri);
     }
 }
