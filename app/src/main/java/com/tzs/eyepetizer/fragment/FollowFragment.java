@@ -19,8 +19,8 @@ import butterknife.ButterKnife;
  * 关注页面
  */
 public class FollowFragment extends Fragment {
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    @BindView(R.id.rv_out)
+    RecyclerView rv_out;
     @BindView(R.id.tv_author)
     TextView tv_author;
     @BindView(R.id.iv_search)
