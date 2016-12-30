@@ -8,4 +8,6 @@
     <color name="text_select">#262626</color>
     <color name="text_light">#fff</color>
 
+    <color name="bg_alpha">#4000</color>
+
 </resources>
