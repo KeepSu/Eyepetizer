@@ -3,6 +3,7 @@ package com.tzs.eyepetizer.adapter;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,13 +44,13 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         if (viewType == HORIZONTALSCROLLCARD) {
-            view = mInflater.inflate(R.layout.discover_scroll_card, parent, false);
+            view = mInflater.inflate(R.layout.item_discover_scroll_card, parent, false);
             return new ScrollCardViewHolder(view);
         } else if (viewType == SQUARECARDCOLLECTION) {
-            view = mInflater.inflate(R.layout.discover_square_card, parent, false);
+            view = mInflater.inflate(R.layout.item_discover_square_card, parent, false);
             return new SquareCardViewHolder(view);
         } else if (viewType == BANNERCOLLECTION){
-            view = mInflater.inflate(R.layout.discover_banner_collection, parent, false);
+            view = mInflater.inflate(R.layout.item_discover_banner_collection, parent, false);
             return new BannerCollectionViewHolder(view);
         }
         return null;
@@ -57,9 +58,8 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        Discover.ItemListBeanX.DataBeanX.HeaderBean header = mData.get(position).getData().getHeader();
         Discover.ItemListBeanX.DataBeanX data = mData.get(position).getData();
-//        List<Discover.ItemListBeanX.DataBeanX.ItemListBean> itemList = mData.get(position).getData().getItemList();
+        List<Discover.ItemListBeanX.DataBeanX.ItemListBean> itemList = mData.get(position).getData().getItemList();
         switch (getItemViewType(position)) {
             case HORIZONTALSCROLLCARD:
                 ScrollCardViewHolder scrollCardViewHolder = (ScrollCardViewHolder) holder;
@@ -78,7 +78,20 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 squareCardviewHolder.title_Discover.setText(data.getHeader().getTitle());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext,
                         LinearLayoutManager.HORIZONTAL, false);
-                squareCardviewHolder.recyclerView_Classify.setLayoutManager(linearLayoutManager);
+                squareCardviewHolder.recyclerView_inner.setLayoutManager(linearLayoutManager);
+                //判断是热门分类id=1、热门排行id=2、还是推荐作者id=3的内容，来设置不同的adapter
+                int id = data.getHeader().getId();
+                if (id == 1) {
+                    DiscoverHotClassifyAdapter dhcAdapter = new DiscoverHotClassifyAdapter(mContext);
+                    squareCardviewHolder.recyclerView_inner.setAdapter(dhcAdapter);
+                    dhcAdapter.setList(itemList);
+                } else if (id == 2) {
+                    DiscoverHotRankAdapter dhrAdapter = new DiscoverHotRankAdapter(mContext);
+                    squareCardviewHolder.recyclerView_inner.setAdapter(dhrAdapter);
+                    dhrAdapter.setList(itemList);
+                }else if (id == 3) {
+                    Log.e("==3=id===", "======"+id);
+                }
                 break;
 //            case BANNERCOLLECTION:
 //                BannerCollectionViewHolder bcviewHolder = (BannerCollectionViewHolder) holder;
@@ -93,7 +106,10 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mData.size();
     }
 
-    /*** 顶部： * type：horizontalScrollCard的ViewHolder */
+    /**
+     * 顶部
+     * type：horizontalScrollCard的ViewHolder
+     */
     static class ScrollCardViewHolder extends RecyclerView.ViewHolder{
         private Banner banner;
         public ScrollCardViewHolder(View itemView) {
@@ -108,11 +124,11 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     static class SquareCardViewHolder extends RecyclerView.ViewHolder{
         private TextView title_Discover;
-        private RecyclerView recyclerView_Classify;
+        private RecyclerView recyclerView_inner;
         public SquareCardViewHolder(View itemView) {
             super(itemView);
             title_Discover = (TextView) itemView.findViewById(R.id.title_Discover);
-            recyclerView_Classify = (RecyclerView) itemView.findViewById(R.id.recyclerView_Classify);
+            recyclerView_inner = (RecyclerView) itemView.findViewById(R.id.recyclerView_inner);
         }
     }
 
