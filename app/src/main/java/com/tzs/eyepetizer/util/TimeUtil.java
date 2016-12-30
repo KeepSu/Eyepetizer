@@ -17,7 +17,7 @@ public class TimeUtil {
         if (time / 60 < 10) {
             during = "0";
         }
-        during = during + time / 60 + "'";
+        during = during + time / 60 + "' ";
         if (time % 60 < 10) {
             during = during + "0";
         }
