@@ -120,38 +120,4 @@ public class SelectFragment extends BaseFragment {
         }
         adapter.notifyDataSetChanged();
     }
-
-    private class MyAdapter extends RecyclerView.Adapter {
-
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test, null);
-            ButterKnife.bind(this, view);
-            return new MyViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ((MyViewHolder) holder).getmTextView().setText("哈哈哈~~~~/n~");
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 100;
-        }
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView mTextView;
-
-            public MyViewHolder(View itemView) {
-                super(itemView);
-                mTextView = (TextView) itemView.findViewById(R.id.tv_test);
-            }
-
-            public TextView getmTextView() {
-                return mTextView;
-            }
-        }
-    }
 }
