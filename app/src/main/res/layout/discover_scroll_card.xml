@@ -9,11 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="208dp"/>
 
-    <include layout="@layout/line_thin"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#ebebeb"/>
+    <include layout="@layout/line_divide"/>
 
 </LinearLayout>
