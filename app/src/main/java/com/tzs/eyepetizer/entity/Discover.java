@@ -239,6 +239,7 @@ public class Discover {
                     private String dataType;
                     private int id;
                     private String title;
+                    private String text;
                     private String description;
                     private String image;
                     private String actionUrl;
@@ -268,6 +269,14 @@ public class Discover {
 
                     public void setTitle(String title) {
                         this.title = title;
+                    }
+
+                    public String getText() {
+                        return text;
+                    }
+
+                    public void setText(String text) {
+                        this.text = text;
                     }
 
                     public String getDescription() {
