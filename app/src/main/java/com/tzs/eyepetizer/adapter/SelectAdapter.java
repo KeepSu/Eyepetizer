@@ -80,11 +80,18 @@ public class SelectAdapter extends RecyclerView.Adapter {
         String type = selectItem.getType();
         switch (type) {
             case "video":
-                VideoHolder videoHolder = ((VideoHolder) holder);
+                final VideoHolder videoHolder = ((VideoHolder) holder);
                 VideoBeanForClient.DataBean data = ((VideoBeanForClient) selectItem).getData();
                 videoHolder.tv_title.setText(data.getTitle());
                 videoHolder.tv_category_duration.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
                 ImageUtil.setImage(context, data.getCover().getFeed(), videoHolder.iv_select_cover);
+                videoHolder.ly_video.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        videoHolder.ly_video.setVisibility(View.GONE);
+                        return false;
+                    }
+                });
                 break;
             case "textFooter":
                 Log.e("=============>", "============>");
@@ -141,6 +148,8 @@ public class SelectAdapter extends RecyclerView.Adapter {
         TextView tv_author;
         @BindView(R.id.tv_promotion)
         TextView tv_promotion;
+        @BindView(R.id.ly_video)
+        LinearLayout ly_video;
 
         VideoHolder(View itemView) {
             super(itemView);
