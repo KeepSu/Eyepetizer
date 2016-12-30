@@ -12,9 +12,10 @@
         android:scaleType="centerCrop" />
 
     <RelativeLayout
+        android:id="@+id/ly_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4000"
+        android:background="@color/bg_alpha"
         android:orientation="vertical">
 
         <TextView
@@ -31,13 +32,14 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/ly_video"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:lines="1"
+                android:ellipsize="end"
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -11,8 +11,11 @@
         android:id="@+id/tv_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="20dp"
         android:text="-Dec.28.supper-"
-        android:textStyle="bold|italic" />
+        android:textColor="@color/text_select"
+        android:textSize="@dimen/textsize_subtitle"
+        android:textStyle="bold|italic"
+        android:typeface="serif" />
 
 </LinearLayout>
