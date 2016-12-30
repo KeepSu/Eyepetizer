@@ -61,8 +61,6 @@ public class DiscoverFragment extends Fragment {
             public void onSuccess(String s, Call call, Response response) {
                 mDiscover = new Gson().fromJson(s, Discover.class);//解析出来的discover对象
                 adapter.setList(mDiscover.getItemList());
-//                getDiscoverClass();
-//                setBanner();
             }
         });
     }
