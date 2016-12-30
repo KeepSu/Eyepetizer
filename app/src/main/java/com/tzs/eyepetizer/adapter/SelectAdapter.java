@@ -1,20 +1,26 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.entity.select.ItemCollection;
 import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
+import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
+import com.tzs.eyepetizer.util.AnimaUtil;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
 
@@ -50,23 +56,23 @@ public class SelectAdapter extends RecyclerView.Adapter {
      */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = null;
+        View itemView;
         switch (viewType) {
             case VIDEO:
                 itemView = inflater.inflate(R.layout.item_select_video, parent, false);
                 return new VideoHolder(itemView);
             case TEXTFOOTER:
                 itemView = inflater.inflate(R.layout.item_select_textfooter, parent, false);
-                return new VideoHolder(itemView);
+                return new TextFooterHolder(itemView);
             case TEXTHEADER:
                 itemView = inflater.inflate(R.layout.item_select_textheader, parent, false);
-                return new VideoHolder(itemView);
+                return new TextHeaderHolder(itemView);
             case VIDEO_COLLECTION_WITH_COVER:
                 itemView = inflater.inflate(R.layout.item_select_viewset_with_cover, parent, false);
-                return new VideoHolder(itemView);
+                return new VideoSetWithCoverHolder(itemView);
             case VIDEO_COLLECTION_OF_FOLLOW:
                 itemView = inflater.inflate(R.layout.item_select_videoset_of_follow, parent, false);
-                return new VideoHolder(itemView);
+                return new VideoSetOfFollowHolder(itemView);
         }
         return null;
     }
@@ -85,23 +91,41 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 videoHolder.tv_title.setText(data.getTitle());
                 videoHolder.tv_category_duration.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
                 ImageUtil.setImage(context, data.getCover().getFeed(), videoHolder.iv_select_cover);
-                videoHolder.ly_video.setOnLongClickListener(new View.OnLongClickListener() {
+                videoHolder.ly_video.setOnTouchListener(new View.OnTouchListener() {
                     @Override
-                    public boolean onLongClick(View v) {
-                        videoHolder.ly_video.setVisibility(View.GONE);
+                    public boolean onTouch(View v, MotionEvent event) {
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                AnimaUtil.disappear(1000, videoHolder.ly_video);
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+                                AnimaUtil.appear(1000, videoHolder.ly_video);
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                AnimaUtil.appear(1000, videoHolder.ly_video);
+                                break;
+                        }
                         return false;
                     }
                 });
                 break;
             case "textFooter":
-                Log.e("=============>", "============>");
-                TextFooterHolder footerHolder = ((TextFooterHolder) holder);
+                TextFooterHolder mFooterHolder = ((TextFooterHolder) holder);
                 TextFooter.DataBean mTextFooter = ((TextFooter) selectItem).getData();
-                footerHolder.tv_footer.setText(mTextFooter.getText());
+                mFooterHolder.tv_footer.setText(mTextFooter.getText());
                 break;
             case "videoCollectionWithCover":
+                VideoSetWithCoverHolder mVideoSetWithCoverHolder = ((VideoSetWithCoverHolder) holder);
+                ItemCollection.DataBean mItemCollection = ((ItemCollection) selectItem).getData();
+                ImageUtil.setImage(context, mItemCollection.getHeader().getCover(), mVideoSetWithCoverHolder.iv_set_cover);
+                LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                mVideoSetWithCoverHolder.rv_video_set.setLayoutManager(manager);
+//                mVideoSetWithCoverHolder.rv_video_set.setAdapter(new VideoSetAdapter());
                 break;
             case "textHeader":
+                TextHeaderHolder mTextHeaderHolder = ((TextHeaderHolder) holder);
+                TextHeader.DataBean mTextHeader = ((TextHeader) selectItem).getData();
+                mTextHeaderHolder.tv_header.setText(mTextHeader.getText());
                 break;
             case "videoCollectionOfFollow":
                 break;
@@ -118,6 +142,7 @@ public class SelectAdapter extends RecyclerView.Adapter {
             case "video":
                 return VIDEO;
             case "textFooter":
+                Log.e("===getItemViewType==>", "===============>");
                 return TEXTFOOTER;
             case "textHeader":
                 return TEXTHEADER;
@@ -149,7 +174,7 @@ public class SelectAdapter extends RecyclerView.Adapter {
         @BindView(R.id.tv_promotion)
         TextView tv_promotion;
         @BindView(R.id.ly_video)
-        LinearLayout ly_video;
+        RelativeLayout ly_video;
 
         VideoHolder(View itemView) {
             super(itemView);
@@ -176,12 +201,12 @@ public class SelectAdapter extends RecyclerView.Adapter {
     /**
      * TextHeader的模板类
      */
-    static class TextHeadterHolder extends RecyclerView.ViewHolder {
+    static class TextHeaderHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_header)
-        TextView tv_footer;
+        TextView tv_header;
 
-        public TextHeadterHolder(View itemView) {
+        public TextHeaderHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -190,9 +215,14 @@ public class SelectAdapter extends RecyclerView.Adapter {
     /**
      * ViderSetWithCover的模板类
      */
-    static class ViderSetWithCoverHolder extends RecyclerView.ViewHolder {
+    static class VideoSetWithCoverHolder extends RecyclerView.ViewHolder {
 
-        public ViderSetWithCoverHolder(View itemView) {
+        @BindView(R.id.iv_set_cover)
+        ImageView iv_set_cover;
+        @BindView(R.id.rv_video_set)
+        RecyclerView rv_video_set;
+
+        VideoSetWithCoverHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -201,9 +231,9 @@ public class SelectAdapter extends RecyclerView.Adapter {
     /**
      * ViderSetOfFollow的模板类
      */
-    static class ViderSetOfFollowHolder extends RecyclerView.ViewHolder {
+    static class VideoSetOfFollowHolder extends RecyclerView.ViewHolder {
 
-        public ViderSetOfFollowHolder(View itemView) {
+        public VideoSetOfFollowHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
