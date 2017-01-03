@@ -2,15 +2,15 @@ package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,11 +18,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.entity.Follow;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.loader.ImageLoader;
+import com.youth.banner.view.BannerViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * Created by Administrator on 2016/12/29.
@@ -69,7 +75,7 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 final AuthorViewHolder avh= (AuthorViewHolder) holder;
                 avh.tv_nickName.setText(header.getTitle());
                 avh.tv_description.setText(header.getDescription());
-                Glide.with(context).load(header.getIcon()).asBitmap().
+                Glide.with(context).load(header.getIcon()).asBitmap().centerCrop().
                                 into(new BitmapImageViewTarget(avh.iv_portrait){
                                     @Override
                                     protected void setResource(Bitmap resource) {
@@ -90,6 +96,23 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 TypeViewHolder tvh= (TypeViewHolder) holder;
                 tvh.tv_type.setText(header.getTitle());
                 tvh.tv_description.setText((String)header.getSubTitle());
+                GlideImageLoader loader=new GlideImageLoader();
+                Follow.ItemListBeanX.DataBeanX data = list.get(position).getData();
+                List<String> imgePath=new ArrayList<>();
+                List<String> titles=new ArrayList<>();
+                for (int i = 0; i <data.getCount(); i++) {
+                    imgePath.add(data.getItemList().get(i).getData().getCover().getFeed());
+                    titles.add(data.getItemList().get(i).getData().getTitle());
+                    Log.i("info","title"+data.getItemList().get(i).getData().getTitle());
+                    //tvh.tv_content.setText(data.getItemList().get(i).getData().getTitle());
+                }
+
+                tvh.banner.setImageLoader(loader);
+                tvh.banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
+                tvh.banner.setImages(imgePath);
+                tvh.banner.setBannerTitles(titles);
+                tvh.banner.isAutoPlay(false);
+                tvh.banner.start();
                 break;
         }
 
@@ -104,15 +127,17 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * 作者布局ViewHolder
      */
     static class AuthorViewHolder extends RecyclerView.ViewHolder{
-        private ImageView iv_portrait;
-        private TextView tv_nickName,tv_description;
-        private RecyclerView rv_inner;
+        @BindView(R.id.iv_portrait)
+        ImageView iv_portrait;
+        @BindView(R.id.tv_nickName)
+        TextView tv_nickName;
+        @BindView(R.id.tv_description)
+        TextView tv_description;
+        @BindView(R.id.rv_inner)
+        RecyclerView rv_inner;
         public AuthorViewHolder(View itemView) {
             super(itemView);
-            iv_portrait= (ImageView) itemView.findViewById(R.id.iv_portrait);
-            tv_nickName= (TextView) itemView.findViewById(R.id.tv_nickName);
-            tv_description= (TextView) itemView.findViewById(R.id.tv_description);
-            rv_inner= (RecyclerView) itemView.findViewById(R.id.rv_inner);
+            ButterKnife.bind(this,itemView);
         }
     }
 
@@ -120,11 +145,21 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * 类型布局ViewHolder
      */
     static class TypeViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv_type,tv_description;
+        @BindView(R.id.tv_type)
+        TextView tv_type;
+        @BindView(R.id.tv_description)
+        TextView tv_description;
+        @BindView(R.id.banner)
+        Banner banner;
+        @BindView(R.id.iv_image)
+        ImageView iv_image;
+        @BindView(R.id.tv_content)
+        TextView tv_content;
+        @BindView(R.id.tv_playTime)
+        TextView tv_playTime;
         public TypeViewHolder(View itemView) {
             super(itemView);
-            tv_type= (TextView) itemView.findViewById(R.id.tv_type);
-            tv_description= (TextView) itemView.findViewById(R.id.tv_description);
+            ButterKnife.bind(this,itemView);
         }
     }
 
@@ -149,5 +184,16 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 return FOLLOW_TYPE;
         }
         return 0;
+    }
+    /**
+     * 用于加载banner图片的类
+     * 是由第三方中提供的
+     */
+    class GlideImageLoader extends ImageLoader {
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            //Glide 加载图片简单用法
+            Glide.with(context).load(path).into(imageView);
+        }
     }
 }

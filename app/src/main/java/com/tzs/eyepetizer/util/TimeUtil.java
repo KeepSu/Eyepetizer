@@ -1,7 +1,7 @@
 package com.tzs.eyepetizer.util;
 
 /**
- * Created by h on 2016/12/29.
+ * 时间工具类
  */
 
 public class TimeUtil {

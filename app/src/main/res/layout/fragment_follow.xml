@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.tzs.eyepetizer.fragment.FollowFragment">
 
@@ -38,9 +39,12 @@
 
     <include layout="@layout/line_thin" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_out"
+    <com.tzs.eyepetizer.view.PullToRefreshRecyclerView
+        android:id="@+id/rr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:ptrHeaderBackground="#fff"
+        app:ptrDrawable="@drawable/ic_eye_black_inner"
+        app:ptrAnimationStyle="rotate"/>
 
 </LinearLayout>

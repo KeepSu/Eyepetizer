@@ -11,7 +11,7 @@ public class ItemCollection extends SelectItem implements Serializable {
 
     /**
      * type : videoCollectionWithCover
-     * data : {"dataType":"ItemCollection","header":{"id":107,"title":null,"font":"normal","cover":"http://img.kaiyanapp.com/207c0c401d940ceb42ac5f90a53e9325.jpeg?imageMogr2/quality/60","label":{"text":null,"card":null,"detail":null},"actionUrl":"eyepetizer://webview/?title=%E7%BD%91%E6%98%93%E6%96%B0%E9%97%BB%E5%B9%B4%E5%BA%A6%E6%80%81%E5%BA%A6%EF%BC%9A%E8%B6%8A%E5%AD%A4%E7%8B%AC%EF%BC%8C%E8%B6%8A%E7%83%AD%E9%97%B9&url=http%3A%2F%2Fwww.eyepetizer.net%2Fvideos_article.html%3Fnid%3D107%26shareable%3Dtrue"},"itemList":[],"count":4,"adTrack":null}
+     * data : {"dataType":"ItemCollection","header":{"id":107,"title":null,"font":"normal","cover":"http://img.kaiyanapp.com/207c0c401d940ceb42ac5f90a53e9325.jpegVideoBeanForClientimageMogr2/quality/60","label":{"text":null,"card":null,"detail":null},"actionUrl":"eyepetizer://webview/VideoBeanForClienttitle=%E7%BD%91%E6%98%93%E6%96%B0%E9%97%BB%E5%B9%B4%E5%BA%A6%E6%80%81%E5%BA%A6%EF%BC%9A%E8%B6%8A%E5%AD%A4%E7%8B%AC%EF%BC%8C%E8%B6%8A%E7%83%AD%E9%97%B9&url=http%3A%2F%2Fwww.eyepetizer.net%2Fvideos_article.html%3Fnid%3D107%26shareable%3Dtrue"},"itemList":[],"count":4,"adTrack":null}
      */
 
     private DataBean data;
@@ -27,7 +27,7 @@ public class ItemCollection extends SelectItem implements Serializable {
     public static class DataBean implements Serializable {
         /**
          * dataType : ItemCollection
-         * header : {"id":107,"title":null,"font":"normal","cover":"http://img.kaiyanapp.com/207c0c401d940ceb42ac5f90a53e9325.jpeg?imageMogr2/quality/60","label":{"text":null,"card":null,"detail":null},"actionUrl":"eyepetizer://webview/?title=%E7%BD%91%E6%98%93%E6%96%B0%E9%97%BB%E5%B9%B4%E5%BA%A6%E6%80%81%E5%BA%A6%EF%BC%9A%E8%B6%8A%E5%AD%A4%E7%8B%AC%EF%BC%8C%E8%B6%8A%E7%83%AD%E9%97%B9&url=http%3A%2F%2Fwww.eyepetizer.net%2Fvideos_article.html%3Fnid%3D107%26shareable%3Dtrue"}
+         * header : {"id":107,"title":null,"font":"normal","cover":"http://img.kaiyanapp.com/207c0c401d940ceb42ac5f90a53e9325.jpegVideoBeanForClientimageMogr2/quality/60","label":{"text":null,"card":null,"detail":null},"actionUrl":"eyepetizer://webview/VideoBeanForClienttitle=%E7%BD%91%E6%98%93%E6%96%B0%E9%97%BB%E5%B9%B4%E5%BA%A6%E6%80%81%E5%BA%A6%EF%BC%9A%E8%B6%8A%E5%AD%A4%E7%8B%AC%EF%BC%8C%E8%B6%8A%E7%83%AD%E9%97%B9&url=http%3A%2F%2Fwww.eyepetizer.net%2Fvideos_article.html%3Fnid%3D107%26shareable%3Dtrue"}
          * itemList : []
          * count : 4
          * adTrack : null
@@ -37,7 +37,7 @@ public class ItemCollection extends SelectItem implements Serializable {
         private HeaderBean header;
         private int count;
         private Object adTrack;
-        private List<?> itemList;
+        private List<VideoBeanForClient> itemList;
 
         public String getDataType() {
             return dataType;
@@ -71,11 +71,11 @@ public class ItemCollection extends SelectItem implements Serializable {
             this.adTrack = adTrack;
         }
 
-        public List<?> getItemList() {
+        public List<VideoBeanForClient> getItemList() {
             return itemList;
         }
 
-        public void setItemList(List<?> itemList) {
+        public void setItemList(List<VideoBeanForClient> itemList) {
             this.itemList = itemList;
         }
 
@@ -84,17 +84,36 @@ public class ItemCollection extends SelectItem implements Serializable {
              * id : 107
              * title : null
              * font : normal
-             * cover : http://img.kaiyanapp.com/207c0c401d940ceb42ac5f90a53e9325.jpeg?imageMogr2/quality/60
+             * cover : http://img.kaiyanapp.com/207c0c401d940ceb42ac5f90a53e9325.jpegVideoBeanForClientimageMogr2/quality/60
              * label : {"text":null,"card":null,"detail":null}
-             * actionUrl : eyepetizer://webview/?title=%E7%BD%91%E6%98%93%E6%96%B0%E9%97%BB%E5%B9%B4%E5%BA%A6%E6%80%81%E5%BA%A6%EF%BC%9A%E8%B6%8A%E5%AD%A4%E7%8B%AC%EF%BC%8C%E8%B6%8A%E7%83%AD%E9%97%B9&url=http%3A%2F%2Fwww.eyepetizer.net%2Fvideos_article.html%3Fnid%3D107%26shareable%3Dtrue
+             * actionUrl : eyepetizer://webview/VideoBeanForClienttitle=%E7%BD%91%E6%98%93%E6%96%B0%E9%97%BB%E5%B9%B4%E5%BA%A6%E6%80%81%E5%BA%A6%EF%BC%9A%E8%B6%8A%E5%AD%A4%E7%8B%AC%EF%BC%8C%E8%B6%8A%E7%83%AD%E9%97%B9&url=http%3A%2F%2Fwww.eyepetizer.net%2Fvideos_article.html%3Fnid%3D107%26shareable%3Dtrue
              */
 
             private int id;
-            private Object title;
+            private String title;
             private String font;
             private String cover;
             private LabelBean label;
             private String actionUrl;
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
+            public List<String> getIconList() {
+                return iconList;
+            }
+
+            public void setIconList(List<String> iconList) {
+                this.iconList = iconList;
+            }
+
+            private String description;
+            private List<String> iconList;
 
             public int getId() {
                 return id;
@@ -104,11 +123,11 @@ public class ItemCollection extends SelectItem implements Serializable {
                 this.id = id;
             }
 
-            public Object getTitle() {
+            public String getTitle() {
                 return title;
             }
 
-            public void setTitle(Object title) {
+            public void setTitle(String title) {
                 this.title = title;
             }
 

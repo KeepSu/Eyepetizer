@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
+        android:layout_marginRight="3dp"
         android:id="@+id/iv_image"
         android:layout_width="300dp"
         android:layout_height="180dp" />
@@ -13,16 +14,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="来自大海的法式湿吻"
-        style="@style/textSubtitle"/>
+        style="@style/textContentDescription"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/tv_playTime"
+            android:id="@+id/tv_category"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#开胃 / 01'00"
             style="@style/textDescription"/>
+
     </LinearLayout>
 </LinearLayout>
