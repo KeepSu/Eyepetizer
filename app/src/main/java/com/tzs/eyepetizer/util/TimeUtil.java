@@ -1,7 +1,7 @@
 package com.tzs.eyepetizer.util;
 
 /**
- * Created by h on 2016/12/29.
+ * 时间工具类
  */
 
 public class TimeUtil {
@@ -17,7 +17,7 @@ public class TimeUtil {
         if (time / 60 < 10) {
             during = "0";
         }
-        during = during + time / 60 + "'";
+        during = during + time / 60 + "' ";
         if (time % 60 < 10) {
             during = during + "0";
         }
