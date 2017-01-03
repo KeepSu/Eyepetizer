@@ -52,7 +52,12 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
     @Override
     protected boolean isReadyForPullStart() {
-        return getRefreshableView().getScrollY() == 0;
+        View view=getRefreshableView().getChildAt(0);
+        if (view!=null){
+            return view.getTop()>=getRefreshableView().getTop();
+        }
+        return false;
+
     }
 
 }
