@@ -1,5 +1,17 @@
 [
     {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
+    },
+    {
+        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
+        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
         "source": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
     },
@@ -8,7 +20,19 @@
         "source": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
     },
     {
+        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
+        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
         "source": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
+        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
     }
 ]

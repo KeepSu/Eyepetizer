@@ -8,30 +8,43 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
+        android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/title_Discover"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="热 门 专 题"
-            android:textSize="@dimen/textsize_subtitle"
-            android:textStyle="bold"/>
-
-        <ImageView
-            android:id="@+id/iv_Go"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_action_more_arrow_dark"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
+            android:clipChildren="false"
+            android:layerType="software">
 
-    <com.youth.banner.Banner
-        android:id="@+id/banner_coll"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+            <TextView
+                android:id="@+id/title_Discover"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="热 门 专 题"
+                android:textSize="@dimen/textsize_subtitle"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/iv_Go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_action_more_arrow_dark"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner_coll"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:clipChildren="false"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

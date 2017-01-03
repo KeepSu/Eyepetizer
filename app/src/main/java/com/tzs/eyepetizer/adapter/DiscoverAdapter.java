@@ -94,9 +94,20 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     draAdapter.setList(itemList);
                 }
                 break;
-//            case BANNERCOLLECTION:
-//                BannerCollectionViewHolder bcviewHolder = (BannerCollectionViewHolder) holder;
-//                break;
+            case BANNERCOLLECTION:
+                BannerCollectionViewHolder bcviewHolder = (BannerCollectionViewHolder) holder;
+                bcviewHolder.title_discover.setText(data.getHeader().getTitle());
+                List imageUrls = new ArrayList();
+                for (int i = 0; i < data.getCount(); i++) {
+                    String imageUrl = data.getItemList().get(i).getData().getImage();
+                    imageUrls.add(imageUrl);
+                }
+                bcviewHolder.banner_coll
+                        .setImageLoader(new GlideImageLoader())
+                        .setImages(imageUrls)
+                        .isAutoPlay(false)//设置为不自动轮播
+                        .start();
+                break;
             default:
                 break;
         }
@@ -139,8 +150,13 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     static class BannerCollectionViewHolder extends RecyclerView.ViewHolder{
 
+        private TextView title_discover;
+        private Banner banner_coll;
+
         public BannerCollectionViewHolder(View itemView) {
             super(itemView);
+            title_discover = (TextView) itemView.findViewById(R.id.title_Discover);
+            banner_coll = (Banner) itemView.findViewById(R.id.banner_coll);
         }
     }
 
