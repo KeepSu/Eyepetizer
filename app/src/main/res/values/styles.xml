@@ -22,6 +22,7 @@
         <item name="android:textSize">@dimen/textsize_subtitle</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="textContentDescription">//图片下面描述内容的风格(16sp,加粗)
         <item name="android:textSize">@dimen/textsize_description</item>
         <item name="android:textStyle">bold</item>
@@ -35,4 +36,27 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxEms">12</item>
     </style>
+
+    <style name="TitleLight">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">啦啦啦~~~</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textsize_title</item>
+    </style>
+
+    <style name="SubTitleLight">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:text">"#开胃 / 03'20\""</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
 </resources>

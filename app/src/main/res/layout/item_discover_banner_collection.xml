@@ -32,6 +32,6 @@
     <com.youth.banner.Banner
         android:id="@+id/banner_coll"
         android:layout_width="match_parent"
-        android:layout_height="208dp"/>
+        android:layout_height="200dp"/>
 
 </LinearLayout>

@@ -3,7 +3,6 @@ package com.tzs.eyepetizer.adapter;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +89,9 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     squareCardviewHolder.recyclerView_inner.setAdapter(dhrAdapter);
                     dhrAdapter.setList(itemList);
                 }else if (id == 3) {
-                    Log.e("==3=id===", "======"+id);
+                    DiscoverRecommendAuthorAdapter draAdapter = new DiscoverRecommendAuthorAdapter(mContext);
+                    squareCardviewHolder.recyclerView_inner.setAdapter(draAdapter);
+                    draAdapter.setList(itemList);
                 }
                 break;
 //            case BANNERCOLLECTION:
