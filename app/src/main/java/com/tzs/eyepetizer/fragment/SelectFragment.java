@@ -17,6 +17,7 @@ import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
+import com.tzs.eyepetizer.util.NetStateUtil;
 import com.tzs.eyepetizer.util.ToastUtil;
 
 import org.json.JSONArray;
@@ -70,11 +71,14 @@ public class SelectFragment extends BaseFragment {
      * 加载数据
      */
     private void initData() {
+        if (!isNetConn()) {
+            return;
+        }
         OkHttpUtils.get("http://baobab.kaiyanapp.com/api/v4/tabs/selected")
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        paseJson(s);
+                        parseJson(s);
                     }
 
                     @Override
@@ -88,7 +92,7 @@ public class SelectFragment extends BaseFragment {
     /**
      * 解析json
      */
-    private void paseJson(String json) {
+    private void parseJson(String json) {
         try {
             JSONObject object = new JSONObject(json);
             JSONArray array = object.getJSONArray("itemList");

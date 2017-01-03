@@ -38,15 +38,8 @@
             android:orientation="vertical">
 
             <TextView
-                android:lines="1"
-                android:ellipsize="end"
                 android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="啦啦啦,啦啦啦~~~~"
-                android:textColor="@color/text_light"
-                android:textSize="@dimen/textsize_title"
-                android:textStyle="bold" />
+                style="@style/TitleLight" />
 
             <TextView
                 android:id="@+id/tv_category_duration"
