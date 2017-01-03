@@ -119,8 +119,9 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 ItemCollection.DataBean mItemCollection = ((ItemCollection) selectItem).getData();
                 ImageUtil.setImage(context, mItemCollection.getHeader().getCover(), mVideoSetWithCoverHolder.iv_set_cover);
                 LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                VideoSetAdapter videoSetAdapter = new VideoSetAdapter(context, mItemCollection.getItemList());
                 mVideoSetWithCoverHolder.rv_video_set.setLayoutManager(manager);
-//                mVideoSetWithCoverHolder.rv_video_set.setAdapter(new VideoSetAdapter());
+                mVideoSetWithCoverHolder.rv_video_set.setAdapter(videoSetAdapter);
                 break;
             case "textHeader":
                 TextHeaderHolder mTextHeaderHolder = ((TextHeaderHolder) holder);
@@ -128,6 +129,24 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 mTextHeaderHolder.tv_header.setText(mTextHeader.getText());
                 break;
             case "videoCollectionOfFollow":
+                VideoSetOfFollowHolder mVideoSetOfFollowHolder = ((VideoSetOfFollowHolder) holder);
+                ItemCollection.DataBean mItemCollection2 = ((ItemCollection) selectItem).getData();
+                ImageUtil.setImage(context, mItemCollection2.getHeader().getCover(), mVideoSetOfFollowHolder.iv_set_cover);
+                mVideoSetOfFollowHolder.tv_title.setText(mItemCollection2.getHeader().getTitle());
+                mVideoSetOfFollowHolder.tv_description.setText(mItemCollection2.getHeader().getDescription());
+
+                LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                VideoSetAdapter videoSetAdapter2 = new VideoSetAdapter(context, mItemCollection2.getItemList());
+                mVideoSetOfFollowHolder.rv_video_set.setLayoutManager(manager2);
+                mVideoSetOfFollowHolder.rv_video_set.setAdapter(videoSetAdapter2);
+
+                LinearLayoutManager manager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                AuthorSetAdapter authorSetAdapter = new AuthorSetAdapter(context, mItemCollection2.getHeader().getIconList());
+                mVideoSetOfFollowHolder.rv_author.setLayoutManager(manager3);
+                mVideoSetOfFollowHolder.rv_author.setAdapter(authorSetAdapter);
+
+                break;
+            default:
                 break;
         }
     }
@@ -206,7 +225,7 @@ public class SelectAdapter extends RecyclerView.Adapter {
         @BindView(R.id.tv_header)
         TextView tv_header;
 
-        public TextHeaderHolder(View itemView) {
+        TextHeaderHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -233,10 +252,20 @@ public class SelectAdapter extends RecyclerView.Adapter {
      */
     static class VideoSetOfFollowHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.iv_set_cover)
+        ImageView iv_set_cover;
+        @BindView(R.id.tv_title)
+        TextView tv_title;
+        @BindView(R.id.tv_description)
+        TextView tv_description;
+        @BindView(R.id.rv_author)
+        RecyclerView rv_author;
+        @BindView(R.id.rv_video_set)
+        RecyclerView rv_video_set;
+
         public VideoSetOfFollowHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
-
 }
