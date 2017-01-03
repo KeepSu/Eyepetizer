@@ -24,7 +24,6 @@
                 android:id="@+id/iv_above"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
-                android:src="@drawable/recommend_share_icon"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>
 
