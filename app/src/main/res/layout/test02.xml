@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tzs.eyepetizer.view.PullScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_page_header_cover" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_select"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</com.tzs.eyepetizer.view.PullScrollView>

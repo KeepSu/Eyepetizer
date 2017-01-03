@@ -8,8 +8,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="#e1dfdd" />
+        android:layout_height="4dp"
+        android:background="#ededed" />
 
     <include layout="@layout/line_thin" />
 
