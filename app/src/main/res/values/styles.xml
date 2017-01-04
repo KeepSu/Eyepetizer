@@ -51,7 +51,8 @@
     <style name="SubTitleLight">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:text">"#开胃 / 03'20\""</item>
         <item name="android:textColor">@color/text_light</item>
         <item name="android:lines">1</item>
