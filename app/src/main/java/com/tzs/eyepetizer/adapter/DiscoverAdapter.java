@@ -1,12 +1,14 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
@@ -29,6 +31,8 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int HORIZONTALSCROLLCARD = 1;//已经直接写在DiscoverFragment中了
     private static final int SQUARECARDCOLLECTION = 2;
     private static final int BANNERCOLLECTION = 3;
+
+    private int mCount;//热门专题处的icon的个数
 
     public void setList(List<Discover.ItemListBeanX> data) {
         this.mData = data;
@@ -70,8 +74,9 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
                 scrollCardViewHolder.banner
                         .setImageLoader(new GlideImageLoader())//设置图片加载器
-                        .setImages(imageUrlList)//设置图片list集合
-                        .start();//banner设置方法全部调用完毕时最后调用
+                        .setImages(imageUrlList)//添加图片路径的list
+                        .setDelayTime(2000)//设置轮播时间
+                        .start();//开始自动播放
                 break;
             case SQUARECARDCOLLECTION:
                 SquareCardViewHolder squareCardviewHolder = (SquareCardViewHolder) holder;
@@ -90,17 +95,66 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     squareCardviewHolder.recyclerView_inner.setAdapter(dhrAdapter);
                     dhrAdapter.setList(itemList);
                 }else if (id == 3) {
-                    Log.e("==3=id===", "======"+id);
+                    DiscoverRecommendAuthorAdapter draAdapter = new DiscoverRecommendAuthorAdapter(mContext);
+                    squareCardviewHolder.recyclerView_inner.setAdapter(draAdapter);
+                    draAdapter.setList(itemList);
                 }
                 break;
-//            case BANNERCOLLECTION:
-//                BannerCollectionViewHolder bcviewHolder = (BannerCollectionViewHolder) holder;
-//                break;
+            case BANNERCOLLECTION:
+                BannerCollectionViewHolder bcViewHolder = (BannerCollectionViewHolder) holder;
+                bcViewHolder.title_discover.setText(data.getHeader().getTitle());
+                List imageUrls = new ArrayList();
+                mCount = data.getCount();
+                for (int i = 0; i < data.getCount(); i++) {
+                    String imageUrl = data.getItemList().get(i).getData().getImage();
+                    imageUrls.add(imageUrl);
+                }
+                imageAdapter imgAdapter = new imageAdapter(imageUrls, mContext);
+                bcViewHolder.vp_coll.setOffscreenPageLimit(data.getCount());
+                bcViewHolder.vp_coll.setPageMargin(12);
+                bcViewHolder.vp_coll.setAdapter(imgAdapter);
+                bcViewHolder.vp_coll.setCurrentItem(Integer.MAX_VALUE/2);//设置viewpager要展示页面的第一个位置
+                //热门专题 处的 页面改变监听事件
+                bcViewHolder.vp_coll.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        setIcon(position % mCount);
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });//热门专题 处的 页面改变监听事件
+                setIcon(0);//设置指示器
+                break;
             default:
                 break;
         }
     }
 
+    //设置热门专题处的viewpagaer下方的指示小点
+    private void setIcon(int curPosition){
+        ImageView img = null;
+        coll_Icons.removeAllViews();
+        for (int i = 0; i < mCount; i++) {
+            img = new ImageView(mContext);
+            img.setLayoutParams(new LinearLayout.LayoutParams(70,70));
+            if (i == curPosition){
+                img.setImageResource(R.drawable.ic_x_recycler_view_pager_indicator_focus);
+            } else {
+                img.setImageResource(R.drawable.ic_x_recycler_view_pager_indicator);
+            }
+            coll_Icons.addView(img);
+        }
+    }
+
+    //发现页面的getItemCount
     @Override
     public int getItemCount() {
         return mData.size();
@@ -110,7 +164,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * 顶部
      * type：horizontalScrollCard的ViewHolder
      */
-    static class ScrollCardViewHolder extends RecyclerView.ViewHolder{
+    class ScrollCardViewHolder extends RecyclerView.ViewHolder{
         private Banner banner;
         public ScrollCardViewHolder(View itemView) {
             super(itemView);
@@ -136,10 +190,15 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * 下部
      * type：bannerCollection的ViewHolder
      */
-    static class BannerCollectionViewHolder extends RecyclerView.ViewHolder{
-
+    private LinearLayout coll_Icons;
+    class BannerCollectionViewHolder extends RecyclerView.ViewHolder{
+        private TextView title_discover;
+        private ViewPager vp_coll;
         public BannerCollectionViewHolder(View itemView) {
             super(itemView);
+            title_discover = (TextView) itemView.findViewById(R.id.title_Discover);
+            vp_coll = (ViewPager) itemView.findViewById(R.id.vp_coll);
+            coll_Icons = (LinearLayout) itemView.findViewById(R.id.coll_Icons);
         }
     }
 

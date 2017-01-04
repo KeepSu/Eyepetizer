@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.tzs.eyepetizer.R;
@@ -22,6 +21,9 @@ import com.tzs.eyepetizer.entity.Follow;
 import com.tzs.eyepetizer.util.PathUtil;
 import com.tzs.eyepetizer.util.ToastUtil;
 import com.tzs.eyepetizer.view.PullToRefreshRecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +48,8 @@ public class FollowFragment extends Fragment {
     RecyclerView recyclerView;
     private FollowRVAdapter adapter;
     private int flag=1;
-    private int page=1;
+    private int page=0;
+    private List<Follow.ItemListBeanX> list=new ArrayList<>();
     public FollowFragment() {
     }
 
@@ -63,6 +66,7 @@ public class FollowFragment extends Fragment {
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.e("=====","==下拉 ===");
                 flag=1;
+              //  list.clear();
                 new MyAsyncTask().execute(flag+"","1");
             }
 
@@ -70,12 +74,11 @@ public class FollowFragment extends Fragment {
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.e("=====","===上拉===");
                 flag=2;
-                page++;
-
+                page+=2;
+                Log.i("===","===page=="+page);
                 new MyAsyncTask().execute(flag+"",page+"");
             }
         });
-        pullToRefreshRecyclerView.onRefreshComplete();
         return view;
     }
 
@@ -89,11 +92,11 @@ public class FollowFragment extends Fragment {
         //设置适配器
         recyclerView.setAdapter(adapter);
 
-        getFollowData(flag+"",page+"");
+        getFollowData(flag+"","1");
     }
 
     private void getFollowData(String flag,String page) {
-        if (flag.equals(page)){
+        if (flag.equals("1")){
             Retrofit retrofit=new Retrofit.Builder()
                     .baseUrl(PathUtil.getFollowPth())
                     .addConverterFactory(GsonConverterFactory.create())
@@ -116,14 +119,14 @@ public class FollowFragment extends Fragment {
                             adapter.setList(follow.getItemList());
                         }
                     });
-        }else if(flag.equals(page)){
+        }else if(flag.equals("2")){
             Retrofit retrofit=new Retrofit.Builder()
                     .baseUrl("http://baobab.kaiyanapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
             HttpApiService apiService=retrofit.create(HttpApiService.class);
-            Observable<Follow> observable = apiService.getFollowNextList(page+"", "10", "false", "0");
+            Observable<Follow> observable = apiService.getFollowNextList(page, "2", "false", "0");
             observable.subscribeOn(Schedulers.io())
                       .observeOn(AndroidSchedulers.mainThread())
                       .subscribe(new Subscriber<Follow>() {
@@ -139,7 +142,8 @@ public class FollowFragment extends Fragment {
 
                           @Override
                           public void onNext(Follow follow) {
-                            adapter.setList(follow.getItemList());
+                            Log.i("===","==follow=="+follow);
+                              adapter.setList(follow.getItemList());
                           }
                       });
 

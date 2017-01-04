@@ -1,18 +1,26 @@
 [
     {
+        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
         "source": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     },
     {
-        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
-        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     },
     {
         "merged": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
         "source": "C:\\Users\\Administrator\\Desktop\\aa\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
-        "merged": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
-        "source": "C:\\Users\\bluesky\\Desktop\\PullToRefreshRecyclerViewDemo\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     }
 ]
