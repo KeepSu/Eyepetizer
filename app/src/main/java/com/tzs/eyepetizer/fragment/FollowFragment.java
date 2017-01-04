@@ -1,8 +1,12 @@
 package com.tzs.eyepetizer.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.adapter.FollowRVAdapter;
 import com.tzs.eyepetizer.apiservice.HttpApiService;
 import com.tzs.eyepetizer.entity.Follow;
@@ -38,7 +44,7 @@ import rx.schedulers.Schedulers;
 /**
  * 关注页面
  */
-public class FollowFragment extends Fragment {
+public class FollowFragment extends BaseFragment {
     @BindView(R.id.rr)
     PullToRefreshRecyclerView pullToRefreshRecyclerView;
     @BindView(R.id.tv_author)
@@ -49,10 +55,16 @@ public class FollowFragment extends Fragment {
     private FollowRVAdapter adapter;
     private int flag=1;
     private int page=0;
-    private List<Follow.ItemListBeanX> list=new ArrayList<>();
+    private List<Follow.ItemListBeanX> list = new ArrayList<>();
+    private Context context;
     public FollowFragment() {
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context=context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,7 +78,7 @@ public class FollowFragment extends Fragment {
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.e("=====","==下拉 ===");
                 flag=1;
-              //  list.clear();
+                list.clear();
                 new MyAsyncTask().execute(flag+"","1");
             }
 
@@ -82,16 +94,17 @@ public class FollowFragment extends Fragment {
         return view;
     }
 
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter=new FollowRVAdapter(getContext());
+        adapter=new FollowRVAdapter(context);
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
         //设置布局方式
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //设置适配器
         recyclerView.setAdapter(adapter);
-
         getFollowData(flag+"","1");
     }
 
@@ -116,7 +129,8 @@ public class FollowFragment extends Fragment {
 
                         @Override
                         public void onNext(Follow follow) {
-                            adapter.setList(follow.getItemList());
+                            list.addAll(follow.getItemList());
+                            adapter.setList(list);
                         }
                     });
         }else if(flag.equals("2")){
@@ -142,31 +156,34 @@ public class FollowFragment extends Fragment {
 
                           @Override
                           public void onNext(Follow follow) {
-                            Log.i("===","==follow=="+follow);
-                              adapter.setList(follow.getItemList());
+                              list.addAll(follow.getItemList());
+                              adapter.setList(list);
                           }
                       });
-
         }
 
     }
 
-    class MyAsyncTask extends AsyncTask<String,Void,Void>{
+    class MyAsyncTask extends AsyncTask<String,Void,String>{
         @Override
-        protected Void doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             String flag= params[0];
-            String page = params[1];
-            getFollowData(flag,page);
-            return null;
+            return flag;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String flag) {
+            super.onPostExecute(flag);
             pullToRefreshRecyclerView.onRefreshComplete();
-            ToastUtil.showToast(getContext(),"刷新完成");
+            if ("1".equals(flag)){
+                getFollowData(flag,page+"");
+            }else if ("2".equals(flag)){
+                getFollowData(flag,page+"");
+            }
+            showToast("刷新成功");
         }
     }
+
 
 
 }
