@@ -3,7 +3,7 @@
     android:layout_width="264dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="4dp">
+    android:paddingRight="4dp">
 
     <ImageView
         android:id="@+id/iv_inner_cover"

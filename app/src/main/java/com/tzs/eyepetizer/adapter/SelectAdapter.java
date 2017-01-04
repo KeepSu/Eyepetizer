@@ -1,5 +1,6 @@
 package com.tzs.eyepetizer.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.BaseActivity;
+import com.tzs.eyepetizer.activity.VideoInfoActivity;
+import com.tzs.eyepetizer.entity.select.Banner;
 import com.tzs.eyepetizer.entity.select.ItemCollection;
 import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
@@ -40,15 +44,17 @@ public class SelectAdapter extends RecyclerView.Adapter {
     private static final int TEXTHEADER = 3;
     private static final int VIDEO_COLLECTION_WITH_COVER = 4;
     private static final int VIDEO_COLLECTION_OF_FOLLOW = 5;
+    private static final int BANNER = 6;
+    private static final int AUTHOR_WITH_COVER = 7;
 
     private List<SelectItem> list;
     private Context context;
     private final LayoutInflater inflater;
 
     public SelectAdapter(List<SelectItem> list, Context context) {
-        inflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
+        inflater = LayoutInflater.from(context);
     }
 
     /**
@@ -73,6 +79,12 @@ public class SelectAdapter extends RecyclerView.Adapter {
             case VIDEO_COLLECTION_OF_FOLLOW:
                 itemView = inflater.inflate(R.layout.item_select_videoset_of_follow, parent, false);
                 return new VideoSetOfFollowHolder(itemView);
+            case BANNER:
+                itemView = inflater.inflate(R.layout.item_select_banner, parent, false);
+                return new BannerHolder(itemView);
+            case AUTHOR_WITH_COVER:
+                itemView = inflater.inflate(R.layout.item_select_author_with_cover, parent, false);
+                return new AuthorWithCoverHolder(itemView);
         }
         return null;
     }
@@ -87,27 +99,44 @@ public class SelectAdapter extends RecyclerView.Adapter {
         switch (type) {
             case "video":
                 final VideoHolder videoHolder = ((VideoHolder) holder);
-                VideoBeanForClient.DataBean data = ((VideoBeanForClient) selectItem).getData();
+                final VideoBeanForClient.DataBean data = ((VideoBeanForClient) selectItem).getData();
                 videoHolder.tv_title.setText(data.getTitle());
                 videoHolder.tv_category_duration.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
                 ImageUtil.setImage(context, data.getCover().getFeed(), videoHolder.iv_select_cover);
-                videoHolder.ly_video.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                AnimaUtil.disappear(1000, videoHolder.ly_video);
-                                break;
-                            case MotionEvent.ACTION_MOVE:
-                                AnimaUtil.appear(1000, videoHolder.ly_video);
-                                break;
-                            case MotionEvent.ACTION_UP:
-                                AnimaUtil.appear(1000, videoHolder.ly_video);
-                                break;
-                        }
-                        return false;
-                    }
-                });
+                if (data.getAuthor() != null) {
+                    videoHolder.tv_author.setVisibility(View.VISIBLE);
+                    videoHolder.tv_author.setText(data.getAuthor().getName());
+                } else {
+                    videoHolder.tv_author.setVisibility(View.GONE);
+                }
+                if (data.getLabel() != null) {
+                    videoHolder.tv_promotion.setVisibility(View.VISIBLE);
+                } else {
+                    videoHolder.tv_promotion.setVisibility(View.GONE);
+                }
+//                videoHolder.ly_video.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data);
+//                    }
+//                });
+//                videoHolder.ly_video.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        switch (event.getAction()) {
+//                            case MotionEvent.ACTION_DOWN:
+//                                AnimaUtil.disappear(1000, videoHolder.ly_video);
+//                                break;
+//                            case MotionEvent.ACTION_MOVE:
+//                                AnimaUtil.appear(1000, videoHolder.ly_video);
+//                                break;
+//                            case MotionEvent.ACTION_UP:
+//                                AnimaUtil.appear(1000, videoHolder.ly_video);
+//                                break;
+//                        }
+//                        return false;
+//                    }
+//                });
                 break;
             case "textFooter":
                 TextFooterHolder mFooterHolder = ((TextFooterHolder) holder);
@@ -146,6 +175,19 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 mVideoSetOfFollowHolder.rv_author.setAdapter(authorSetAdapter);
 
                 break;
+
+            case "banner":
+                BannerHolder mBannerHolder = ((BannerHolder) holder);
+                String imgBanner = ((Banner) selectItem).getData().getImage();
+                ImageUtil.setImage(context, imgBanner, mBannerHolder.iv_banner);
+
+                break;
+
+            case "videoCollectionOfAuthorWithCover":
+                AuthorWithCoverHolder mAuthorWithCoverHolder = ((AuthorWithCoverHolder) holder);
+                ItemCollection.DataBean mItemCollection3 = ((ItemCollection) selectItem).getData();
+                ImageUtil.setImage(context, mItemCollection3.getHeader().getCover(), mAuthorWithCoverHolder.iv_author_video_cover);
+                break;
             default:
                 break;
         }
@@ -161,7 +203,6 @@ public class SelectAdapter extends RecyclerView.Adapter {
             case "video":
                 return VIDEO;
             case "textFooter":
-                Log.e("===getItemViewType==>", "===============>");
                 return TEXTFOOTER;
             case "textHeader":
                 return TEXTHEADER;
@@ -169,6 +210,8 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 return VIDEO_COLLECTION_WITH_COVER;
             case "videoCollectionOfFollow":
                 return VIDEO_COLLECTION_OF_FOLLOW;
+            case "banner":
+                return BANNER;
         }
         return 0;
     }
@@ -176,6 +219,19 @@ public class SelectAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    /**
+     * 广告的模板类
+     */
+    static class BannerHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_banner)
+        ImageView iv_banner;
+
+        public BannerHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
 
     /**
@@ -268,4 +324,41 @@ public class SelectAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, itemView);
         }
     }
+
+    /**
+     * AuthorWithCoverHolder的模板类
+     */
+    static class AuthorWithCoverHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_author_video_cover)
+        ImageView iv_author_video_cover;
+        @BindView(R.id.iv_author_video_head)
+        ImageView iv_author_video_head;
+        @BindView(R.id.tv_author_name)
+        TextView tv_author_name;
+        @BindView(R.id.tv_author_description)
+        TextView tv_author_description;
+        @BindView(R.id.tv_follow_author)
+        TextView tv_follow_author;
+        @BindView(R.id.rv_video_set)
+        RecyclerView rv_video_set;
+
+        public AuthorWithCoverHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+//    /**
+//     * 点击事件的处理
+//     */
+//    private class MyOnClickListener implements View.OnClickListener {
+//        @Override
+//        public void onClick(View v) {
+//            switch (v.getId()) {
+//                case R.id.ly_video:
+//                    ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class,);
+//                    break;
+//            }
+//        }
+//    }
 }

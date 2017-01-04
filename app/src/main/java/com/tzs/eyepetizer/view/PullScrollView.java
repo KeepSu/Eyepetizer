@@ -3,18 +3,14 @@ package com.tzs.eyepetizer.view;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.PointF;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
 
-import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.callback.OnScrollToBottomListener;
 
 
 /**
@@ -32,6 +28,8 @@ public class PullScrollView extends ScrollView implements View.OnTouchListener {
     private View dropZoomView;
     private int dropZoomViewWidth;
     private int dropZoomViewHeight;
+
+    private OnScrollToBottomListener listener;
 
     public PullScrollView(Context context) {
         super(context);
@@ -52,20 +50,21 @@ public class PullScrollView extends ScrollView implements View.OnTouchListener {
         init();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-    }
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//    }
 
     private void init() {
         setOverScrollMode(OVER_SCROLL_NEVER);
         if (getChildAt(0) != null) {
             ViewGroup vg = (ViewGroup) getChildAt(0);
             if (vg.getChildAt(0) != null) {
-                dropZoomView = vg.getChildAt(0);
-                setOnTouchListener(this);
-
+                ViewGroup vg2 = (ViewGroup) vg.getChildAt(0);
+                if (vg2.getChildAt(0) != null) {
+                    dropZoomView = vg2.getChildAt(0);
+                    setOnTouchListener(this);
+                }
             }
         }
     }
@@ -130,5 +129,23 @@ public class PullScrollView extends ScrollView implements View.OnTouchListener {
         lp.width = (int) (dropZoomViewWidth + s);
         lp.height = (int) (dropZoomViewHeight * ((dropZoomViewWidth + s) / dropZoomViewWidth));
         dropZoomView.setLayoutParams(lp);
+    }
+
+    //设置ScrollView滑动到底部的监听
+    public void setOnScrollToBottomListener(OnScrollToBottomListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        ViewGroup vg = (ViewGroup) getChildAt(0);
+        View view = vg.getChildAt(0);
+        view.scrollTo(0, -getScrollY());
+
+        if (getScrollY() + getHeight() == getChildAt(0).getHeight()) {
+            listener.OnScrollToBottom();
+        }
+
+        super.onScrollChanged(l, t, oldl, oldt);
     }
 }

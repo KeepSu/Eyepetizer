@@ -32,4 +32,5 @@ public class MyApplication extends Application implements OnNetChangeListener{
         isNetConn = NetStateUtil.isNetConnect(this);
         NetStateUtil.showNetType(this);
     }
+
 }

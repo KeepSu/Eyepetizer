@@ -84,7 +84,7 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * 跳转到另一个Activity
      */
-    protected void goToAnotherActivity(Class<? extends Activity> targetActivity, Object obj) {
+    public void goToAnotherActivity(Class<? extends Activity> targetActivity, Object obj) {
         Intent intent = new Intent(this, targetActivity);
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", (Serializable) obj);

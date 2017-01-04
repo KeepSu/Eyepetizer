@@ -29,7 +29,7 @@ public class ImageUtil {
         Glide.with(context)
                 .load(url)
                 .asBitmap()
-                .placeholder(R.drawable.account_default_avatar)
+//                .placeholder(R.drawable.account_default_avatar)
                 .centerCrop()
                 .into(new BitmapImageViewTarget(iv) {
                     @Override

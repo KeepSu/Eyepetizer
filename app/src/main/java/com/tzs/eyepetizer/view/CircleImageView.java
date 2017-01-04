@@ -30,6 +30,10 @@ public class CircleImageView extends ImageView {
         super(context, attrs, defStyleAttr);
     }
 
+    public CircleImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -84,8 +88,6 @@ public class CircleImageView extends ImageView {
         paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
         canvas.drawBitmap(sbmp, rect, rect, paint);
 
-
         return output;
     }
-
 }

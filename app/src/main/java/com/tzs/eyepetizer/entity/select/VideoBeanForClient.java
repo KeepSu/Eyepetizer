@@ -1,5 +1,7 @@
 package com.tzs.eyepetizer.entity.select;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,8 +12,7 @@ import java.util.List;
 public class VideoBeanForClient extends SelectItem implements Serializable {
 
     /**
-     * type : video
-     * data : {"dataType":"VideoBeanForClient","id":11252,"title":"对抗失恋的 N 种方法","description":"这是泰国线上音乐与创作平台 Fungja 的广告之失恋篇。世界上所有的事物，都有保质期。丢掉过期的那个人，那些回忆，和孤单作战重新开始，也许一切都没有你想的那么糟。From 泰國清邁象","provider":{"name":"YouTube","alias":"youtube","icon":"http://img.kaiyanapp.com/fa20228bc5b921e837156923a58713f6.png"},"category":"广告","author":null,"cover":{"feed":"http://img.kaiyanapp.com/40fb4f6be9a113ba6dee3e9953e33a41.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/40fb4f6be9a113ba6dee3e9953e33a41.jpeg?imageMogr2/quality/60","blurred":"http://img.kaiyanapp.com/7f62908b3624e5965115884ff627ae22.jpeg?imageMogr2/quality/60","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=default","duration":186,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=11252","forWeibo":"http://wandou.im/3eo8nm"},"releaseTime":1482973200000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=high"}],"consumption":{"collectionCount":837,"shareCount":783,"replyCount":27},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[{"id":108,"name":"爱情","actionUrl":"eyepetizer://tag/108/?title=%E7%88%B1%E6%83%85","adTrack":null},{"id":530,"name":"人生","actionUrl":"eyepetizer://tag/530/?title=%E4%BA%BA%E7%94%9F","adTrack":null},{"id":16,"name":"广告","actionUrl":"eyepetizer://tag/16/?title=%E5%B9%BF%E5%91%8A","adTrack":null},{"id":386,"name":"泰国广告","actionUrl":"eyepetizer://tag/386/?title=%E6%B3%B0%E5%9B%BD%E5%B9%BF%E5%91%8A","adTrack":null}],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482973200000,"promotion":null,"label":null,"collected":false,"played":false}
+     * data : {"dataType":"VideoBeanForClient","id":11956,"title":"4 款暗黑系方便面大测评","description":"香菜料理，国际大品牌，果然不一般。","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"生活","author":{"id":82,"icon":"http://img.kaiyanapp.com/831c82506f6f1abfb4dc0745c0e6784f.png","name":"微在涨姿势","description":"国内首个生产神技能的原创视频基地；擅长脑洞大开，盛产闻所未闻。一日一姿势\u2014\u2014有知识，才性感。","link":"","latestReleaseTime":1483424391000,"videoNum":94,"adTrack":null,"follow":{"itemType":"author","itemId":82,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/a8933d70321c7b69f02945853d2eaa58.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/a8933d70321c7b69f02945853d2eaa58.jpeg?imageMogr2/quality/60","blurred":"s","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=default","duration":289,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=11956","forWeibo":"http://wandou.im/3jxp1h"},"releaseTime":1482637288000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=high"}],"consumption":{"collectionCount":47,"shareCount":75,"replyCount":7},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[{"id":666,"name":"生活","actionUrl":"eyepetizer://tag/666/?title=%E7%94%9F%E6%B4%BB","adTrack":null},{"id":20,"name":"开胃","actionUrl":"eyepetizer://tag/20/?title=%E5%BC%80%E8%83%83","adTrack":null},{"id":36,"name":"集锦","actionUrl":"eyepetizer://tag/36/?title=%E9%9B%86%E9%94%A6","adTrack":null},{"id":28,"name":"综艺","actionUrl":"eyepetizer://tag/28/?title=%E7%BB%BC%E8%89%BA","adTrack":null}],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1483491600000,"promotion":null,"label":null,"collected":false,"played":false}
      */
 
     private DataBean data;
@@ -27,29 +28,29 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
     public static class DataBean implements Serializable {
         /**
          * dataType : VideoBeanForClient
-         * id : 11252
-         * title : 对抗失恋的 N 种方法
-         * description : 这是泰国线上音乐与创作平台 Fungja 的广告之失恋篇。世界上所有的事物，都有保质期。丢掉过期的那个人，那些回忆，和孤单作战重新开始，也许一切都没有你想的那么糟。From 泰國清邁象
-         * provider : {"name":"YouTube","alias":"youtube","icon":"http://img.kaiyanapp.com/fa20228bc5b921e837156923a58713f6.png"}
-         * category : 广告
-         * author : null
-         * cover : {"feed":"http://img.kaiyanapp.com/40fb4f6be9a113ba6dee3e9953e33a41.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/40fb4f6be9a113ba6dee3e9953e33a41.jpeg?imageMogr2/quality/60","blurred":"http://img.kaiyanapp.com/7f62908b3624e5965115884ff627ae22.jpeg?imageMogr2/quality/60","sharing":null}
-         * playUrl : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=default
-         * duration : 186
-         * webUrl : {"raw":"http://www.eyepetizer.net/detail.html?vid=11252","forWeibo":"http://wandou.im/3eo8nm"}
-         * releaseTime : 1482973200000
-         * playInfo : [{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=high"}]
-         * consumption : {"collectionCount":837,"shareCount":783,"replyCount":27}
+         * id : 11956
+         * title : 4 款暗黑系方便面大测评
+         * description : 香菜料理，国际大品牌，果然不一般。
+         * provider : {"name":"PGC","alias":"PGC","icon":""}
+         * category : 生活
+         * author : {"id":82,"icon":"http://img.kaiyanapp.com/831c82506f6f1abfb4dc0745c0e6784f.png","name":"微在涨姿势","description":"国内首个生产神技能的原创视频基地；擅长脑洞大开，盛产闻所未闻。一日一姿势\u2014\u2014有知识，才性感。","link":"","latestReleaseTime":1483424391000,"videoNum":94,"adTrack":null,"follow":{"itemType":"author","itemId":82,"followed":false}}
+         * cover : {"feed":"http://img.kaiyanapp.com/a8933d70321c7b69f02945853d2eaa58.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/a8933d70321c7b69f02945853d2eaa58.jpeg?imageMogr2/quality/60","blurred":"s","sharing":null}
+         * playUrl : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=default
+         * duration : 289
+         * webUrl : {"raw":"http://www.eyepetizer.net/detail.html?vid=11956","forWeibo":"http://wandou.im/3jxp1h"}
+         * releaseTime : 1482637288000
+         * playInfo : [{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=high"}]
+         * consumption : {"collectionCount":47,"shareCount":75,"replyCount":7}
          * campaign : null
          * waterMarks : null
          * adTrack : null
-         * tags : [{"id":108,"name":"爱情","actionUrl":"eyepetizer://tag/108/?title=%E7%88%B1%E6%83%85","adTrack":null},{"id":530,"name":"人生","actionUrl":"eyepetizer://tag/530/?title=%E4%BA%BA%E7%94%9F","adTrack":null},{"id":16,"name":"广告","actionUrl":"eyepetizer://tag/16/?title=%E5%B9%BF%E5%91%8A","adTrack":null},{"id":386,"name":"泰国广告","actionUrl":"eyepetizer://tag/386/?title=%E6%B3%B0%E5%9B%BD%E5%B9%BF%E5%91%8A","adTrack":null}]
+         * tags : [{"id":666,"name":"生活","actionUrl":"eyepetizer://tag/666/?title=%E7%94%9F%E6%B4%BB","adTrack":null},{"id":20,"name":"开胃","actionUrl":"eyepetizer://tag/20/?title=%E5%BC%80%E8%83%83","adTrack":null},{"id":36,"name":"集锦","actionUrl":"eyepetizer://tag/36/?title=%E9%9B%86%E9%94%A6","adTrack":null},{"id":28,"name":"综艺","actionUrl":"eyepetizer://tag/28/?title=%E7%BB%BC%E8%89%BA","adTrack":null}]
          * type : NORMAL
          * idx : 0
          * shareAdTrack : null
          * favoriteAdTrack : null
          * webAdTrack : null
-         * date : 1482973200000
+         * date : 1483491600000
          * promotion : null
          * label : null
          * collected : false
@@ -62,7 +63,7 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
         private String description;
         private ProviderBean provider;
         private String category;
-        private Object author;
+        private AuthorBean author;
         private CoverBean cover;
         private String playUrl;
         private int duration;
@@ -72,7 +73,8 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
         private Object campaign;
         private Object waterMarks;
         private Object adTrack;
-        private String type;
+        @SerializedName("type")
+        private String typeX;
         private int idx;
         private Object shareAdTrack;
         private Object favoriteAdTrack;
@@ -133,11 +135,11 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             this.category = category;
         }
 
-        public Object getAuthor() {
+        public AuthorBean getAuthor() {
             return author;
         }
 
-        public void setAuthor(Object author) {
+        public void setAuthor(AuthorBean author) {
             this.author = author;
         }
 
@@ -213,12 +215,12 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             this.adTrack = adTrack;
         }
 
-        public String getType() {
-            return type;
+        public String getTypeX() {
+            return typeX;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setTypeX(String typeX) {
+            this.typeX = typeX;
         }
 
         public int getIdx() {
@@ -311,9 +313,9 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
 
         public static class ProviderBean implements Serializable {
             /**
-             * name : YouTube
-             * alias : youtube
-             * icon : http://img.kaiyanapp.com/fa20228bc5b921e837156923a58713f6.png
+             * name : PGC
+             * alias : PGC
+             * icon :
              */
 
             private String name;
@@ -345,11 +347,167 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             }
         }
 
+        public static class AuthorBean implements Serializable {
+            /**
+             * id : 82
+             * icon : http://img.kaiyanapp.com/831c82506f6f1abfb4dc0745c0e6784f.png
+             * name : 微在涨姿势
+             * description : 国内首个生产神技能的原创视频基地；擅长脑洞大开，盛产闻所未闻。一日一姿势——有知识，才性感。
+             * link :
+             * latestReleaseTime : 1483424391000
+             * videoNum : 94
+             * adTrack : null
+             * follow : {"itemType":"author","itemId":82,"followed":false}
+             */
+
+            private int id;
+            private String icon;
+            private String name;
+            private String description;
+            private String link;
+            private long latestReleaseTime;
+            private int videoNum;
+            private Object adTrack;
+            private FollowBean follow;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getIcon() {
+                return icon;
+            }
+
+            public void setIcon(String icon) {
+                this.icon = icon;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
+            public String getLink() {
+                return link;
+            }
+
+            public void setLink(String link) {
+                this.link = link;
+            }
+
+            public long getLatestReleaseTime() {
+                return latestReleaseTime;
+            }
+
+            public void setLatestReleaseTime(long latestReleaseTime) {
+                this.latestReleaseTime = latestReleaseTime;
+            }
+
+            public int getVideoNum() {
+                return videoNum;
+            }
+
+            public void setVideoNum(int videoNum) {
+                this.videoNum = videoNum;
+            }
+
+            public Object getAdTrack() {
+                return adTrack;
+            }
+
+            public void setAdTrack(Object adTrack) {
+                this.adTrack = adTrack;
+            }
+
+            public FollowBean getFollow() {
+                return follow;
+            }
+
+            public void setFollow(FollowBean follow) {
+                this.follow = follow;
+            }
+
+            public static class FollowBean implements Serializable {
+                /**
+                 * itemType : author
+                 * itemId : 82
+                 * followed : false
+                 */
+
+                private String itemType;
+                private int itemId;
+                private boolean followed;
+
+                public String getItemType() {
+                    return itemType;
+                }
+
+                public void setItemType(String itemType) {
+                    this.itemType = itemType;
+                }
+
+                public int getItemId() {
+                    return itemId;
+                }
+
+                public void setItemId(int itemId) {
+                    this.itemId = itemId;
+                }
+
+                public boolean isFollowed() {
+                    return followed;
+                }
+
+                public void setFollowed(boolean followed) {
+                    this.followed = followed;
+                }
+
+                @Override
+                public String toString() {
+                    return "FollowBean{" +
+                            "itemType='" + itemType + '\'' +
+                            ", itemId=" + itemId +
+                            ", followed=" + followed +
+                            '}';
+                }
+            }
+
+            @Override
+            public String toString() {
+                return "AuthorBean{" +
+                        "id=" + id +
+                        ", icon='" + icon + '\'' +
+                        ", name='" + name + '\'' +
+                        ", description='" + description + '\'' +
+                        ", link='" + link + '\'' +
+                        ", latestReleaseTime=" + latestReleaseTime +
+                        ", videoNum=" + videoNum +
+                        ", adTrack=" + adTrack +
+                        ", follow=" + follow +
+                        '}';
+            }
+        }
+
         public static class CoverBean implements Serializable {
             /**
-             * feed : http://img.kaiyanapp.com/40fb4f6be9a113ba6dee3e9953e33a41.jpeg?imageMogr2/quality/60
-             * detail : http://img.kaiyanapp.com/40fb4f6be9a113ba6dee3e9953e33a41.jpeg?imageMogr2/quality/60
-             * blurred : http://img.kaiyanapp.com/7f62908b3624e5965115884ff627ae22.jpeg?imageMogr2/quality/60
+             * feed : http://img.kaiyanapp.com/a8933d70321c7b69f02945853d2eaa58.jpeg?imageMogr2/quality/60
+             * detail : http://img.kaiyanapp.com/a8933d70321c7b69f02945853d2eaa58.jpeg?imageMogr2/quality/60
+             * blurred : s
              * sharing : null
              */
 
@@ -389,12 +547,22 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             public void setSharing(Object sharing) {
                 this.sharing = sharing;
             }
+
+            @Override
+            public String toString() {
+                return "CoverBean{" +
+                        "feed='" + feed + '\'' +
+                        ", detail='" + detail + '\'' +
+                        ", blurred='" + blurred + '\'' +
+                        ", sharing=" + sharing +
+                        '}';
+            }
         }
 
         public static class WebUrlBean implements Serializable {
             /**
-             * raw : http://www.eyepetizer.net/detail.html?vid=11252
-             * forWeibo : http://wandou.im/3eo8nm
+             * raw : http://www.eyepetizer.net/detail.html?vid=11956
+             * forWeibo : http://wandou.im/3jxp1h
              */
 
             private String raw;
@@ -415,13 +583,21 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             public void setForWeibo(String forWeibo) {
                 this.forWeibo = forWeibo;
             }
+
+            @Override
+            public String toString() {
+                return "WebUrlBean{" +
+                        "raw='" + raw + '\'' +
+                        ", forWeibo='" + forWeibo + '\'' +
+                        '}';
+            }
         }
 
         public static class ConsumptionBean implements Serializable {
             /**
-             * collectionCount : 837
-             * shareCount : 783
-             * replyCount : 27
+             * collectionCount : 47
+             * shareCount : 75
+             * replyCount : 7
              */
 
             private int collectionCount;
@@ -451,6 +627,15 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             public void setReplyCount(int replyCount) {
                 this.replyCount = replyCount;
             }
+
+            @Override
+            public String toString() {
+                return "ConsumptionBean{" +
+                        "collectionCount=" + collectionCount +
+                        ", shareCount=" + shareCount +
+                        ", replyCount=" + replyCount +
+                        '}';
+            }
         }
 
         public static class PlayInfoBean implements Serializable {
@@ -459,13 +644,14 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
              * width : 854
              * name : 标清
              * type : normal
-             * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11252&editionType=normal
+             * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11956&editionType=normal
              */
 
             private int height;
             private int width;
             private String name;
-            private String type;
+            @SerializedName("type")
+            private String typeX;
             private String url;
 
             public int getHeight() {
@@ -492,12 +678,12 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
                 this.name = name;
             }
 
-            public String getType() {
-                return type;
+            public String getTypeX() {
+                return typeX;
             }
 
-            public void setType(String type) {
-                this.type = type;
+            public void setTypeX(String typeX) {
+                this.typeX = typeX;
             }
 
             public String getUrl() {
@@ -507,13 +693,24 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             public void setUrl(String url) {
                 this.url = url;
             }
+
+            @Override
+            public String toString() {
+                return "PlayInfoBean{" +
+                        "height=" + height +
+                        ", width=" + width +
+                        ", name='" + name + '\'' +
+                        ", typeX='" + typeX + '\'' +
+                        ", url='" + url + '\'' +
+                        '}';
+            }
         }
 
         public static class TagsBean implements Serializable {
             /**
-             * id : 108
-             * name : 爱情
-             * actionUrl : eyepetizer://tag/108/?title=%E7%88%B1%E6%83%85
+             * id : 666
+             * name : 生活
+             * actionUrl : eyepetizer://tag/666/?title=%E7%94%9F%E6%B4%BB
              * adTrack : null
              */
 
@@ -553,6 +750,16 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             public void setAdTrack(Object adTrack) {
                 this.adTrack = adTrack;
             }
+
+            @Override
+            public String toString() {
+                return "TagsBean{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", actionUrl='" + actionUrl + '\'' +
+                        ", adTrack=" + adTrack +
+                        '}';
+            }
         }
 
         @Override
@@ -574,7 +781,7 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
                     ", campaign=" + campaign +
                     ", waterMarks=" + waterMarks +
                     ", adTrack=" + adTrack +
-                    ", type='" + type + '\'' +
+                    ", typeX='" + typeX + '\'' +
                     ", idx=" + idx +
                     ", shareAdTrack=" + shareAdTrack +
                     ", favoriteAdTrack=" + favoriteAdTrack +
