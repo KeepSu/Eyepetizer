@@ -21,6 +21,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.entity.Follow;
+import com.tzs.eyepetizer.util.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
@@ -34,13 +35,13 @@ import butterknife.ButterKnife;
 
 
 /**
- * Created by Administrator on 2016/12/29.
+ * 关注页面RecyclerView适配器
  */
 public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int FOLLOW_AUTHOR = 1;
     private static final int FOLLOW_TYPE = 2;
     private static final int FOLLOW_ATTENTION = 3;
-    private Context context;
+    private Context ctx;
     private LayoutInflater inflater;
     private List<Follow.ItemListBeanX> list=new ArrayList<>();
 
@@ -48,14 +49,14 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.list=list;
         notifyDataSetChanged();
     }
-
     public FollowRVAdapter(Context context) {
-        this.context = context;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.ctx = context;
+        inflater =LayoutInflater.from(ctx);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.e("===", "==onCreateViewHolder===" );
         View itemView = null;
         switch (viewType) {
             case FOLLOW_AUTHOR:
@@ -70,6 +71,7 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        Log.e("===", "==position===" + position);
         //获取头部信息
         final Follow.ItemListBeanX.DataBeanX.HeaderBean header = list.get(position).getData().getHeader();
         //获取Item里面子Itemde数据
@@ -80,20 +82,20 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 final AuthorViewHolder avh = (AuthorViewHolder) holder;
                 avh.tv_nickName.setText(header.getTitle());
                 avh.tv_description.setText(header.getDescription());
-                Glide.with(context).load(header.getIcon()).asBitmap().centerCrop().
+                Glide.with(ctx).load(header.getIcon()).asBitmap().centerCrop().
                         into(new BitmapImageViewTarget(avh.iv_portrait) {
                             @Override
                             protected void setResource(Bitmap resource) {
                                 RoundedBitmapDrawable circularBitmapDrawable =
-                                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                                        RoundedBitmapDrawableFactory.create(ctx.getResources(), resource);
                                 circularBitmapDrawable.setCircular(true);
                                 avh.iv_portrait.setImageDrawable(circularBitmapDrawable);
                             }
                         });
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ctx,
                         LinearLayoutManager.HORIZONTAL, false);
                 avh.rv_inner.setLayoutManager(linearLayoutManager);
-                FollowRVInnerAdapter adapter = new FollowRVInnerAdapter(context);
+                FollowRVInnerAdapter adapter = new FollowRVInnerAdapter(ctx);
                 avh.rv_inner.setAdapter(adapter);
                 adapter.setList(itemList);
                 //获取ItemList里面的data下面的itemList下面的data数据
@@ -104,12 +106,14 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 avh.rl_toAuthorDetail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(context, AuthorDetailActivity.class);
+                        Intent intent=new Intent(ctx, AuthorDetailActivity.class);
                         Bundle bundle=new Bundle();
+                        int id = header.getId();
                         bundle.putSerializable("itemList", (Serializable) list);
                         bundle.putInt("position",position);
+                        bundle.putInt("id",id);
                         intent.putExtras(bundle);
-                        context.startActivity(intent);
+                        ctx.startActivity(intent);
                     }
                 });
                 break;
@@ -184,6 +188,7 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public TypeViewHolder(View itemView) {
             super(itemView);
+            Log.e("===", "==TypeViewHolder===" );
             ButterKnife.bind(this, itemView);
         }
     }
@@ -203,24 +208,13 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemViewType(int position) {
         Follow.ItemListBeanX itemListBeanX = list.get(position);
         String type = itemListBeanX.getType();
+        Log.e("===", "==type==="+type );
         switch (type) {
             case "videoCollectionWithBrief":
                 return FOLLOW_AUTHOR;
             case "videoCollectionOfHorizontalScrollCard":
                 return FOLLOW_TYPE;
         }
-        return 0;
-    }
-
-    /**
-     * 用于加载banner图片的类
-     * 是由第三方中提供的
-     */
-    class GlideImageLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            //Glide 加载图片简单用法
-            Glide.with(context).load(path).into(imageView);
-        }
+        return FOLLOW_AUTHOR;
     }
 }

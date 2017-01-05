@@ -29,11 +29,11 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
         super(context, mode, style);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
-    }
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
+//        super.onMeasure(widthMeasureSpec, expandSpec);
+//    }
 
     @Override
     public Orientation getPullToRefreshScrollDirection() {
@@ -63,7 +63,6 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
             return view.getTop()>=getRefreshableView().getTop();
         }
         return false;
-
     }
 
 }

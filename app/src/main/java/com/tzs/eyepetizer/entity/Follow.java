@@ -63,6 +63,15 @@ public class Follow implements Serializable{
     }
 
     public static class ItemListBeanX implements Serializable{
+
+        @Override
+        public String toString() {
+            return "ItemListBeanX{" +
+                    "data=" + data +
+                    ", type='" + type + '\'' +
+                    '}';
+        }
+
         /**
          * type : videoCollectionWithBrief
          * data : {"dataType":"ItemCollection","header":{"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","iconType":"round","title":"收了Sola","subTitle":null,"description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","actionUrl":"eyepetizer://pgc/detail/295/?title=%E6%94%B6%E4%BA%86Sola","adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}},"itemList":[{"type":"video","data":{"dataType":"VideoBeanForClient","id":12076,"title":"他随手做的小教具，玩转地球 40 年。","description":"一个年轻的大学教师，为学生随手做的一个小教具，在其后的 40 年间，居然在全世界卖掉 3.5 亿个。好吧这听上去很酷，但是，「所有听上去美好的传说，其实平常无奇。」他说。","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"创意","author":{"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","name":"收了Sola","description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","link":"","latestReleaseTime":1482845501000,"videoNum":4,"adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/1ac699873eac97426e4447a013d73e02.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/1ac699873eac97426e4447a013d73e02.jpeg?imageMogr2/quality/60","blurred":"1","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=default","duration":153,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=12076","forWeibo":"http://wandou.im/3kk8av"},"releaseTime":1482845501000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=high"}],"consumption":{"collectionCount":175,"shareCount":130,"replyCount":2},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[{"id":24,"name":"记录","actionUrl":"eyepetizer://tag/24/?title=%E8%AE%B0%E5%BD%95","adTrack":null},{"id":598,"name":"访谈","actionUrl":"eyepetizer://tag/598/?title=%E8%AE%BF%E8%B0%88","adTrack":null},{"id":2,"name":"创意","actionUrl":"eyepetizer://tag/2/?title=%E5%88%9B%E6%84%8F","adTrack":null}],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482845501000,"promotion":null,"label":null,"collected":false,"played":false}},{"type":"video","data":{"dataType":"VideoBeanForClient","id":11907,"title":"魔都有座房子在跳舞","description":"魔都，出现了一座真实移动的房子 \u2014\u2014 又是设计师托马斯.赫斯维克，一个被称为「当代达芬奇」的疯子。当年，正是他把世博会英国馆设计成一朵播扬的蒲公英。","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"创意","author":{"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","name":"收了Sola","description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","link":"","latestReleaseTime":1482845501000,"videoNum":4,"adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/4f4fb34b3e94688d69a9a40b3660afa0.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/4f4fb34b3e94688d69a9a40b3660afa0.jpeg?imageMogr2/quality/60","blurred":"d","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11907&editionType=default","duration":207,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=11907","forWeibo":"http://wandou.im/3jczvk"},"releaseTime":1482412767000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11907&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11907&editionType=high"}],"consumption":{"collectionCount":1362,"shareCount":1278,"replyCount":26},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[{"id":2,"name":"创意","actionUrl":"eyepetizer://tag/2/?title=%E5%88%9B%E6%84%8F","adTrack":null},{"id":24,"name":"记录","actionUrl":"eyepetizer://tag/24/?title=%E8%AE%B0%E5%BD%95","adTrack":null},{"id":68,"name":"建筑设计","actionUrl":"eyepetizer://tag/68/?title=%E5%BB%BA%E7%AD%91%E8%AE%BE%E8%AE%A1","adTrack":null},{"id":64,"name":"装置艺术","actionUrl":"eyepetizer://tag/64/?title=%E8%A3%85%E7%BD%AE%E8%89%BA%E6%9C%AF","adTrack":null}],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482412767000,"promotion":null,"label":null,"collected":false,"played":false}},{"type":"video","data":{"dataType":"VideoBeanForClient","id":11849,"title":"汪文伟 | 网络隐形，文艺族音乐大神","description":"上世纪的西方，唱片工业和摇滚一起完蛋，indie大行其道。中国当然还是摇滚大行其道，玩氛围的汪文伟就显得另类，其实，他一直都是我的同类。","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"创意","author":{"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","name":"收了Sola","description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","link":"","latestReleaseTime":1482845501000,"videoNum":4,"adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/9a8a313f3403ab908c17f9a24f87c728.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/9a8a313f3403ab908c17f9a24f87c728.jpeg?imageMogr2/quality/60","blurred":"","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11849&editionType=default","duration":181,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=11849","forWeibo":"http://wandou.im/3j1fvk"},"releaseTime":1482295289000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11849&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11849&editionType=high"}],"consumption":{"collectionCount":17,"shareCount":5,"replyCount":0},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482295289000,"promotion":null,"label":null,"collected":false,"played":false}},{"type":"video","data":{"dataType":"VideoBeanForClient","id":11788,"title":"如果你厌倦了千篇一律的周遭","description":"\u201c收了\u201d是几个脱离体制的媒体老炮，包括原第一财经日报创办人韩国强，原南方体育创办人龚晓跃，原青年时报老总金毅，在喝酒聊天之余，想着是不是可以一起做一些有趣的事。于是就做了。","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"预告","author":{"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","name":"收了Sola","description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","link":"","latestReleaseTime":1482845501000,"videoNum":4,"adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/a657458197b9a8c8cf0f52ca22cdd4a5.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/a657458197b9a8c8cf0f52ca22cdd4a5.jpeg?imageMogr2/quality/60","blurred":"","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11788&editionType=default","duration":93,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=11788","forWeibo":"http://wandou.im/3iu1qh"},"releaseTime":1482209818000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11788&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=11788&editionType=high"}],"consumption":{"collectionCount":49,"shareCount":20,"replyCount":1},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482209818000,"promotion":null,"label":null,"collected":false,"played":false}}],"count":4,"adTrack":null}
@@ -88,6 +97,17 @@ public class Follow implements Serializable{
         }
 
         public static class DataBeanX implements Serializable{
+            @Override
+            public String toString() {
+                return "DataBeanX{" +
+                        "adTrack=" + adTrack +
+                        ", dataType='" + dataType + '\'' +
+                        ", header=" + header +
+                        ", count=" + count +
+                        ", itemList=" + itemList +
+                        '}';
+            }
+
             /**
              * dataType : ItemCollection
              * header : {"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","iconType":"round","title":"收了Sola","subTitle":null,"description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","actionUrl":"eyepetizer://pgc/detail/295/?title=%E6%94%B6%E4%BA%86Sola","adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}}
@@ -964,5 +984,16 @@ public class Follow implements Serializable{
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Follow{" +
+                "count=" + count +
+                ", total=" + total +
+                ", nextPageUrl='" + nextPageUrl + '\'' +
+                ", updateTime=" + updateTime +
+                ", itemList=" + itemList +
+                '}';
     }
 }

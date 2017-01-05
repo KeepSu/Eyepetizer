@@ -12,7 +12,7 @@ import com.tzs.eyepetizer.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ADTwoFragment extends Fragment {
+public class ADTwoFragment extends AuthorDetailFragment {
 
 
     public ADTwoFragment() {
@@ -23,7 +23,7 @@ public class ADTwoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_adtwo, container, false);
     }
 
