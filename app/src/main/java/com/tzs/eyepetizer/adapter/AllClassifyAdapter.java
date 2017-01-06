@@ -44,6 +44,12 @@ public class AllClassifyAdapter extends RecyclerView.Adapter<AllClassifyAdapter.
     public void onBindViewHolder(AllClassifyViewHolder holder, int position) {
         AllClassify.ItemListBean.DataBean data = mList.get(position).getData();
         AllClassifyViewHolder acViewHolder = holder;
+        boolean isShade = mList.get(position).getData().isShade();
+        if (isShade) {
+            acViewHolder.tv_allClassify.setVisibility(View.VISIBLE);
+        } else {
+            acViewHolder.tv_allClassify.setVisibility(View.INVISIBLE);
+        }
         acViewHolder.tv_allClassify.setText(data.getTitle());
         ImageUtil.setImage(mContext, data.getImage(), acViewHolder.iv_allClassify);
     }
