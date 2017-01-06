@@ -69,6 +69,7 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select, container, false);
         ButterKnife.bind(this, view);
+        tv_end.setVisibility(View.GONE);
         return view;
     }
 
