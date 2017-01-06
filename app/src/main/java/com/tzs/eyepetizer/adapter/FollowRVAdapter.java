@@ -116,6 +116,8 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         ctx.startActivity(intent);
                     }
                 });
+
+
                 break;
             case FOLLOW_TYPE:
                 TypeViewHolder tvh = (TypeViewHolder) holder;

@@ -25,9 +25,9 @@ import butterknife.ButterKnife;
  * 作者详情RecyclerViewAdapter
  */
 public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAdapter.MyViewHolder>{
-    private List<AuthorDetail> lists=new ArrayList();
+    private List<AuthorDetail.ItemListBean> lists=new ArrayList();
     private Context context;
-    public void setList(List<AuthorDetail> list) {
+    public void setList(List<AuthorDetail.ItemListBean> list) {
         this.lists=list;
         notifyDataSetChanged();
     }
@@ -44,21 +44,21 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        List<AuthorDetail.ItemListBean> itemList = lists.get(position).getItemList();
+        Log.i("==","===lists.size()==="+lists.size());
         //设置标题
-        holder.tv_title.setText(itemList.get(position).getData().getTitle());
-        Log.i("==","==title=="+itemList.get(position).getData().getTitle());
+        holder.tv_title.setText(lists.get(position).getData().getTitle());
+        Log.i("==","==title=="+lists.get(position).getData().getTitle());
         //设置类型
-        int duration = itemList.get(position).getData().getDuration();
-        holder.tv_category_duration.setText("#"+itemList.get(position).getData().getCategory()+" / "
+        int duration = lists.get(position).getData().getDuration();
+        holder.tv_category_duration.setText("#"+lists.get(position).getData().getCategory()+" / "
                                         + TimeUtil.getDurnig(duration));
-        Log.i("==","==type=="+"#"+itemList.get(position).getData().getCategory()+" / "
+        Log.i("==","==type=="+"#"+lists.get(position).getData().getCategory()+" / "
                 + TimeUtil.getDurnig(duration));
         //设置作者名字
-        holder.tv_author.setText(itemList.get(position).getData().getAuthor().getName());
-        Log.i("==","==name=="+itemList.get(position).getData().getAuthor().getName());
+        holder.tv_author.setText(lists.get(position).getData().getAuthor().getName());
+        Log.i("==","==name=="+lists.get(position).getData().getAuthor().getName());
         //设置背景图片
-        ImageUtil.setImage(context,itemList.get(position).getData().getCover().getFeed(),holder.iv_select_cover);
+        ImageUtil.setImage(context,lists.get(position).getData().getCover().getFeed(),holder.iv_select_cover);
     }
 
     @Override

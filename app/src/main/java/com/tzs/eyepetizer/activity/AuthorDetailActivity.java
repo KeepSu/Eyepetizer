@@ -2,6 +2,7 @@ package com.tzs.eyepetizer.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,39 +10,28 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.adapter.AuthorDetailVPAdapter;
-import com.tzs.eyepetizer.apiservice.HttpApiService;
 import com.tzs.eyepetizer.callback.OnCallBack;
 import com.tzs.eyepetizer.entity.AuthorDetail;
-import com.tzs.eyepetizer.entity.Follow;
-import com.tzs.eyepetizer.fragment.ADTwoFragment;
 import com.tzs.eyepetizer.fragment.AuthorDetailFragment;
 import com.tzs.eyepetizer.util.ImageUtil;
-import com.tzs.eyepetizer.util.PathUtil;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnPageChange;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class AuthorDetailActivity extends BaseActivity {
     @BindView(R.id.iv_portrait)
@@ -67,7 +57,9 @@ public class AuthorDetailActivity extends BaseActivity {
     private AuthorDetailVPAdapter adapter;
     //作者的id
     private int id;
-    private AuthorDetailFragment authorDetailFragment;
+    private AuthorDetailFragment adFragment1;
+    private View view1;
+    private View view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,24 +68,61 @@ public class AuthorDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         tool_bar.setNavigationIcon(R.drawable.ic_action_back);
         setSupportActionBar(tool_bar);
+        setCustomTabLayout();
         //初始化数据
         initData();
-       /* authorDetailFragment.setCallBack(new OnCallBack() {
+        //传值到AuthorDetailFragment中
+        toADFragment();
+        //回调回来的数据
+        adFragment1.setCallBack(new OnCallBack() {
             @Override
             public void OnCallBackData(AuthorDetail authorDetail) {
                 setData(authorDetail);
             }
-        });*/
+        });
     }
+    //自定义TabLayout
+    private void setCustomTabLayout() {
+        //设置选中指示器的颜色
+        tabLayout.setSelectedTabIndicatorColor(Color.RED);
+        //设置为滚动模式
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        for (int i = 0; i < titles.length; i++) {
+            //添加默认内容
+            tabLayout.addTab(tabLayout.newTab().setCustomView(getTabView(i)));
+        }
 
+        //利用ViewTree观察修改tab内容
+        tabLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                for (int i = 0; i < titles.length; i++) {
+                    //设置真正的内容
+                    tabLayout.getTabAt(i).setCustomView(getTabView(i));
+                }
+
+                //移除之后自己处理全局布局监听事件
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    tabLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
+    }
+    public View getTabView(int position){
+        //首先为子tab布置一个布局
+        View v = LayoutInflater.from(this).inflate(R.layout.layout_tablayout_item,null);
+        TextView tv_type = (TextView) v.findViewById(R.id.tv_type);
+        tv_type.setText(titles[position]);
+       /* view1 = v.findViewById(R.id.view1);
+        view2 = v.findViewById(R.id.view2);*/
+        return v;
+    }
 
 
     //设置数据
     private void setData(AuthorDetail authorDetail) {
         //作者头像
         ImageUtil.setCircleImage(this, authorDetail.getPgcInfo().getIcon(), iv_portrait);
-        //作者名字
-        tv_author.setText(authorDetail.getPgcInfo().getName());
         //收藏，分享，视频个数
         tv_brief.setText(authorDetail.getPgcInfo().getBrief());
         //作者描述
@@ -110,28 +139,30 @@ public class AuthorDetailActivity extends BaseActivity {
         }
         //collapsingToolbarLayout设置相关标题，颜色
         collapsingToolbarLayout.setTitle(authorDetail.getPgcInfo().getName());
-        collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#00000000"));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
 
-        //本页面传值到AuthorDetailFragment中
-        toADFragment(authorDetail);
+/* collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#00000000"));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);*/
     }
 
     //本页面传值到AuthorDetailFragment中
-    private void toADFragment(AuthorDetail authorDetail) {
-       // authorDetailFragment = AuthorDetailFragment.getInstance(id, "date");
-        authorDetailFragment = new AuthorDetailFragment();
+    private void toADFragment() {
+        adFragment1 = new AuthorDetailFragment();
         Bundle bundle=new Bundle();
         bundle.putInt("id",id);
-        bundle.putSerializable("authorDetail",authorDetail);
-        authorDetailFragment.setArguments(bundle);
-        fragmentList.add(authorDetailFragment);
-        fragmentList.add(new ADTwoFragment());
-        adapter = new AuthorDetailVPAdapter(getSupportFragmentManager(),
-                fragmentList,
-                titles);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        bundle.putString("strategy","date");
+        bundle.putBoolean("isFirst",true);
+        adFragment1.setArguments(bundle);
+
+        AuthorDetailFragment adFragment2=new AuthorDetailFragment();
+        Bundle bundle1=new Bundle();
+        bundle1.putInt("id",id);
+        bundle1.putString("strategy","shareCount");
+        adFragment2.setArguments(bundle1);
+
+        fragmentList.add(adFragment1);
+        fragmentList.add(adFragment2);
+        //给适配器添加数据
+        adapter.setFragments(fragmentList);
     }
 
     /**
@@ -143,52 +174,23 @@ public class AuthorDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         id = bundle.getInt("id", 0);
-        parseAuthorDetailData(id,"date");
+        adapter = new AuthorDetailVPAdapter(getSupportFragmentManager(),fragmentList,
+                titles);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-    //ViewPager的监听事件
     @OnPageChange(R.id.viewpager)
     void onPageSelected(int position) {
+        Log.i("info","==position="+position);
 
-    }
 
-    //返回键
-    public void back(View view) {
-        finish();
-    }
-
-    //解析作者详情的数据
-    private void parseAuthorDetailData(int id, String strategy) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PathUtil.getFollowPth())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-        HttpApiService apiService = retrofit.create(HttpApiService.class);
-        Observable<AuthorDetail> observable =
-                apiService.getAuthorDetailVideoList(String.valueOf(id), strategy);
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<AuthorDetail>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onNext(AuthorDetail authorDetail) {
-                        Log.i("info","===authorDetail===="+authorDetail);
-                        setData(authorDetail);
-                    }
-                });
     }
 }

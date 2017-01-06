@@ -44,9 +44,6 @@
         app:ptrHeaderBackground="#fff"
         app:ptrDrawable="@drawable/ic_eye_black_inner"
         app:ptrAnimationStyle="rotate"
-
-
-
         />
 
 </LinearLayout>
