@@ -30,6 +30,7 @@ public class FollowVPAdapter extends PagerAdapter{
         notifyDataSetChanged();
     }
 
+
     @Override
     public int getCount() {
         return list.size();

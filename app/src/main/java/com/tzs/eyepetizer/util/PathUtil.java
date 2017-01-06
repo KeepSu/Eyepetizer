@@ -5,6 +5,6 @@ package com.tzs.eyepetizer.util;
  */
 public class PathUtil {
     public static String getFollowPth(){
-        return "http://baobab.kaiyanapp.com/api/v4/tabs/follow/";
+        return "http://baobab.kaiyanapp.com/";
     }
 }

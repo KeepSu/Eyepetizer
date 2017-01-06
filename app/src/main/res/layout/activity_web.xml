@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_web"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tzs.eyepetizer.activity.WebActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:id="@+id/relativeLayout2">
+
+        <ImageView
+            android:id="@+id/iv_webBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:src="@drawable/ic_action_back"/>
+
+        <TextView
+            android:id="@+id/webTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="网页的TITLE"
+            android:textColor="#000000"
+            android:textSize="@dimen/textsize_title"
+            android:textStyle="bold"
+            android:fontFamily="serif"/>
+
+        <ImageView
+            android:id="@+id/iv_webShare"
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_action_share_grey"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout2"/>
+
+</RelativeLayout>
