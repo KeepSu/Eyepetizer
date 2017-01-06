@@ -1,16 +1,14 @@
 package com.tzs.eyepetizer.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
@@ -22,11 +20,8 @@ import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
-import com.tzs.eyepetizer.util.NetStateUtil;
 import com.tzs.eyepetizer.util.ToastUtil;
-import com.tzs.eyepetizer.view.FullyLinearLayoutManager;
 import com.tzs.eyepetizer.view.PullScrollView;
-import com.tzs.eyepetizer.view.PullToRefreshRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,13 +32,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
 /**
  * 精选页面
  */
-public class SelectFragment extends BaseFragment implements OnScrollToBottomListener {
+public class SelectFragment extends BaseFragment implements OnScrollToBottomListener, View.OnClickListener {
 
     @BindView(R.id.rv_select)
     RecyclerView rv_select;
@@ -51,12 +47,12 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     PullScrollView pullScrollView;
     @BindView(R.id.tv_end)
     TextView tv_end;
+    @BindView(R.id.iv_search)
+    ImageView iv_search;
 
     private List<SelectItem> selectList = new ArrayList<>();
     private SelectAdapter adapter;
-
-    private boolean isloading = false;//表示正在加载数据
-
+    private boolean isLoading = false;//是否正在加载数据
     private static final String HOME_PAGE_URL = "http://baobab.kaiyanapp.com/api/v4/tabs/selected";
     private String nextPageUrl = HOME_PAGE_URL;//下一页数据的地址
 
@@ -78,12 +74,12 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter = new SelectAdapter(selectList, getActivity());
-        rv_select.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_select.setAdapter(adapter);
+        adapter = new SelectAdapter(selectList, context);
+        rv_select.setLayoutManager(new LinearLayoutManager(context));
         pullScrollView.setOnScrollToBottomListener(this);
+        rv_select.setAdapter(adapter);
     }
 
     /**
@@ -94,23 +90,23 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
             tv_end.setVisibility(View.VISIBLE);
             return;
         }
-        if (!isNetConn() || isloading) {
+        if (!isNetConn() || isLoading) {
             return;
         }
-        isloading = true;
+        isLoading = true;
         OkHttpUtils.get(nextPageUrl)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         parseJson(s);
-                        isloading = false;
+                        isLoading = false;
                     }
 
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
                         ToastUtil.showToast(getContext(), "访问网络失败~");
-                        isloading = false;
+                        isLoading = false;
                     }
                 });
     }
@@ -128,10 +124,6 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
                 if (obj.getString("type").equals("squareCardCollection")) {
                     continue;
                 }
-                if (obj.getString("type").equals("videoCollectionOfAuthorWithCover")) {
-                    continue;
-                }
-
                 JSONObject data = obj.getJSONObject("data");
                 String type = data.getString("dataType");
                 String dataJson = obj.toString();
@@ -169,11 +161,24 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
         initData();
     }
 
+    /**
+     * 点击事件的处理
+     */
+    @OnClick({R.id.iv_search})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_search:
+                break;
+        }
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         selectList.clear();
         nextPageUrl = HOME_PAGE_URL;
-        isloading = false;
+        tv_end.setVisibility(View.GONE);
+        isLoading = false;
+
     }
 }

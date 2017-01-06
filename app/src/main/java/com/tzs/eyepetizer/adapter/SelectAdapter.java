@@ -24,6 +24,7 @@ import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
+import com.tzs.eyepetizer.fragment.BaseFragment;
 import com.tzs.eyepetizer.util.AnimaUtil;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
@@ -98,45 +99,7 @@ public class SelectAdapter extends RecyclerView.Adapter {
         String type = selectItem.getType();
         switch (type) {
             case "video":
-                final VideoHolder videoHolder = ((VideoHolder) holder);
-                final VideoBeanForClient.DataBean data = ((VideoBeanForClient) selectItem).getData();
-                videoHolder.tv_title.setText(data.getTitle());
-                videoHolder.tv_category_duration.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
-                ImageUtil.setImage(context, data.getCover().getFeed(), videoHolder.iv_select_cover);
-                if (data.getAuthor() != null) {
-                    videoHolder.tv_author.setVisibility(View.VISIBLE);
-                    videoHolder.tv_author.setText(data.getAuthor().getName());
-                } else {
-                    videoHolder.tv_author.setVisibility(View.GONE);
-                }
-                if (data.getLabel() != null) {
-                    videoHolder.tv_promotion.setVisibility(View.VISIBLE);
-                } else {
-                    videoHolder.tv_promotion.setVisibility(View.GONE);
-                }
-//                videoHolder.ly_video.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data);
-//                    }
-//                });
-//                videoHolder.ly_video.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        switch (event.getAction()) {
-//                            case MotionEvent.ACTION_DOWN:
-//                                AnimaUtil.disappear(1000, videoHolder.ly_video);
-//                                break;
-//                            case MotionEvent.ACTION_MOVE:
-//                                AnimaUtil.appear(1000, videoHolder.ly_video);
-//                                break;
-//                            case MotionEvent.ACTION_UP:
-//                                AnimaUtil.appear(1000, videoHolder.ly_video);
-//                                break;
-//                        }
-//                        return false;
-//                    }
-//                });
+                showDataType1((VideoHolder) holder, ((VideoBeanForClient) selectItem).getData(), position);
                 break;
             case "textFooter":
                 TextFooterHolder mFooterHolder = ((TextFooterHolder) holder);
@@ -187,10 +150,66 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 AuthorWithCoverHolder mAuthorWithCoverHolder = ((AuthorWithCoverHolder) holder);
                 ItemCollection.DataBean mItemCollection3 = ((ItemCollection) selectItem).getData();
                 ImageUtil.setImage(context, mItemCollection3.getHeader().getCover(), mAuthorWithCoverHolder.iv_author_video_cover);
+                ImageUtil.setCircleImage(context, mItemCollection3.getHeader().getIcon(), mAuthorWithCoverHolder.iv_author_video_head);
+                mAuthorWithCoverHolder.tv_author_name.setText(mItemCollection3.getHeader().getTitle());
+                mAuthorWithCoverHolder.tv_author_description.setText(mItemCollection3.getHeader().getDescription());
+                LinearLayoutManager manager4 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                VideoSetAdapter videoSetAdapter3 = new VideoSetAdapter(context, mItemCollection3.getItemList());
+                mAuthorWithCoverHolder.rv_video_set.setLayoutManager(manager4);
+                mAuthorWithCoverHolder.rv_video_set.setAdapter(videoSetAdapter3);
                 break;
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 展示video布局的数据
+     */
+    private void showDataType1(final VideoHolder holder, final VideoBeanForClient.DataBean data, final int position) {
+        holder.tv_title.setText(data.getTitle());
+        holder.tv_category_duration.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
+        ImageUtil.setImage(context, data.getCover().getFeed(), holder.iv_select_cover);
+        holder.iv_select_cover.setTransitionName(data.getId() + "");
+        if (data.getAuthor() != null) {
+            holder.tv_author.setVisibility(View.VISIBLE);
+            holder.tv_author.setText(data.getAuthor().getName());
+        } else {
+            holder.tv_author.setVisibility(View.GONE);
+        }
+        if (data.getPromotion() == null) {
+            holder.tv_promotion.setVisibility(View.GONE);
+        } else if (data.getPromotion().getText().equals("广告")) {
+            holder.tv_promotion.setVisibility(View.VISIBLE);
+            holder.tv_promotion.setText("广告");
+        } else {
+            holder.tv_promotion.setVisibility(View.VISIBLE);
+            holder.tv_promotion.setText("360°全景");
+        }
+        holder.ly_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data, holder.iv_select_cover, data.getId() + "");
+            }
+        });
+//        holder.ly_video.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        AnimaUtil.disappear(1000, holder.ly_video);
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        AnimaUtil.appear(1000, holder.ly_video);
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        AnimaUtil.appear(1000, holder.ly_video);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
     }
 
     /**
@@ -212,6 +231,8 @@ public class SelectAdapter extends RecyclerView.Adapter {
                 return VIDEO_COLLECTION_OF_FOLLOW;
             case "banner":
                 return BANNER;
+            case "videoCollectionOfAuthorWithCover":
+                return AUTHOR_WITH_COVER;
         }
         return 0;
     }
@@ -219,19 +240,6 @@ public class SelectAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    /**
-     * 广告的模板类
-     */
-    static class BannerHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_banner)
-        ImageView iv_banner;
-
-        public BannerHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
     }
 
     /**
@@ -255,6 +263,21 @@ public class SelectAdapter extends RecyclerView.Adapter {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    /**
+     * 广告的模板类
+     */
+    static class BannerHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.iv_banner)
+        ImageView iv_banner;
+
+        public BannerHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
     }
 
     /**
@@ -345,6 +368,16 @@ public class SelectAdapter extends RecyclerView.Adapter {
         public AuthorWithCoverHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
+
+    /**
+     * 模板类
+     */
+    static class SelectViewHolder extends RecyclerView.ViewHolder {
+
+        public SelectViewHolder(View itemView,int viewType) {
+            super(itemView);
         }
     }
 

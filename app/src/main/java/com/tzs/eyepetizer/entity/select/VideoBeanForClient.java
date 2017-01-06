@@ -80,7 +80,7 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
         private Object favoriteAdTrack;
         private Object webAdTrack;
         private long date;
-        private Object promotion;
+        private PromotionBean promotion;
         private Object label;
         private boolean collected;
         private boolean played;
@@ -263,11 +263,11 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             this.date = date;
         }
 
-        public Object getPromotion() {
+        public PromotionBean getPromotion() {
             return promotion;
         }
 
-        public void setPromotion(Object promotion) {
+        public void setPromotion(PromotionBean promotion) {
             this.promotion = promotion;
         }
 
@@ -794,6 +794,23 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
                     ", playInfo=" + playInfo +
                     ", tags=" + tags +
                     '}';
+        }
+
+        public class PromotionBean implements Serializable {
+
+            /**
+             * text : 广告
+             */
+
+            public String text;
+
+            public String getText() {
+                return text;
+            }
+
+            public void setText(String text) {
+                this.text = text;
+            }
         }
     }
 

@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_video_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1fff"
     android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6">
+        android:layout_weight="4">
+
 
         <ImageView
-            android:layout_width="match_parent"
+            android:id="@+id/iv_cover"
+            android:layout_width="616dp"
             android:layout_height="match_parent"
-            android:background="@color/bg_alpha" />
+            android:layout_gravity="center_horizontal"
+            android:background="@color/bg_alpha"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -22,62 +28,91 @@
             android:src="@drawable/ic_action_play" />
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_action_detail_back" />
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="5"
-        android:background="#5000"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp">
+        android:layout_weight="3"
+        android:background="#c000">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <LinearLayout
+            android:id="@+id/ly_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="8dp">
+            android:layout_height="match_parent"
+            android:background="#4000"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:gravity="center">
 
-                <TextView style="@style/TitleLight" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView style="@style/SubTitleLight" />
+                    <com.tzs.eyepetizer.view.PrinterTextView
+                        android:id="@+id/tv_title"
+                        style="@style/TitleLight"
+                        app:typefacePath="fonts/FZLanTingHeiS-DB1-GB-Regular.TTF" />
+
+                    <com.tzs.eyepetizer.view.PrinterTextView
+                        android:id="@+id/tv_during"
+                        style="@style/SubTitleLight"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_find_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_up_white_small" />
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_up_white_small" />
+            <include
+                android:id="@+id/ly_author"
+                layout="@layout/item_video_author" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#2fff" />
+
+            <com.tzs.eyepetizer.view.PrinterTextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="8"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="发僧扥共的东方赛方森腮红的仿赛方法赛风扥红"
+                android:textColor="@color/text_light"
+                android:textSize="@dimen/textsize_description" />
+
+            <include layout="@layout/item_video_tab" />
 
         </LinearLayout>
-
-        <include layout="@layout/line_thin" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:maxLines="8"
-            android:paddingBottom="16dp"
-            android:paddingTop="16dp"
-            android:text="发僧扥共的东方赛方森腮红的仿赛方法赛风扥红"
-            android:textColor="@color/text_light" />
-
-        <include layout="@layout/item_video_tab" />
-
-    </LinearLayout>
+    </FrameLayout>
 
 
 </LinearLayout>

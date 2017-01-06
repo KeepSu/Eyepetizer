@@ -1,58 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="-16dp"
     android:gravity="center_vertical">
 
-    <ImageView
+    <LinearLayout
+        android:id="@+id/ly_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_favorites" />
+        android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="222"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/textsize_description" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_favorites" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_share" />
+        <com.tzs.eyepetizer.view.CustomFontTextView
+            android:id="@+id/tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/textsize_description" />
+    </LinearLayout>
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/ly_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="222"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/textsize_description" />
+        android:gravity="center">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_action_reply_nopadding" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_share" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="222"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/textsize_description" />
+        <com.tzs.eyepetizer.view.CustomFontTextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/textsize_description" />
+    </LinearLayout>
 
-    <ImageView
+    <LinearLayout
+        android:id="@+id/ly_feed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_action_offline_without_padding" />
+        android:gravity="center">
 
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_action_reply_nopadding" />
+
+        <com.tzs.eyepetizer.view.CustomFontTextView
+            android:id="@+id/tv_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/textsize_description" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_cache"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="缓存"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/textsize_description" />
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_action_offline_without_padding" />
+
+        <com.tzs.eyepetizer.view.CustomFontTextView
+            android:id="@+id/tv_cache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="缓存"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/textsize_description"
+            app:typefacePath="fonts/FZLanTingHeiS-DB1-GB-Regular.TTF" />
+    </LinearLayout>
 
 </LinearLayout>
