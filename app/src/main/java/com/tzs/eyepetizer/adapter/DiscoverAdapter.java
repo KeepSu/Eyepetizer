@@ -41,7 +41,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private int mCount1;//后面的分类里的icon要有的个数
 
     public void setList(List<Discover.ItemListBeanX> data) {
-        this.mData.addAll(data);
+        this.mData = data;
         notifyDataSetChanged();
     }
 
@@ -125,13 +125,8 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case BANNERCOLLECTION:
                 BannerCollectionViewHolder bcViewHolder = (BannerCollectionViewHolder) holder;
                 bcViewHolder.title_discover.setText(data.getHeader().getTitle());
-                List imageUrls = new ArrayList();
                 mCount = data.getCount();
-                for (int i = 0; i < data.getCount(); i++) {
-                    String imageUrl = data.getItemList().get(i).getData().getImage();
-                    imageUrls.add(imageUrl);
-                }
-                imageAdapter imgAdapter = new imageAdapter(imageUrls, mContext);
+                imageAdapter imgAdapter = new imageAdapter(itemList, mContext);
                 bcViewHolder.vp_coll.setOffscreenPageLimit(mCount);
                 bcViewHolder.vp_coll.setPageMargin(12);
                 bcViewHolder.vp_coll.setAdapter(imgAdapter);
@@ -152,7 +147,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     public void onPageScrollStateChanged(int state) {
 
                     }
-                });//热门专题 处的 页面改变监听事件
+                });
                 setIcon(0);//设置指示器
                 break;
             case VIDEOCOLLECTION:
