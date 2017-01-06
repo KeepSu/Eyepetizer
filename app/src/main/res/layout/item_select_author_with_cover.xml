@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="4dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -11,20 +12,21 @@
         <ImageView
             android:id="@+id/iv_author_video_cover"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="240dp"
             android:scaleType="centerCrop"
             android:src="@drawable/recommend_bg_liked" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/bg_alpha"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_author_video_head"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp" />
 
@@ -42,8 +44,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/shape_bg_video_tint"
-                android:padding="2dp"
-                android:text="    +关注    "
+                android:paddingBottom="4dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="4dp"
+                android:text="+关注"
                 android:textColor="@color/text_light"
                 android:textSize="@dimen/textsize_tint"
                 android:textStyle="bold" />

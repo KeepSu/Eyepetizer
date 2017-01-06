@@ -61,7 +61,7 @@ public class ImageUtil {
         Glide.with(context)
                 .load(url)
                 .asBitmap()
-                .placeholder(R.drawable.pgc_default_avatar)
+//                .placeholder(R.drawable.pgc_default_avatar)
                 .centerCrop()
                 .into(iv);
     }

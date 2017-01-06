@@ -95,6 +95,15 @@ public class ItemCollection extends SelectItem implements Serializable {
             private String cover;
             private LabelBean label;
             private String actionUrl;
+            private String icon;
+
+            public String getIcon() {
+                return icon;
+            }
+
+            public void setIcon(String icon) {
+                this.icon = icon;
+            }
 
             public String getDescription() {
                 return description;
