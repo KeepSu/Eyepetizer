@@ -44,32 +44,20 @@ public class AuthorDetailFragment extends BaseFragment {
     private AuthorDatailRVAdapter adapter;
 
     //装数据源的集合
-    private List<AuthorDetail> list=new ArrayList();
+    private List<AuthorDetail.ItemListBean> list=new ArrayList();
 
-   /* private OnCallBack callBack;
+    private OnCallBack callBack;
 
+    private boolean isFirst;
     public void setCallBack(OnCallBack callBack) {
         this.callBack = callBack;
     }
-*/
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context=context;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //获取AuthorDetailActivity传递过来的值
-        Bundle bundle = getArguments();
-        int id = bundle.getInt("id", 0);
-        AuthorDetail authorDetail = (AuthorDetail) bundle.getSerializable("authorDetail");
-        //添加数据到集合中
-        list.add(authorDetail);
-       // String strategy = bundle.getString("strategy");
-      //  parseAuthorDetailData(id,"date");
-    }
 
     //解析作者详情的数据
     private void parseAuthorDetailData(int id, String strategy) {
@@ -95,9 +83,14 @@ public class AuthorDetailFragment extends BaseFragment {
                     @Override
                     public void onNext(AuthorDetail authorDetail) {
                         Log.i("info","===authorDetail===="+authorDetail);
-                      //  callBack.OnCallBackData(authorDetail);
+                        if (isFirst){
+                            callBack.OnCallBackData(authorDetail);
+                            isFirst=false;
+                        }
                         //添加数据到集合中
-                       // list.add(authorDetail);
+                        list.addAll(authorDetail.getItemList());
+                        initData();
+                        Log.i("==","==size=="+list.size());
                     }
                 });
     }
@@ -110,20 +103,24 @@ public class AuthorDetailFragment extends BaseFragment {
         return view;
     }
     //获取本类对象
-    public static AuthorDetailFragment getInstance(int id,String strategy){
+/*    public static AuthorDetailFragment getInstance(int id,String strategy){
         AuthorDetailFragment authorDetailFragment = new AuthorDetailFragment();
         Bundle bundle=new Bundle();
         bundle.putInt("id",id);
         bundle.putString("strategy",strategy);
         authorDetailFragment.setArguments(bundle);
         return authorDetailFragment;
-    }
+    }*/
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Bundle bundle = getArguments();
+        int id = bundle.getInt("id", 0);
+        String strategy = bundle.getString("strategy");
+        isFirst = bundle.getBoolean("isFirst");
+        parseAuthorDetailData(id,strategy);
         setEvent();
-        initData();
     }
 
     /**
