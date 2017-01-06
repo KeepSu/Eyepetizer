@@ -1,5 +1,7 @@
 package com.tzs.eyepetizer.entity;
 
+import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -294,13 +296,13 @@ public class Follow implements Serializable{
                 }
             }
 
-            public static class ItemListBean implements Serializable{
+            public static class ItemListBean extends VideoBeanForClient implements Serializable{
                 /**
                  * type : video
                  * data : {"dataType":"VideoBeanForClient","id":12076,"title":"他随手做的小教具，玩转地球 40 年。","description":"一个年轻的大学教师，为学生随手做的一个小教具，在其后的 40 年间，居然在全世界卖掉 3.5 亿个。好吧这听上去很酷，但是，「所有听上去美好的传说，其实平常无奇。」他说。","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"创意","author":{"id":295,"icon":"http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60","name":"收了Sola","description":"格格不入，满不在乎，他们的头脑中隐藏着另外的宇宙。","link":"","latestReleaseTime":1482845501000,"videoNum":4,"adTrack":null,"follow":{"itemType":"author","itemId":295,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/1ac699873eac97426e4447a013d73e02.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/1ac699873eac97426e4447a013d73e02.jpeg?imageMogr2/quality/60","blurred":"1","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=default","duration":153,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=12076","forWeibo":"http://wandou.im/3kk8av"},"releaseTime":1482845501000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=high"}],"consumption":{"collectionCount":175,"shareCount":130,"replyCount":2},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[{"id":24,"name":"记录","actionUrl":"eyepetizer://tag/24/?title=%E8%AE%B0%E5%BD%95","adTrack":null},{"id":598,"name":"访谈","actionUrl":"eyepetizer://tag/598/?title=%E8%AE%BF%E8%B0%88","adTrack":null},{"id":2,"name":"创意","actionUrl":"eyepetizer://tag/2/?title=%E5%88%9B%E6%84%8F","adTrack":null}],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482845501000,"promotion":null,"label":null,"collected":false,"played":false}
                  */
 
-                private String type;
+              /*  private String type;
                 private DataBean data;
 
                 public String getType() {
@@ -320,7 +322,7 @@ public class Follow implements Serializable{
                 }
 
                 public static class DataBean implements Serializable{
-                    /**
+                    *//**
                      * dataType : VideoBeanForClient
                      * id : 12076
                      * title : 他随手做的小教具，玩转地球 40 年。
@@ -349,7 +351,7 @@ public class Follow implements Serializable{
                      * label : null
                      * collected : false
                      * played : false
-                     */
+                     *//*
 
                     private String dataType;
                     private int id;
@@ -605,11 +607,11 @@ public class Follow implements Serializable{
                     }
 
                     public static class ProviderBean implements Serializable{
-                        /**
+                        *//**
                          * name : PGC
                          * alias : PGC
                          * icon :
-                         */
+                         *//*
 
                         private String name;
                         private String alias;
@@ -641,7 +643,7 @@ public class Follow implements Serializable{
                     }
 
                     public static class AuthorBean implements Serializable{
-                        /**
+                        *//**
                          * id : 295
                          * icon : http://img.kaiyanapp.com/36465d071f45d8e6f412da00085c06ee.jpeg?imageMogr2/quality/60
                          * name : 收了Sola
@@ -651,7 +653,7 @@ public class Follow implements Serializable{
                          * videoNum : 4
                          * adTrack : null
                          * follow : {"itemType":"author","itemId":295,"followed":false}
-                         */
+                         *//*
 
                         private int id;
                         private String icon;
@@ -736,11 +738,11 @@ public class Follow implements Serializable{
                         }
 
                         public static class FollowBeanX implements Serializable{
-                            /**
+                            *//**
                              * itemType : author
                              * itemId : 295
                              * followed : false
-                             */
+                             *//*
 
                             private String itemType;
                             private int itemId;
@@ -773,12 +775,12 @@ public class Follow implements Serializable{
                     }
 
                     public static class CoverBean implements Serializable{
-                        /**
+                        *//**
                          * feed : http://img.kaiyanapp.com/1ac699873eac97426e4447a013d73e02.jpeg?imageMogr2/quality/60
                          * detail : http://img.kaiyanapp.com/1ac699873eac97426e4447a013d73e02.jpeg?imageMogr2/quality/60
                          * blurred : 1
                          * sharing : null
-                         */
+                         *//*
 
                         private String feed;
                         private String detail;
@@ -819,10 +821,10 @@ public class Follow implements Serializable{
                     }
 
                     public static class WebUrlBean implements Serializable{
-                        /**
+                        *//**
                          * raw : http://www.eyepetizer.net/detail.html?vid=12076
                          * forWeibo : http://wandou.im/3kk8av
-                         */
+                         *//*
 
                         private String raw;
                         private String forWeibo;
@@ -845,11 +847,11 @@ public class Follow implements Serializable{
                     }
 
                     public static class ConsumptionBean implements Serializable{
-                        /**
+                        *//**
                          * collectionCount : 175
                          * shareCount : 130
                          * replyCount : 2
-                         */
+                         *//*
 
                         private int collectionCount;
                         private int shareCount;
@@ -881,13 +883,13 @@ public class Follow implements Serializable{
                     }
 
                     public static class PlayInfoBean implements Serializable{
-                        /**
+                        *//**
                          * height : 480
                          * width : 854
                          * name : 标清
                          * type : normal
                          * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12076&editionType=normal
-                         */
+                         *//*
 
                         private int height;
                         private int width;
@@ -937,12 +939,12 @@ public class Follow implements Serializable{
                     }
 
                     public static class TagsBean implements Serializable{
-                        /**
+                        *//**
                          * id : 24
                          * name : 记录
                          * actionUrl : eyepetizer://tag/24/?title=%E8%AE%B0%E5%BD%95
                          * adTrack : null
-                         */
+                         *//*
 
                         private int id;
                         private String name;
@@ -981,7 +983,7 @@ public class Follow implements Serializable{
                             this.adTrack = adTrack;
                         }
                     }
-                }
+                }*/
             }
         }
     }

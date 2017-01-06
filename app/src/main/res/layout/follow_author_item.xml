@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginLeft="5dp"
-    android:clickable="true"
-    android:onClick="toVideoDetail">
+    android:id="@+id/linearLayout">
 
     <ImageView
         android:id="@+id/iv_image"

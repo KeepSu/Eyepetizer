@@ -1,16 +1,22 @@
 package com.tzs.eyepetizer.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
@@ -25,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnPageChange;
 
 public class AuthorDetailActivity extends BaseActivity {
     @BindView(R.id.iv_portrait)
@@ -51,6 +58,9 @@ public class AuthorDetailActivity extends BaseActivity {
     //作者的id
     private int id;
     private AuthorDetailFragment adFragment1;
+    private View view1;
+    private View view2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +68,7 @@ public class AuthorDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         tool_bar.setNavigationIcon(R.drawable.ic_action_back);
         setSupportActionBar(tool_bar);
+        setCustomTabLayout();
         //初始化数据
         initData();
         //传值到AuthorDetailFragment中
@@ -70,7 +81,42 @@ public class AuthorDetailActivity extends BaseActivity {
             }
         });
     }
+    //自定义TabLayout
+    private void setCustomTabLayout() {
+        //设置选中指示器的颜色
+        tabLayout.setSelectedTabIndicatorColor(Color.RED);
+        //设置为滚动模式
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        for (int i = 0; i < titles.length; i++) {
+            //添加默认内容
+            tabLayout.addTab(tabLayout.newTab().setCustomView(getTabView(i)));
+        }
 
+        //利用ViewTree观察修改tab内容
+        tabLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                for (int i = 0; i < titles.length; i++) {
+                    //设置真正的内容
+                    tabLayout.getTabAt(i).setCustomView(getTabView(i));
+                }
+
+                //移除之后自己处理全局布局监听事件
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    tabLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
+    }
+    public View getTabView(int position){
+        //首先为子tab布置一个布局
+        View v = LayoutInflater.from(this).inflate(R.layout.layout_tablayout_item,null);
+        TextView tv_type = (TextView) v.findViewById(R.id.tv_type);
+        tv_type.setText(titles[position]);
+       /* view1 = v.findViewById(R.id.view1);
+        view2 = v.findViewById(R.id.view2);*/
+        return v;
+    }
 
 
     //设置数据
@@ -134,9 +180,17 @@ public class AuthorDetailActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    @OnPageChange(R.id.viewpager)
+    void onPageSelected(int position) {
+        Log.i("info","==position="+position);
+
+
     }
 }
