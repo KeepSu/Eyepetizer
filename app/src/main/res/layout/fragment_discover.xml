@@ -15,6 +15,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/discover_all_classify"
+            android:textColor="@color/text_select"
             android:textSize="@dimen/textsize_subtitle"
             android:layout_marginLeft="10dp"/>
         <TextView
@@ -22,6 +23,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/discover_discover"
+            android:textColor="#000000"
             android:textSize="@dimen/textsize_title"
             android:textStyle="italic|bold"
             android:typeface="serif"/>
@@ -35,10 +37,9 @@
 
     <include layout="@layout/line_thin"/>
 
-    <android.support.v7.widget.RecyclerView
+    <com.tzs.eyepetizer.view.PullRecyclerView
         android:id="@+id/recyclerView_Discover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
