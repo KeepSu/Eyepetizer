@@ -2,19 +2,23 @@ package com.tzs.eyepetizer.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AllClassifyActivity;
 import com.tzs.eyepetizer.adapter.DiscoverAdapter;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.view.PullRecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,14 +28,16 @@ import okhttp3.Response;
 /**
  * 发现页面
  */
-public class DiscoverFragment extends Fragment {
-    private static String path = "http://baobab.kaiyanapp.com/api/v4/tabs/discovery?";
+public class DiscoverFragment extends BaseFragment implements View.OnClickListener {
+    private static String path = "http://baobab.kaiyanapp.com/api/v4/tabs/discovery";
+    List<Discover.ItemListBeanX> mList = new ArrayList<>();
 
     @BindView(R.id.recyclerView_Discover)
     PullRecyclerView recyclerView_Discover;
+    @BindView(R.id.tv_classify)
+    TextView tv_classify;
 
     private Discover mDiscover;//解析出来的discover对象
-
     private DiscoverAdapter adapter;
 
     public DiscoverFragment() {
@@ -43,6 +49,7 @@ public class DiscoverFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
         ButterKnife.bind(this, view);
+        tv_classify.setOnClickListener(this);
         return view;
     }
 
@@ -69,16 +76,21 @@ public class DiscoverFragment extends Fragment {
                 public void onSuccess(String s, Call call, Response response) {
                     mDiscover = new Gson().fromJson(s, Discover.class);//解析出来的discover对象
                     path = mDiscover.getNextPageUrl();//每次数据下载完成后，是path得到下一页的数据
-                    adapter.setList(mDiscover.getItemList());
+                    mList.addAll(mDiscover.getItemList());
+                    adapter.setList(mList);
                 }
             });
         } else {
-            return;
+            adapter.setList(mList);
         }
     }
-//
-//    public void onClickToAllClassify(View view) {
-//        Intent intent = new Intent(getActivity(), AllClassifyActivity.class);
-//        startActivity(intent);
-//    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_classify://点击跳转进入所有分类
+                goToAnotherActivity(AllClassifyActivity.class);
+                break;
+        }
+    }
 }

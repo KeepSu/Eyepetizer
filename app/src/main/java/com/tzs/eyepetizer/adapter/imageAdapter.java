@@ -1,11 +1,15 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.tzs.eyepetizer.activity.WebActivity;
+import com.tzs.eyepetizer.entity.Discover;
+import com.tzs.eyepetizer.util.DecodeUtil;
 import com.tzs.eyepetizer.util.ImageUtil;
 
 import java.util.ArrayList;
@@ -16,10 +20,10 @@ import java.util.List;
  */
 
 public class imageAdapter extends PagerAdapter {
-    private List<String> data = new ArrayList();
+    private List<Discover.ItemListBeanX.DataBeanX.ItemListBean> data = new ArrayList();
     private Context mContext;
 
-    public imageAdapter(List data, Context context) {
+    public imageAdapter(List<Discover.ItemListBeanX.DataBeanX.ItemListBean> data, Context context) {
         this.data = data;
         mContext = context;
     }
@@ -31,10 +35,23 @@ public class imageAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         ImageView img = new ImageView(mContext);
         img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        ImageUtil.setImage(mContext, data.get(position % data.size()), img);
+        ImageUtil.setImage(mContext, data.get(position % data.size()).getData().getImage(), img);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String actionUrl = DecodeUtil.StringDecode(data.get(position % data.size()).getData().getActionUrl());
+                String[] a = actionUrl.split("title=")[1].split("&url=");
+                String webTitle = a[0];
+                String webUrl = a[1];
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra("webTitle", webTitle);
+                intent.putExtra("webUrl", webUrl);
+                mContext.startActivity(intent);
+            }
+        });
         container.addView(img);
         return img;
     }
