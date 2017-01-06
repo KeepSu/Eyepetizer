@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
         initView();
         setEvent();
+
     }
 
     //初始化view
