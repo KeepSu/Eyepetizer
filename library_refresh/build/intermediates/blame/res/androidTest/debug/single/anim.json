@@ -4,8 +4,20 @@
         "source": "C:\\Users\\h\\Desktop\\2222\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
     {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+    },
+    {
         "merged": "C:\\Users\\h\\Desktop\\2222\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
         "source": "C:\\Users\\h\\Desktop\\2222\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
     {
         "merged": "C:\\Users\\h\\Desktop\\2222\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
@@ -14,5 +26,9 @@
     {
         "merged": "C:\\Users\\h\\Desktop\\2222\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
         "source": "C:\\Users\\h\\Desktop\\2222\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "E:\\WorkSpace\\Eyepetizer\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     }
 ]

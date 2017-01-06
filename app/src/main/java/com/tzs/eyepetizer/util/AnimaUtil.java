@@ -17,7 +17,6 @@ public class AnimaUtil {
         disappearAnimation.setDuration(during);
         disappearAnimation.setFillAfter(true);
         view.startAnimation(disappearAnimation);
-
     }
 
     /**
@@ -26,6 +25,7 @@ public class AnimaUtil {
     public static void appear(long during, View view) {
         AlphaAnimation appearAnimation = new AlphaAnimation(0, 1);
         appearAnimation.setDuration(during);
+        appearAnimation.setFillAfter(true);
         view.startAnimation(appearAnimation);
     }
 }

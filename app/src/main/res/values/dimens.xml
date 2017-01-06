@@ -4,8 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="textsize_title">16sp</dimen>//标题字号
-    <dimen name="textsize_subtitle">15sp</dimen>//副标题字号
-    <dimen name="textsize_description">12sp</dimen>//描述内容字号
+    <dimen name="textsize_subtitle">14sp</dimen>//副标题字号
+    <dimen name="textsize_description">11sp</dimen>//描述内容字号
     <dimen name="textsize_tint">10sp</dimen>//最小的字号
     <dimen name="high_dividing">8dp</dimen>//分割线高度
 

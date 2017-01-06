@@ -131,7 +131,6 @@ public class PullScrollView extends ScrollView implements View.OnTouchListener {
         dropZoomView.setLayoutParams(lp);
     }
 
-    //设置ScrollView滑动到底部的监听
     public void setOnScrollToBottomListener(OnScrollToBottomListener listener) {
         this.listener = listener;
     }
