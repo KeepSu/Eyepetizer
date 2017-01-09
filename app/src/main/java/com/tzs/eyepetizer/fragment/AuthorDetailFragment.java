@@ -4,6 +4,7 @@ package com.tzs.eyepetizer.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +18,9 @@ import com.tzs.eyepetizer.apiservice.HttpApiService;
 import com.tzs.eyepetizer.callback.OnCallBack;
 import com.tzs.eyepetizer.entity.AuthorDetail;
 import com.tzs.eyepetizer.entity.Follow;
+import com.tzs.eyepetizer.entity.Search;
 import com.tzs.eyepetizer.util.PathUtil;
+import com.tzs.eyepetizer.view.PullRecyclerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,29 +41,34 @@ import rx.schedulers.Schedulers;
  */
 public class AuthorDetailFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    PullRecyclerView recyclerView;
     private Context context;
     //视频Item的RecyclerView适配器
     private AuthorDatailRVAdapter adapter;
 
     //装数据源的集合
-    private List<AuthorDetail.ItemListBean> list=new ArrayList();
+    private List<AuthorDetail.ItemListBean> list = new ArrayList();
 
     private OnCallBack callBack;
 
     private boolean isFirst;
+    private int start = 10;
+    private int id;
+    private String strategy;
+
     public void setCallBack(OnCallBack callBack) {
         this.callBack = callBack;
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context=context;
+        this.context = context;
     }
 
 
     //解析作者详情的数据
-    private void parseAuthorDetailData(int id, String strategy) {
+    private void parseAuthorDetailData(int start, int id, String strategy) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PathUtil.getFollowPth())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -68,7 +76,7 @@ public class AuthorDetailFragment extends BaseFragment {
                 .build();
         HttpApiService apiService = retrofit.create(HttpApiService.class);
         Observable<AuthorDetail> observable =
-                apiService.getAuthorDetailVideoList(String.valueOf(id), strategy);
+                apiService.getAuthorDetailVideoList(String.valueOf(start), "10", String.valueOf(id), strategy);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<AuthorDetail>() {
@@ -82,45 +90,48 @@ public class AuthorDetailFragment extends BaseFragment {
 
                     @Override
                     public void onNext(AuthorDetail authorDetail) {
-                        Log.i("info","===authorDetail===="+authorDetail);
-                        if (isFirst){
+                        Log.i("info", "===authorDetail====" + authorDetail);
+                        if (isFirst) {
                             callBack.OnCallBackData(authorDetail);
-                            isFirst=false;
+                            isFirst = false;
                         }
                         //添加数据到集合中
                         list.addAll(authorDetail.getItemList());
                         initData();
-                        Log.i("==","==size=="+list.size());
+                        Log.i("==", "==size==" + list.size());
                     }
                 });
     }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_author_detail, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
-    //获取本类对象
-/*    public static AuthorDetailFragment getInstance(int id,String strategy){
-        AuthorDetailFragment authorDetailFragment = new AuthorDetailFragment();
-        Bundle bundle=new Bundle();
-        bundle.putInt("id",id);
-        bundle.putString("strategy",strategy);
-        authorDetailFragment.setArguments(bundle);
-        return authorDetailFragment;
-    }*/
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getArguments();
-        int id = bundle.getInt("id", 0);
-        String strategy = bundle.getString("strategy");
+        id = bundle.getInt("id", 0);
+        strategy = bundle.getString("strategy");
         isFirst = bundle.getBoolean("isFirst");
-        parseAuthorDetailData(id,strategy);
+        parseAuthorDetailData(start, id, strategy);
         setEvent();
+        //监听，当滑到底部的时候下载并加载下一页的数据
+        recyclerView.setOnScrollToButtomLinstener(new PullRecyclerView.OnScrollToButtomLinstener() {
+            @Override
+            public void onScrollToButtom() {
+                start += 10;
+                parseAuthorDetailData(start, id, strategy);
+            }
+        });
     }
 
     /**
@@ -128,7 +139,7 @@ public class AuthorDetailFragment extends BaseFragment {
      */
     private void setEvent() {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        adapter=new AuthorDatailRVAdapter(context);
+        adapter = new AuthorDatailRVAdapter(context);
         recyclerView.setAdapter(adapter);
     }
 
