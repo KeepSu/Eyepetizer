@@ -2,6 +2,7 @@ package com.tzs.eyepetizer.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +15,17 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.SearchActivity;
 import com.tzs.eyepetizer.adapter.FollowRVAdapter;
 import com.tzs.eyepetizer.apiservice.HttpApiService;
 import com.tzs.eyepetizer.entity.Follow;
+import com.tzs.eyepetizer.util.AnimaUtil;
 import com.tzs.eyepetizer.util.PathUtil;
+import com.tzs.eyepetizer.view.PullRecyclerView;
 import com.tzs.eyepetizer.view.PullToRefreshRecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +51,7 @@ public class FollowFragment extends BaseFragment {
     private FollowRVAdapter adapter;
     private int flag=1;
     private int page=0;
+    private List<Follow.ItemListBeanX> list=new ArrayList<>();
     private Context context;
     public FollowFragment() {
     }
@@ -64,28 +72,78 @@ public class FollowFragment extends BaseFragment {
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
         //设置布局方式
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
-        pullToRefreshRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
+        //pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
+        pullToRefreshRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+                list.clear();
+                getFollowData(String.valueOf(flag),"1");
+            }
+        });
+        //滑动到底部自动加载
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isSlideToBottom(recyclerView)) {
+                    Log.e("=====","===到达底部了===");
+                    flag=2;
+                    page+=2;
+                    getFollowData(String.valueOf(flag),String.valueOf(page));
+                }
+            }
+        });
+    /*    pullToRefreshRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.e("=====","==下拉 ===");
+                list.clear();
                 getFollowData(String.valueOf(flag),"1");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.e("=====","===上拉===");
+
                 flag=2;
                 page+=2;
                 getFollowData(String.valueOf(flag),String.valueOf(page));
             }
-        });
+        });*/
         //设置适配器
         adapter=new FollowRVAdapter(context);
         recyclerView.setAdapter(adapter);
         //下载数据
         getFollowData(String.valueOf(flag),"1");
+
+        toSearchActivity();
         return view;
+    }
+
+    //监听是否到达底部
+    public boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null)
+            return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
+    }
+
+    //跳转到搜索页面
+    private void toSearchActivity() {
+        iv_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, SearchActivity.class);
+                startActivity(intent);
+                View view = LayoutInflater.from(context).inflate(R.layout.activity_search, null);
+                AnimaUtil.appear(1000,view);
+            }
+        });
     }
 
 
@@ -119,9 +177,11 @@ public class FollowFragment extends BaseFragment {
                     @Override
                     public void onNext(Follow follow) {
                         Log.e("===", "==onNext===" + follow.getItemList().size());
-                        adapter.setList(follow.getItemList());
+                        list.addAll(follow.getItemList());
+                        adapter.setList(list);
                         pullToRefreshRecyclerView.onRefreshComplete();
                     }
                 });
     }
+
 }

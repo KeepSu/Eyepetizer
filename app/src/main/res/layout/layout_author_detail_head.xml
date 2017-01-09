@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="60dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -20,7 +20,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="-5dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/pgc_default_avatar" />
 
         <TextView
             android:id="@+id/tv_author"
@@ -34,8 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#898787"
-            android:text="45个视频" />
+            android:textColor="#898787" />
 
 
         <LinearLayout
@@ -44,7 +43,8 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical">
 
-            <Button
+            <TextView
+                android:gravity="center"
                 android:id="@+id/btn_attention"
                 android:layout_width="70dp"
                 android:layout_height="35dp"
@@ -63,7 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
-            android:text="知名美食博主。@姜老刀和小伙伴们一起做饭吃饭的地儿。"
             android:textColor="#898787"
             android:textSize="12sp" />
 

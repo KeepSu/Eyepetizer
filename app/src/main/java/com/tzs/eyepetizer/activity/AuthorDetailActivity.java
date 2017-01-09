@@ -43,7 +43,7 @@ public class AuthorDetailActivity extends BaseActivity {
     @BindView(R.id.tv_description)
     TextView tv_description;
     @BindView(R.id.btn_attention)
-    Button btn_attention;
+    TextView btn_attention;
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
@@ -130,12 +130,7 @@ public class AuthorDetailActivity extends BaseActivity {
         //点击关注
         boolean followed = authorDetail.getPgcInfo().getFollow().isFollowed();
         if (followed) {
-            btn_attention.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    btn_attention.setText("已关注");
-                }
-            });
+
         }
         //collapsingToolbarLayout设置相关标题，颜色
         collapsingToolbarLayout.setTitle(authorDetail.getPgcInfo().getName());

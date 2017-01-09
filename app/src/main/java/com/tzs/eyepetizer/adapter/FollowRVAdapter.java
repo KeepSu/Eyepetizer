@@ -98,10 +98,6 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 FollowRVInnerAdapter adapter = new FollowRVInnerAdapter(ctx);
                 avh.rv_inner.setAdapter(adapter);
                 adapter.setList(itemList);
-                //获取ItemList里面的data下面的itemList下面的data数据
-                final Follow.ItemListBeanX.DataBeanX.ItemListBean.DataBean dataBean =
-                        list.get(position).getData().getItemList().get(position).getData();
-
                 //作者详情页面的跳转
                 avh.rl_toAuthorDetail.setOnClickListener(new View.OnClickListener() {
                     @Override

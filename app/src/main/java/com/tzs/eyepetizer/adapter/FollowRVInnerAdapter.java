@@ -28,17 +28,19 @@ import butterknife.ButterKnife;
 /**
  * Item里面的滚动的RecycView适配器
  */
-public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdapter.MyViewHolder>{
+public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdapter.MyViewHolder> {
     private static Context context;
     private LayoutInflater inflater;
-    private List<Follow.ItemListBeanX.DataBeanX.ItemListBean> list=new ArrayList<>();
+    private List<Follow.ItemListBeanX.DataBeanX.ItemListBean> list = new ArrayList<>();
+
     public void setList(List<Follow.ItemListBeanX.DataBeanX.ItemListBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
+
     public FollowRVInnerAdapter(Context context) {
         this.context = context;
-        inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
@@ -53,12 +55,12 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
         Follow.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = list.get(position).getData();
         holder.tv_content.setText(data.getTitle());
         String category = data.getCategory();
-        Log.e("=====","====category===="+category);
+        Log.e("=====", "====category====" + category);
         int duration = data.getDuration();
-        Log.e("=====","====duration===="+duration);
+        Log.e("=====", "====duration====" + duration);
         String time = TimeUtil.getDurnig(duration);
-        holder.tv_category.setText("#"+category+" / "+time);
-        Glide.with(context).load(data.getCover().getFeed()).into(holder.iv_image);
+        holder.tv_category.setText("#" + category + " / " + time);
+        Glide.with(context).load(data.getCover().getFeed()).placeholder(R.drawable.pgc_default_avatar).into(holder.iv_image);
 
     }
 
@@ -67,7 +69,7 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
         return list.size();
     }
 
-     class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_image)
         ImageView iv_image;
         @BindView(R.id.tv_content)
@@ -77,18 +79,13 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     VideoBeanForClient client = (VideoBeanForClient) list.get(0);
-                    ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class,client);
-                   /* Intent intent=new Intent(context, VideoInfoActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("client",client);
-                    intent.putExtras(bundle);*/
-                   // context.startActivity(intent);
+                   // ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, client);
                 }
             });
         }
