@@ -1,1 +1,1 @@
-include ':app', ':library_refresh'
+include ':app', ':library_refresh', ':vitamio'
