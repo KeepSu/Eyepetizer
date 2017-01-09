@@ -15,7 +15,6 @@ import com.tzs.eyepetizer.util.TimeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 
 /**
  * 搜索页面的RV适配器

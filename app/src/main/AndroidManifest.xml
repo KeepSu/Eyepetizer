@@ -27,7 +27,8 @@
         <activity android:name=".activity.AllClassifyActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.AuthorDetailActivity" />
-        <activity android:name=".activity.AllAuthorActivity"></activity>
+        <activity android:name=".activity.AllAuthorActivity" />
+        <activity android:name=".activity.SetActivity"></activity>
     </application>
 
 </manifest>
