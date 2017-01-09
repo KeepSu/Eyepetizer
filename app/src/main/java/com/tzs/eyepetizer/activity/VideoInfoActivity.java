@@ -1,15 +1,12 @@
 package com.tzs.eyepetizer.activity;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -87,6 +84,7 @@ public class VideoInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
         mVideo = (VideoBeanForClient.DataBean) getIntent().getSerializableExtra("object");
         showData();
+        TimeUtil.getDateToday();
     }
 
     /**
@@ -118,7 +116,7 @@ public class VideoInfoActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_cover, R.id.ly_author, R.id.iv_back})
+    @OnClick({R.id.iv_cover, R.id.ly_author, R.id.iv_back, R.id.iv_find_more})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_cover:
@@ -130,12 +128,10 @@ public class VideoInfoActivity extends BaseActivity {
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.iv_find_more:
+                transition(RelatedActivity.class, mVideo.getId() + "");
+                break;
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return super.onKeyDown(keyCode, event);
     }
 
     /**

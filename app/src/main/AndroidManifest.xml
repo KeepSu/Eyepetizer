@@ -34,7 +34,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="sensorLandscape" />
 
-
         <!-- 必须初始化 -->
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
@@ -42,6 +41,8 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.DailyActivity" />
+        <activity android:name=".activity.RelatedActivity" />
     </application>
 
 </manifest>

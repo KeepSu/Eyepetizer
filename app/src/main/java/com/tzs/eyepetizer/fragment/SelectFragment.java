@@ -1,5 +1,8 @@
 package com.tzs.eyepetizer.fragment;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +15,10 @@ import android.widget.TextView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.BaseActivity;
+import com.tzs.eyepetizer.activity.DailyActivity;
 import com.tzs.eyepetizer.adapter.SelectAdapter;
+import com.tzs.eyepetizer.callback.OnPullToRefreshListener;
 import com.tzs.eyepetizer.callback.OnScrollToBottomListener;
 import com.tzs.eyepetizer.entity.select.Banner;
 import com.tzs.eyepetizer.entity.select.ItemCollection;
@@ -20,6 +26,7 @@ import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
+import com.tzs.eyepetizer.util.TimeUtil;
 import com.tzs.eyepetizer.util.ToastUtil;
 import com.tzs.eyepetizer.view.PullScrollView;
 
@@ -39,7 +46,7 @@ import okhttp3.Response;
 /**
  * 精选页面
  */
-public class SelectFragment extends BaseFragment implements OnScrollToBottomListener, View.OnClickListener {
+public class SelectFragment extends BaseFragment implements OnScrollToBottomListener, View.OnClickListener, OnPullToRefreshListener {
 
     @BindView(R.id.rv_select)
     RecyclerView rv_select;
@@ -47,14 +54,20 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     PullScrollView pullScrollView;
     @BindView(R.id.tv_end)
     TextView tv_end;
+    @BindView(R.id.tv_data)
+    TextView tv_data;
     @BindView(R.id.iv_search)
     ImageView iv_search;
+    @BindView(R.id.iv_head)
+    ImageView iv_head;
 
     private List<SelectItem> selectList = new ArrayList<>();
     private SelectAdapter adapter;
     private boolean isLoading = false;//是否正在加载数据
+    private boolean isRefresh = false;//是否是在刷新
     private static final String HOME_PAGE_URL = "http://baobab.kaiyanapp.com/api/v4/tabs/selected";
     private String nextPageUrl = HOME_PAGE_URL;//下一页数据的地址
+
 
     public SelectFragment() {
     }
@@ -70,6 +83,7 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
         View view = inflater.inflate(R.layout.fragment_select, container, false);
         ButterKnife.bind(this, view);
         tv_end.setVisibility(View.GONE);
+        tv_data.setText(TimeUtil.getDateToday());
         return view;
     }
 
@@ -79,6 +93,7 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
         adapter = new SelectAdapter(selectList, context);
         rv_select.setLayoutManager(new LinearLayoutManager(context));
         pullScrollView.setOnScrollToBottomListener(this);
+        pullScrollView.setOnPullToRefreshListener(this);
         rv_select.setAdapter(adapter);
     }
 
@@ -98,6 +113,11 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
+//                        if (isRefresh) {
+//                            selectList.clear();
+//                            isRefresh = false;
+//                            showToast("刷新完成\\(^o^)/~");
+//                        }
                         parseJson(s);
                         isLoading = false;
                     }
@@ -106,6 +126,7 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
                         showToast("访问网络失败~");
+                        isRefresh = false;
                         isLoading = false;
                     }
                 });
@@ -165,12 +186,28 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     }
 
     /**
+     * 下拉刷新
+     */
+    @Override
+    public void onPullToRefresh() {
+//        isRefresh = true;
+//        nextPageUrl = HOME_PAGE_URL;
+//        tv_end.setVisibility(View.GONE);
+//        isLoading = false;
+//        initData();
+
+    }
+
+    /**
      * 点击事件的处理
      */
-    @OnClick({R.id.iv_search})
+    @OnClick({R.id.iv_search, R.id.iv_head})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
+                break;
+            case R.id.iv_head:
+                ((BaseActivity) context).transition(DailyActivity.class);
                 break;
         }
     }

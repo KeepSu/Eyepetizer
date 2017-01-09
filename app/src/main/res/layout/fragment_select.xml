@@ -22,8 +22,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="220dp"
+                    android:id="@+id/iv_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/home_page_header_cover" />
 
@@ -42,13 +43,17 @@
                     android:src="@drawable/abc_ic_search_api_mtrl_alpha" />
 
                 <TextView
+                    android:id="@+id/tv_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="24dp"
                     android:text="测试测试"
-                    android:textColor="@color/text_light" />
+                    android:textColor="@color/text_light"
+                    android:textSize="@dimen/textsize_subtitle"
+                    android:textStyle="italic"
+                    android:typeface="serif" />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

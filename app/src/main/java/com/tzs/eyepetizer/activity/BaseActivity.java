@@ -74,7 +74,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 跳转到另一个Activity
+     * 跳转到另一个Activity,携带多个String参数
      */
     public void goToAnotherActivity(Class<? extends Activity> targetActivity, String... data) {
         Intent intent = new Intent(this, targetActivity);
@@ -85,11 +85,27 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 跳转到另一个Activity
+     * 跳转到另一个Activity,携带obj
      */
     public void goToAnotherActivity(Class<? extends Activity> targetActivity, Object obj) {
         Intent intent = new Intent(this, targetActivity);
         intent.putExtra("object", (Serializable) obj);
+        startActivity(intent);
+    }
+
+    /**
+     * 跳转到另一个Activity，动画效果
+     */
+    public void transition(Class<? extends Activity> targetActivity, String... data) {
+        Intent intent = new Intent(this, targetActivity);
+        for (int i = 0; i < data.length; i++) {
+            intent.putExtra("data" + i, data[i]);
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
+            startActivity(intent, bundle);
+            return;
+        }
         startActivity(intent);
     }
 

@@ -1,5 +1,6 @@
 package com.tzs.eyepetizer.adapter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -19,6 +20,7 @@ import com.tzs.eyepetizer.activity.AllAuthorActivity;
 import com.tzs.eyepetizer.activity.AllClassifyActivity;
 import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.activity.BaseActivity;
+import com.tzs.eyepetizer.activity.DailyActivity;
 import com.tzs.eyepetizer.activity.VideoInfoActivity;
 import com.tzs.eyepetizer.activity.WebActivity;
 import com.tzs.eyepetizer.entity.select.Banner;
@@ -225,6 +227,17 @@ public class SelectAdapter extends RecyclerView.Adapter {
      */
     private void showDataType2(TextFooterHolder holder, TextFooter.DataBean data) {
         holder.tv_footer.setText(data.getText());
+        holder.tv_footer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    context.startActivity(new Intent(context, DailyActivity.class),
+                            ActivityOptions.makeSceneTransitionAnimation((BaseActivity) context).toBundle());
+                } else {
+                    context.startActivity(new Intent(context, DailyActivity.class));
+                }
+            }
+        });
     }
 
     /**
