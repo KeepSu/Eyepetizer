@@ -1,15 +1,12 @@
 package com.tzs.eyepetizer.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.activity.AllAuthorActivity;
 import com.tzs.eyepetizer.activity.AllClassifyActivity;
@@ -31,19 +27,14 @@ import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
-import com.tzs.eyepetizer.fragment.BaseFragment;
-import com.tzs.eyepetizer.fragment.SelectFragment;
-import com.tzs.eyepetizer.util.AnimaUtil;
 import com.tzs.eyepetizer.util.DecodeUtil;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 精选页面列表的适配器
