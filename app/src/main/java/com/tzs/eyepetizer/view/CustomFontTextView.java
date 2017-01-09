@@ -16,7 +16,7 @@ import com.tzs.eyepetizer.R;
  * Created by h on 2017/1/6.
  */
 
-public class CustomFontTextView extends AppCompatTextView {
+public class CustomFontTextView extends TextView {
     public CustomFontTextView(Context context) {
         super(context);
     }
@@ -24,14 +24,14 @@ public class CustomFontTextView extends AppCompatTextView {
     public CustomFontTextView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         // 自定义属性
-        TypedArray mArray = context.obtainStyledAttributes(attrs, R.styleable.TextFont);
-        String mTypefacePath = mArray.getString(R.styleable.TextFont_typefacePath);
-        mArray.recycle();
-        if (!TextUtils.isEmpty(mTypefacePath)) {
-            setTypeface(Typeface.createFromAsset(context.getAssets(), mTypefacePath));
-        } else {
-            setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/FZLanTingHeiS-L-GB-Regular.TTF"));
-        }
+//        TypedArray mArray = context.obtainStyledAttributes(attrs, R.styleable.TextFont);
+//        String mTypefacePath = mArray.getString(R.styleable.TextFont_typefacePath);
+//        mArray.recycle();
+//        if (!TextUtils.isEmpty(mTypefacePath)) {
+//            setTypeface(Typeface.createFromAsset(context.getAssets(), mTypefacePath));
+//        } else {
+//            setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/FZLanTingHeiS-L-GB-Regular.TTF"));
+//        }
     }
 
     public CustomFontTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

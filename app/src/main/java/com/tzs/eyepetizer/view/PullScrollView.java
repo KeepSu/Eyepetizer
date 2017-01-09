@@ -15,9 +15,6 @@ import com.tzs.eyepetizer.callback.OnScrollToBottomListener;
 
 /**
  * 自定义ScrollView
- *
- * @author markmjw
- * @date 2013-09-13
  */
 public class PullScrollView extends ScrollView implements View.OnTouchListener {
     // 记录首次按下位置
@@ -49,11 +46,6 @@ public class PullScrollView extends ScrollView implements View.OnTouchListener {
         super.onFinishInflate();
         init();
     }
-
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//    }
 
     private void init() {
         setOverScrollMode(OVER_SCROLL_NEVER);

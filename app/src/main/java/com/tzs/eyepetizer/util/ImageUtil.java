@@ -9,18 +9,21 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.tzs.eyepetizer.R;
 
 /**
  * 加载图片的工具类
  */
 
 public class ImageUtil {
+
+    public static final int SIZE_MAX = 0;
+    public static final int SIZE_NORMAL = 1;
+    public static final int SIZE_SMALL = 2;
+    public static final int SIZE_MIN = 3;
 
     /**
      * 下载显示圆形图片
@@ -29,7 +32,6 @@ public class ImageUtil {
         Glide.with(context)
                 .load(url)
                 .asBitmap()
-//                .placeholder(R.drawable.account_default_avatar)
                 .centerCrop()
                 .into(new BitmapImageViewTarget(iv) {
                     @Override
@@ -41,42 +43,69 @@ public class ImageUtil {
                 });
     }
 
+//    /**
+//     * 下载显示图片,自定义默认图片
+//     */
+//    public static void setImage(Context context, String url, ImageView iv, int defaultImage) {
+//        Glide.with(context)
+//                .load(url)
+//                .asBitmap()
+//                .centerCrop()
+//                .placeholder(defaultImage)
+//                .into(iv);
+//
+//    }
+
     /**
      * 下载显示图片,自定义默认图片
-     */
-    public static void setImage(Context context, String url, ImageView iv, int defaultImage) {
-        Glide.with(context)
-                .load(url)
-                .asBitmap()
-                .centerCrop()
-                .placeholder(defaultImage)
-                .into(iv);
-
-    }
-
-    /**
-     * 下载显示图片
      */
     public static void setImage(Context context, String url, ImageView iv) {
         Glide.with(context)
                 .load(url)
                 .asBitmap()
-//                .placeholder(R.drawable.pgc_default_avatar)
                 .centerCrop()
                 .into(iv);
     }
 
+//    /**
+//     * 给图片覆盖阴影
+//     */
+//    public static Bitmap getBlackImage(Bitmap bm) {
+//        Bitmap bmp = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), Bitmap.Config.RGB_565);
+//        Paint paint = new Paint();
+//        paint.setAntiAlias(true);
+//        Canvas canvas = new Canvas(bmp);
+//        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+//        canvas.drawBitmap(bm, 0, 0, paint);
+//        canvas.drawColor(Color.parseColor("#90000000"));
+//        return bmp;
+//    }
+
     /**
-     * 给图片覆盖阴影
+     * 下载显示图片,动态指定尺寸
      */
-    public static Bitmap getBlackImage(Bitmap bm) {
-        Bitmap bmp = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), Bitmap.Config.RGB_565);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Canvas canvas = new Canvas(bmp);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bm, 0, 0, paint);
-        canvas.drawColor(Color.parseColor("#90000000"));
-        return bmp;
+    public static void setImage(Context context, String url, ImageView iv, int imageSize) {
+        int width = 640;
+        int height = 360;
+        switch (imageSize) {
+            case SIZE_MAX:
+                width = 800;
+                height = 450;
+                break;
+            case SIZE_SMALL:
+                width = 500;
+                height = 250;
+                break;
+            case SIZE_MIN:
+                width = 480;
+                height = 270;
+                break;
+        }
+        Glide.with(context)
+                .load(url)
+                .asBitmap()
+                .override(width, height)
+                .centerCrop()
+                .into(iv);
     }
 }

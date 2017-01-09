@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.BaseActivity;
+import com.tzs.eyepetizer.activity.VideoInfoActivity;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
 import com.tzs.eyepetizer.util.ImageUtil;
@@ -42,12 +44,19 @@ class VideoSetAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder = ((MyViewHolder) holder);
-        VideoBeanForClient.DataBean data = list.get(position).getData();
+        final VideoBeanForClient.DataBean data = list.get(position).getData();
         myViewHolder.tv_inner_title.setText(data.getTitle());
         myViewHolder.tv_inner_during.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
-        ImageUtil.setImage(context, data.getCover().getFeed(), myViewHolder.iv_inner_cover);
+        ImageUtil.setImage(context, data.getCover().getFeed(), myViewHolder.iv_inner_cover, ImageUtil.SIZE_MIN);
+        myViewHolder.iv_inner_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity) context).goToAnotherActivity(
+                        VideoInfoActivity.class, data, ((MyViewHolder) holder).iv_inner_cover, data.getId() + "");
+            }
+        });
     }
 
     @Override

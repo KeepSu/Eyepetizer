@@ -1,5 +1,6 @@
 package com.tzs.eyepetizer.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,7 +48,6 @@ public class VideoInfoActivity extends BaseActivity {
     @BindView(R.id.tv_follow)
     TextView tv_follow;
 
-
     @BindView(R.id.tv_like)
     TextView tv_like;
     @BindView(R.id.tv_share)
@@ -72,20 +72,22 @@ public class VideoInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_info);
-        ButterKnife.bind(this);
         initState();
+        ButterKnife.bind(this);
         mVideo = (VideoBeanForClient.DataBean) getIntent().getSerializableExtra("object");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            iv_cover.setTransitionName(mVideo.getId() + "");
+        }
         showData();
     }
 
     @Override
     protected void showData() {
-        iv_cover.setTransitionName(mVideo.getId() + "");
-        ImageUtil.setImage(this, mVideo.getCover().getFeed(), iv_cover);
+        ImageUtil.setImage(this, mVideo.getCover().getFeed(), iv_cover, ImageUtil.SIZE_MAX);
         tv_title.setPrintText(mVideo.getTitle());
         tv_during.setPrintText(mVideo.getCategory() + " / " + TimeUtil.getDurnig(mVideo.getDuration()));
         tv_description.setPrintText(mVideo.getDescription());
-        ImageUtil.setImage(this, mVideo.getCover().getBlurred(), iv_bg);
+        ImageUtil.setImage(this, mVideo.getCover().getBlurred(), iv_bg, ImageUtil.SIZE_NORMAL);
         tv_like.setText(mVideo.getConsumption().getCollectionCount() + "");
         tv_share.setText(mVideo.getConsumption().getShareCount() + "");
         tv_feed.setText(mVideo.getConsumption().getReplyCount() + "");

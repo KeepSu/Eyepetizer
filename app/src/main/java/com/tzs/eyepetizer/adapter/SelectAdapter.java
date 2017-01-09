@@ -2,6 +2,9 @@ package com.tzs.eyepetizer.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,8 +19,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AllAuthorActivity;
+import com.tzs.eyepetizer.activity.AllClassifyActivity;
+import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.activity.BaseActivity;
 import com.tzs.eyepetizer.activity.VideoInfoActivity;
+import com.tzs.eyepetizer.activity.WebActivity;
 import com.tzs.eyepetizer.entity.select.Banner;
 import com.tzs.eyepetizer.entity.select.ItemCollection;
 import com.tzs.eyepetizer.entity.select.SelectItem;
@@ -25,14 +32,18 @@ import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
 import com.tzs.eyepetizer.fragment.BaseFragment;
+import com.tzs.eyepetizer.fragment.SelectFragment;
 import com.tzs.eyepetizer.util.AnimaUtil;
+import com.tzs.eyepetizer.util.DecodeUtil;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 精选页面列表的适配器
@@ -99,79 +110,142 @@ public class SelectAdapter extends RecyclerView.Adapter {
         String type = selectItem.getType();
         switch (type) {
             case "video":
-                showDataType1((VideoHolder) holder, ((VideoBeanForClient) selectItem).getData(), position);
+                showDataType1((VideoHolder) holder, ((VideoBeanForClient) selectItem).getData());
                 break;
             case "textFooter":
-                TextFooterHolder mFooterHolder = ((TextFooterHolder) holder);
-                TextFooter.DataBean mTextFooter = ((TextFooter) selectItem).getData();
-                mFooterHolder.tv_footer.setText(mTextFooter.getText());
+                showDataType2(((TextFooterHolder) holder), ((TextFooter) selectItem).getData());
                 break;
             case "videoCollectionWithCover":
-                VideoSetWithCoverHolder mVideoSetWithCoverHolder = ((VideoSetWithCoverHolder) holder);
-                ItemCollection.DataBean mItemCollection = ((ItemCollection) selectItem).getData();
-                ImageUtil.setImage(context, mItemCollection.getHeader().getCover(), mVideoSetWithCoverHolder.iv_set_cover);
-                LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                VideoSetAdapter videoSetAdapter = new VideoSetAdapter(context, mItemCollection.getItemList());
-                mVideoSetWithCoverHolder.rv_video_set.setLayoutManager(manager);
-                mVideoSetWithCoverHolder.rv_video_set.setAdapter(videoSetAdapter);
+                showDataType3(((VideoSetWithCoverHolder) holder), ((ItemCollection) selectItem).getData());
                 break;
             case "textHeader":
-                TextHeaderHolder mTextHeaderHolder = ((TextHeaderHolder) holder);
-                TextHeader.DataBean mTextHeader = ((TextHeader) selectItem).getData();
-                mTextHeaderHolder.tv_header.setText(mTextHeader.getText());
+                showDataType4(((TextHeaderHolder) holder), ((TextHeader) selectItem).getData());
                 break;
             case "videoCollectionOfFollow":
-                VideoSetOfFollowHolder mVideoSetOfFollowHolder = ((VideoSetOfFollowHolder) holder);
-                ItemCollection.DataBean mItemCollection2 = ((ItemCollection) selectItem).getData();
-                ImageUtil.setImage(context, mItemCollection2.getHeader().getCover(), mVideoSetOfFollowHolder.iv_set_cover);
-                mVideoSetOfFollowHolder.tv_title.setText(mItemCollection2.getHeader().getTitle());
-                mVideoSetOfFollowHolder.tv_description.setText(mItemCollection2.getHeader().getDescription());
-
-                LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                VideoSetAdapter videoSetAdapter2 = new VideoSetAdapter(context, mItemCollection2.getItemList());
-                mVideoSetOfFollowHolder.rv_video_set.setLayoutManager(manager2);
-                mVideoSetOfFollowHolder.rv_video_set.setAdapter(videoSetAdapter2);
-
-                LinearLayoutManager manager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                AuthorSetAdapter authorSetAdapter = new AuthorSetAdapter(context, mItemCollection2.getHeader().getIconList());
-                mVideoSetOfFollowHolder.rv_author.setLayoutManager(manager3);
-                mVideoSetOfFollowHolder.rv_author.setAdapter(authorSetAdapter);
-
+                showDataType5(((VideoSetOfFollowHolder) holder), ((ItemCollection) selectItem).getData());
                 break;
-
             case "banner":
-                BannerHolder mBannerHolder = ((BannerHolder) holder);
-                String imgBanner = ((Banner) selectItem).getData().getImage();
-                ImageUtil.setImage(context, imgBanner, mBannerHolder.iv_banner);
-
+                showDataType6(((BannerHolder) holder), ((Banner) selectItem).getData());
                 break;
-
             case "videoCollectionOfAuthorWithCover":
-                AuthorWithCoverHolder mAuthorWithCoverHolder = ((AuthorWithCoverHolder) holder);
-                ItemCollection.DataBean mItemCollection3 = ((ItemCollection) selectItem).getData();
-                ImageUtil.setImage(context, mItemCollection3.getHeader().getCover(), mAuthorWithCoverHolder.iv_author_video_cover);
-                ImageUtil.setCircleImage(context, mItemCollection3.getHeader().getIcon(), mAuthorWithCoverHolder.iv_author_video_head);
-                mAuthorWithCoverHolder.tv_author_name.setText(mItemCollection3.getHeader().getTitle());
-                mAuthorWithCoverHolder.tv_author_description.setText(mItemCollection3.getHeader().getDescription());
-                LinearLayoutManager manager4 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                VideoSetAdapter videoSetAdapter3 = new VideoSetAdapter(context, mItemCollection3.getItemList());
-                mAuthorWithCoverHolder.rv_video_set.setLayoutManager(manager4);
-                mAuthorWithCoverHolder.rv_video_set.setAdapter(videoSetAdapter3);
+                showDataType7(((AuthorWithCoverHolder) holder), ((ItemCollection) selectItem).getData());
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * 展示AuthorWithCover布局的数据
+     */
+    private void showDataType7(AuthorWithCoverHolder holder, final ItemCollection.DataBean data) {
+        ImageUtil.setImage(context, data.getHeader().getCover(), holder.iv_author_video_cover);
+        ImageUtil.setCircleImage(context, data.getHeader().getIcon(), holder.iv_author_video_head);
+        holder.tv_author_name.setText(data.getHeader().getTitle());
+        holder.tv_author_description.setText(data.getHeader().getDescription());
+        LinearLayoutManager manager4 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        VideoSetAdapter videoSetAdapter3 = new VideoSetAdapter(context, data.getItemList());
+        holder.rv_video_set.setLayoutManager(manager4);
+        holder.rv_video_set.setAdapter(videoSetAdapter3);
+        holder.iv_author_video_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AuthorDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", data.getHeader().getId());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * 展示Banner布局的数据
+     */
+    private void showDataType6(BannerHolder holder, Banner.DataBean data) {
+        ImageUtil.setImage(context, data.getImage(), holder.iv_banner, ImageUtil.SIZE_NORMAL);
+        holder.iv_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity) context).goToAnotherActivity(AllClassifyActivity.class);
+            }
+        });
+    }
+
+    /**
+     * 展示VideoSetOfFollow布局的数据
+     */
+    private void showDataType5(VideoSetOfFollowHolder holder, ItemCollection.DataBean data) {
+        ImageUtil.setImage(context, data.getHeader().getCover(), holder.iv_set_cover, ImageUtil.SIZE_NORMAL);
+        holder.tv_title.setText(data.getHeader().getTitle());
+        holder.tv_description.setText(data.getHeader().getDescription());
+
+        LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        VideoSetAdapter videoSetAdapter2 = new VideoSetAdapter(context, data.getItemList());
+        holder.rv_video_set.setLayoutManager(manager2);
+        holder.rv_video_set.setAdapter(videoSetAdapter2);
+
+        LinearLayoutManager manager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        AuthorSetAdapter authorSetAdapter = new AuthorSetAdapter(context, data.getHeader().getIconList());
+        holder.rv_author.setLayoutManager(manager3);
+        holder.rv_author.setAdapter(authorSetAdapter);
+
+        holder.iv_set_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, AllAuthorActivity.class));
+            }
+        });
+    }
+
+    /**
+     * 展示TextHeader布局的数据
+     */
+    private void showDataType4(TextHeaderHolder holder, TextHeader.DataBean data) {
+        holder.tv_header.setText(data.getText());
+    }
+
+    /**
+     * 展示VideoSetWithCover布局的数据
+     */
+    private void showDataType3(VideoSetWithCoverHolder holder, final ItemCollection.DataBean data) {
+        ImageUtil.setImage(context, data.getHeader().getCover(), holder.iv_set_cover, ImageUtil.SIZE_NORMAL);
+        LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        VideoSetAdapter videoSetAdapter = new VideoSetAdapter(context, data.getItemList());
+        holder.rv_video_set.setLayoutManager(manager);
+        holder.rv_video_set.setAdapter(videoSetAdapter);
+        holder.iv_set_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String actionUrl = DecodeUtil.StringDecode(data.getHeader().getActionUrl());
+                String[] a = actionUrl.split("title=")[1].split("&url=");
+                String webTitle = a[0];
+                String webUrl = a[1];
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("webTitle", webTitle);
+                intent.putExtra("webUrl", webUrl);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * 展示TextFooter布局的数据
+     */
+    private void showDataType2(TextFooterHolder holder, TextFooter.DataBean data) {
+        holder.tv_footer.setText(data.getText());
+    }
 
     /**
      * 展示video布局的数据
      */
-    private void showDataType1(final VideoHolder holder, final VideoBeanForClient.DataBean data, final int position) {
+    private void showDataType1(final VideoHolder holder, final VideoBeanForClient.DataBean data) {
         holder.tv_title.setText(data.getTitle());
         holder.tv_category_duration.setText("#" + data.getCategory() + " / " + TimeUtil.getDurnig(data.getDuration()));
-        ImageUtil.setImage(context, data.getCover().getFeed(), holder.iv_select_cover);
-        holder.iv_select_cover.setTransitionName(data.getId() + "");
+        ImageUtil.setImage(context, data.getCover().getFeed(), holder.iv_select_cover, ImageUtil.SIZE_NORMAL);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            holder.iv_select_cover.setTransitionName(data.getId() + "");
+        }
         if (data.getAuthor() != null) {
             holder.tv_author.setVisibility(View.VISIBLE);
             holder.tv_author.setText(data.getAuthor().getName());
@@ -187,12 +261,15 @@ public class SelectAdapter extends RecyclerView.Adapter {
             holder.tv_promotion.setVisibility(View.VISIBLE);
             holder.tv_promotion.setText("360°全景");
         }
+
         holder.ly_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data, holder.iv_select_cover, data.getId() + "");
+                ((BaseActivity) context).goToAnotherActivity(
+                        VideoInfoActivity.class, data, holder.iv_select_cover, data.getId() + "");
             }
         });
+//        holder.ly_video.setOnClickListener(this);
 //        holder.ly_video.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
@@ -273,11 +350,10 @@ public class SelectAdapter extends RecyclerView.Adapter {
         @BindView(R.id.iv_banner)
         ImageView iv_banner;
 
-        public BannerHolder(View itemView) {
+        BannerHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
     /**
@@ -370,28 +446,4 @@ public class SelectAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, itemView);
         }
     }
-
-    /**
-     * 模板类
-     */
-    static class SelectViewHolder extends RecyclerView.ViewHolder {
-
-        public SelectViewHolder(View itemView,int viewType) {
-            super(itemView);
-        }
-    }
-
-//    /**
-//     * 点击事件的处理
-//     */
-//    private class MyOnClickListener implements View.OnClickListener {
-//        @Override
-//        public void onClick(View v) {
-//            switch (v.getId()) {
-//                case R.id.ly_video:
-//                    ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class,);
-//                    break;
-//            }
-//        }
-//    }
 }

@@ -25,7 +25,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_base);
     }
 
@@ -68,8 +67,10 @@ public class BaseActivity extends AppCompatActivity {
      * 沉浸式状态栏
      */
     protected void initState() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
     }
 
     /**
@@ -88,9 +89,7 @@ public class BaseActivity extends AppCompatActivity {
      */
     public void goToAnotherActivity(Class<? extends Activity> targetActivity, Object obj) {
         Intent intent = new Intent(this, targetActivity);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("object", (Serializable) obj);
-        intent.putExtra("data", bundle);
+        intent.putExtra("object", (Serializable) obj);
         startActivity(intent);
     }
 
@@ -100,8 +99,13 @@ public class BaseActivity extends AppCompatActivity {
     public void goToAnotherActivity(Class<? extends Activity> targetActivity, Object obj, View view, String name) {
         Intent intent = new Intent(this, targetActivity);
         intent.putExtra("object", (Serializable) obj);
-        Bundle bundle1 = ActivityOptions.makeSceneTransitionAnimation(this, view, name).toBundle();
-        startActivity(intent, bundle1);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Bundle bundle1 = null;
+            bundle1 = ActivityOptions.makeSceneTransitionAnimation(this, view, name).toBundle();
+            startActivity(intent, bundle1);
+        } else {
+            startActivity(intent);
+        }
     }
 
     /**

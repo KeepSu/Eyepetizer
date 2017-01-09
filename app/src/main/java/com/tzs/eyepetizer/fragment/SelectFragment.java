@@ -105,7 +105,7 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        ToastUtil.showToast(getContext(), "访问网络失败~");
+                        showToast("访问网络失败~");
                         isLoading = false;
                     }
                 });
@@ -122,6 +122,9 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);
                 if (obj.getString("type").equals("squareCardCollection")) {
+                    continue;
+                }
+                if (obj.getString("type").equals("banner2")) {
                     continue;
                 }
                 JSONObject data = obj.getJSONObject("data");

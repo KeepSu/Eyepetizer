@@ -16,19 +16,18 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BaseActivity"/>
-        <activity android:name=".activity.VideoInfoActivity"/>
-        <activity android:name=".activity.WebActivity">
-        </activity>
-        <activity android:name=".activity.AllClassifyActivity">
-        </activity>
+        <activity android:name=".activity.BaseActivity" />
+        <activity android:name=".activity.VideoInfoActivity" />
+        <activity android:name=".activity.WebActivity" />
+        <activity android:name=".activity.AllClassifyActivity" />
         <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.AuthorDetailActivity"/>
+        <activity android:name=".activity.AuthorDetailActivity" />
+        <activity android:name=".activity.AllAuthorActivity"></activity>
     </application>
 
 </manifest>
