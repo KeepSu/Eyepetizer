@@ -16,7 +16,7 @@ import com.tzs.eyepetizer.R;
  * Created by h on 2017/1/6.
  */
 
-public class CustomFontTextView extends TextView {
+public class CustomFontTextView extends AppCompatTextView {
     public CustomFontTextView(Context context) {
         super(context);
     }

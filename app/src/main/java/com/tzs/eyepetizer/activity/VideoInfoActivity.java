@@ -1,6 +1,5 @@
 package com.tzs.eyepetizer.activity;
 
-import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mob.commons.SHARESDK;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.constant.NetState;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
@@ -23,6 +23,8 @@ import com.tzs.eyepetizer.view.PrinterTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class VideoInfoActivity extends BaseActivity {
 
@@ -83,8 +85,10 @@ public class VideoInfoActivity extends BaseActivity {
         initState();
         ButterKnife.bind(this);
         mVideo = (VideoBeanForClient.DataBean) getIntent().getSerializableExtra("object");
-        showData();
-        TimeUtil.getDateToday();
+        if (mVideo != null) {
+            showData();
+        }
+//        TimeUtil.getDateToday();
     }
 
     /**
@@ -116,7 +120,7 @@ public class VideoInfoActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_cover, R.id.ly_author, R.id.iv_back, R.id.iv_find_more})
+    @OnClick({R.id.iv_cover, R.id.ly_author, R.id.iv_back, R.id.iv_find_more, R.id.ly_share})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_cover:
@@ -131,7 +135,37 @@ public class VideoInfoActivity extends BaseActivity {
             case R.id.iv_find_more:
                 transition(RelatedActivity.class, mVideo.getId() + "");
                 break;
+            case R.id.ly_share:
+                shoShare();
+                break;
         }
+    }
+
+    private void shoShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+//关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
+        oks.setTitle(mVideo.getTitle());
+// titleUrl是标题的网络链接，QQ和QQ空间等使用
+        oks.setTitleUrl(mVideo.getWebUrl().getRaw());
+// text是分享文本，所有平台都需要这个字段
+        oks.setText(mVideo.getDescription());
+// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+// url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl(mVideo.getWebUrl().getRaw());
+// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+// site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite("开眼");
+// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl(mVideo.getWebUrl().getRaw());
+
+// 启动分享GUI
+        oks.show(this);
     }
 
     /**

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
@@ -58,5 +59,10 @@ public class AllClassifyActivity extends AppCompatActivity {
                 acAdapter.setList(mClassify.getItemList());
             }
         });
+    }
+
+    //返回
+    public void onBack(View view) {
+        finish();
     }
 }

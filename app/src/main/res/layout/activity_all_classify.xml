@@ -17,6 +17,7 @@
             android:id="@+id/iv_classifyBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="onBack"
             android:gravity="center_vertical"
             android:src="@drawable/ic_action_back"/>
 

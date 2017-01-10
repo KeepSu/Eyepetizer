@@ -3,7 +3,7 @@
     android:id="@+id/activity_related"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5000"
+    android:background="#a000"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,6 +13,8 @@
         android:padding="16dp">
 
         <TextView
+            style="@style/TitleLight"
+            android:textColor="@color/text_light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

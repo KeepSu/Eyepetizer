@@ -90,5 +90,4 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
             });
         }
     }
-
 }

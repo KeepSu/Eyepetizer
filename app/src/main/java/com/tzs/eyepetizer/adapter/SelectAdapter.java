@@ -256,6 +256,7 @@ public class SelectAdapter extends RecyclerView.Adapter {
         } else {
             holder.tv_author.setVisibility(View.GONE);
         }
+        //TODO
         if (data.getPromotion() == null) {
             holder.tv_promotion.setVisibility(View.GONE);
         } else if (data.getPromotion().getText().equals("广告")) {

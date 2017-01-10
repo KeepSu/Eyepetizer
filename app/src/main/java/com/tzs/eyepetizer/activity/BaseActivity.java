@@ -17,6 +17,8 @@ import com.tzs.eyepetizer.util.ToastUtil;
 
 import java.io.Serializable;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Activity基类，定义一些公用方法
  */
@@ -26,6 +28,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
+        ShareSDK.initSDK(this, "1aa9beb717e2c");
     }
 
     /**
