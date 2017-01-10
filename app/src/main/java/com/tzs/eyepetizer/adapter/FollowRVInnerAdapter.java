@@ -85,10 +85,10 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
                 public void onClick(View v) {
 
                     VideoBeanForClient client = (VideoBeanForClient) list.get(0);
-                   // ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, client);
+                    VideoBeanForClient.DataBean data = client.getData();
+                    ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data);
                 }
             });
         }
     }
-
 }

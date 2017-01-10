@@ -1,6 +1,7 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.util.ImageUtil;
 
@@ -27,7 +29,7 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
     private LayoutInflater mInflater;
     private List<Discover.ItemListBeanX.DataBeanX.ItemListBean> mList = new ArrayList<>();
 
-    public void setList (List<Discover.ItemListBeanX.DataBeanX.ItemListBean> list) {
+    public void setList(List<Discover.ItemListBeanX.DataBeanX.ItemListBean> list) {
         this.mList = list;
         notifyDataSetChanged();
     }
@@ -40,7 +42,7 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
-        if(viewType == SQUARECARD) {
+        if (viewType == SQUARECARD) {
             view = mInflater.inflate(R.layout.item_discover_square_recommend_author, parent, false);
             return new RecommendAuthorViewHolder(view);
         } else if (viewType == ACTIONCARD) {
@@ -52,7 +54,7 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Discover.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = mList.get(position).getData();
+        final Discover.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = mList.get(position).getData();
         switch (getItemViewType(position)) {
             case SQUARECARD:
                 RecommendAuthorViewHolder ravh = (RecommendAuthorViewHolder) holder;
@@ -60,6 +62,16 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
                 ImageUtil.setImage(mContext, imageUrl, ravh.iv_below);
                 ImageUtil.setCircleImage(mContext, imageUrl, ravh.iv_above);
                 ravh.text_author.setText(data.getTitle());
+                //点击跳转到作者详情页面
+                ravh.iv_below.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, AuthorDetailActivity.class);
+                        intent.putExtra("id", data.getId());
+                        mContext.startActivity(intent);
+                    }
+                });
+
                 break;
             case ACTIONCARD:
                 AllViewHolder avh = (AllViewHolder) holder;
@@ -82,6 +94,7 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
         private ImageView iv_below;
         private ImageView iv_above;
         private TextView text_author;
+
         public RecommendAuthorViewHolder(View itemView) {
             super(itemView);
             iv_below = (ImageView) itemView.findViewById(R.id.iv_below);
@@ -95,6 +108,7 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
      */
     static class AllViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_all;
+
         public AllViewHolder(View itemView) {
             super(itemView);
             tv_all = (TextView) itemView.findViewById(R.id.tv_all_discover);

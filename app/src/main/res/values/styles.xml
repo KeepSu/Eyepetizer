@@ -13,6 +13,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="RadioButtonStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -66,10 +67,30 @@
         <item name="android:ellipsize">end</item>
     </style>
 
-    <!--<style name="Transparent">-->
-    <!--<item name="android:windowBackground">@color/transparent</item>-->
-    <!--<item name="android:windowIsTranslucent">true</item>-->
-    <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>　-->
-    <!--</style>-->
+    <style name="Transparent" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>　
+    </style>
+
+    <style name="dialog" parent="Theme.AppCompat.Dialog">
+
+        <!-- 去黑边 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置是否可滑动 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 设置是否透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景 -->
+        <item name="android:background">@null</item>
+        <!-- 窗口背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 点击空白部分activity不消失 -->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
 
 </resources>

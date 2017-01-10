@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_login"
+    android:layout_width="240dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/eyepetizer_login_head_bg"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/textsize_title"
+        android:textStyle="bold" />
+
+    <include layout="@layout/line_thin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_weixin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/account_sdk_ic_wechat_dark"
+            android:gravity="center_horizontal"
+            android:text="微信"
+            android:textColor="@color/text_select" />
+
+        <TextView
+            android:id="@+id/tv_weibo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/account_sdk_ic_sina_dark"
+            android:gravity="center_horizontal"
+            android:text="微博"
+            android:textColor="@color/text_select" />
+
+        <TextView
+            android:id="@+id/tv_qq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/account_sdk_ic_qq_dark"
+            android:gravity="center_horizontal"
+            android:text="QQ"
+            android:textColor="@color/text_select" />
+    </LinearLayout>
+
+    <include layout="@layout/line_thin" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_bg_login"
+        android:gravity="center"
+        android:text="登录即可发表评论及同步收藏视频"
+        android:textColor="@color/text_normal"
+        android:textSize="@dimen/textsize_description" />
+
+</LinearLayout>
