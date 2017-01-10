@@ -1,6 +1,5 @@
 package com.tzs.eyepetizer.activity;
 
-import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -83,8 +82,10 @@ public class VideoInfoActivity extends BaseActivity {
         initState();
         ButterKnife.bind(this);
         mVideo = (VideoBeanForClient.DataBean) getIntent().getSerializableExtra("object");
-        showData();
-        TimeUtil.getDateToday();
+        if (mVideo != null) {
+            showData();
+        }
+//        TimeUtil.getDateToday();
     }
 
     /**

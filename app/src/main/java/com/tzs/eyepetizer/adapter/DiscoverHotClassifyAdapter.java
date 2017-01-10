@@ -1,6 +1,7 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AllClassifyActivity;
+import com.tzs.eyepetizer.activity.ClassInfoActivity;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.util.ImageUtil;
 
@@ -53,17 +56,31 @@ public class DiscoverHotClassifyAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Discover.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = mList.get(position).getData();
+        final Discover.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = mList.get(position).getData();
         switch (getItemViewType(position)) {
             case SQUARECARD:
                 HotClassifyViewHolder hcvh = (HotClassifyViewHolder) holder;
                 String imageUrl = data.getImage();
                 ImageUtil.setImage(context, imageUrl, hcvh.iv_hotClassify);
                 hcvh.tv_hotClassify.setText(data.getTitle());
+                hcvh.iv_hotClassify.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ClassInfoActivity.class);
+                        intent.putExtra("id", data.getId());
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             case ACTIONCARD:
                 AllViewHolder avh = (AllViewHolder) holder;
                 avh.tv_all.setText(data.getText());
+                avh.tv_all.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        context.startActivity(new Intent(context, AllClassifyActivity.class));
+                    }
+                });
                 break;
             default:
                 break;

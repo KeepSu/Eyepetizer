@@ -1,6 +1,7 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.util.ImageUtil;
 
@@ -52,7 +54,7 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Discover.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = mList.get(position).getData();
+        final Discover.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = mList.get(position).getData();
         switch (getItemViewType(position)) {
             case SQUARECARD:
                 RecommendAuthorViewHolder ravh = (RecommendAuthorViewHolder) holder;
@@ -60,6 +62,15 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
                 ImageUtil.setImage(mContext, imageUrl, ravh.iv_below);
                 ImageUtil.setCircleImage(mContext, imageUrl, ravh.iv_above);
                 ravh.text_author.setText(data.getTitle());
+                //点击跳转到作者详情页面
+                ravh.iv_below.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, AuthorDetailActivity.class);
+                        intent.putExtra("id", data.getId());
+                        mContext.startActivity(intent);
+                    }
+                });
                 break;
             case ACTIONCARD:
                 AllViewHolder avh = (AllViewHolder) holder;
