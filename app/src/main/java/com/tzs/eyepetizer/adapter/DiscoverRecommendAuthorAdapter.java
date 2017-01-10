@@ -1,7 +1,6 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,7 +93,6 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
         private ImageView iv_below;
         private ImageView iv_above;
         private TextView text_author;
-
         public RecommendAuthorViewHolder(View itemView) {
             super(itemView);
             iv_below = (ImageView) itemView.findViewById(R.id.iv_below);
@@ -108,7 +106,6 @@ public class DiscoverRecommendAuthorAdapter extends RecyclerView.Adapter<Recycle
      */
     static class AllViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_all;
-
         public AllViewHolder(View itemView) {
             super(itemView);
             tv_all = (TextView) itemView.findViewById(R.id.tv_all_discover);

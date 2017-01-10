@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.AllClassifyActivity;
 import com.tzs.eyepetizer.activity.WebActivity;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.util.DecodeUtil;
@@ -109,6 +110,12 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 //判断是热门分类id=1、热门排行id=2、还是推荐作者id=3的内容，来设置不同的adapter
                 int id = data.getHeader().getId();
                 if (id == 1) {
+                    squareCardviewHolder.title_Discover.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {//点击事件，跳转进入所有分类页面
+                            mContext.startActivity(new Intent(mContext, AllClassifyActivity.class));
+                        }
+                    });
                     DiscoverHotClassifyAdapter dhcAdapter = new DiscoverHotClassifyAdapter(mContext);
                     squareCardviewHolder.recyclerView_inner.setAdapter(dhcAdapter);
                     dhcAdapter.setList(itemList);
