@@ -35,8 +35,10 @@ public interface HttpApiService {
                                                       @Query("num") String num,
                                                       @Query("pgcId") String pgcId,
                                                       @Query("strategy") String strategy);
+
     //http://baobab.kaiyanapp.com/api/v1/search?/query="城会玩"
     @GET("api/v1/search?")
-    Observable<Search> getSearchList(@Query("query") String query);
-
+    Observable<Search> getSearchList(@Query("start") String start,
+                                     @Query("num") String num,
+                                     @Query("query") String query);
 }

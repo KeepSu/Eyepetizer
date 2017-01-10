@@ -11,12 +11,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
@@ -31,7 +28,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnPageChange;
 
 public class AuthorDetailActivity extends BaseActivity {
     @BindView(R.id.iv_portrait)
@@ -58,15 +54,11 @@ public class AuthorDetailActivity extends BaseActivity {
     //作者的id
     private int id;
     private AuthorDetailFragment adFragment1;
-    private View view1;
-    private View view2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_author_detail);
         ButterKnife.bind(this);
-        tool_bar.setNavigationIcon(R.drawable.ic_action_back);
         setSupportActionBar(tool_bar);
         setCustomTabLayout();
         //初始化数据
@@ -77,6 +69,7 @@ public class AuthorDetailActivity extends BaseActivity {
         adFragment1.setCallBack(new OnCallBack() {
             @Override
             public void OnCallBackData(AuthorDetail authorDetail) {
+                Log.i("info","ad1111111");
                 setData(authorDetail);
             }
         });
@@ -113,14 +106,13 @@ public class AuthorDetailActivity extends BaseActivity {
         View v = LayoutInflater.from(this).inflate(R.layout.layout_tablayout_item,null);
         TextView tv_type = (TextView) v.findViewById(R.id.tv_type);
         tv_type.setText(titles[position]);
-       /* view1 = v.findViewById(R.id.view1);
-        view2 = v.findViewById(R.id.view2);*/
         return v;
     }
 
 
     //设置数据
     private void setData(AuthorDetail authorDetail) {
+        Log.i("info","ad22222");
         //作者头像
         ImageUtil.setCircleImage(this, authorDetail.getPgcInfo().getIcon(), iv_portrait);
         //收藏，分享，视频个数
@@ -134,9 +126,6 @@ public class AuthorDetailActivity extends BaseActivity {
         }
         //collapsingToolbarLayout设置相关标题，颜色
         collapsingToolbarLayout.setTitle(authorDetail.getPgcInfo().getName());
-
-/* collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#00000000"));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);*/
     }
 
     //本页面传值到AuthorDetailFragment中
@@ -169,23 +158,17 @@ public class AuthorDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         id = bundle.getInt("id", 0);
-        adapter = new AuthorDetailVPAdapter(getSupportFragmentManager(),fragmentList,
-                titles);
+        adapter = new AuthorDetailVPAdapter(getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
+    //返回键
+    public void back(View view) {
+        finish();
     }
-    @OnPageChange(R.id.viewpager)
-    void onPageSelected(int position) {
-        Log.i("info","==position="+position);
-
+    //分享
+    public void share(View view) {
 
     }
 }

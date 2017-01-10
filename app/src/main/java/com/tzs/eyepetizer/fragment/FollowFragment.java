@@ -97,23 +97,7 @@ public class FollowFragment extends BaseFragment {
                 }
             }
         });
-    /*    pullToRefreshRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-                Log.e("=====","==下拉 ===");
-                list.clear();
-                getFollowData(String.valueOf(flag),"1");
-            }
 
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-                Log.e("=====","===上拉===");
-
-                flag=2;
-                page+=2;
-                getFollowData(String.valueOf(flag),String.valueOf(page));
-            }
-        });*/
         //设置适配器
         adapter=new FollowRVAdapter(context);
         recyclerView.setAdapter(adapter);

@@ -6,11 +6,11 @@
 
     <RelativeLayout
         android:id="@+id/rl_toAuthorDetail"
-        android:clickable="true"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center_vertical">
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/iv_portrait"
@@ -19,27 +19,27 @@
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
-            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/iv_portrait"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_nickName"
+                style="@style/textSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:text="GoPro"
-                style="@style/textSubtitle" />
+                android:text="GoPro" />
 
             <TextView
                 android:id="@+id/tv_description"
+                style="@style/textDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用第一人称视角记录刺激的运动和温柔....."
-                style="@style/textDescription" />
+                android:text="用第一人称视角记录刺激的运动和温柔....." />
         </LinearLayout>
 
         <LinearLayout
@@ -53,19 +53,34 @@
                 android:layout_width="60dp"
                 android:layout_height="35dp"
                 android:background="@drawable/discover_button_shape"
+                android:gravity="center"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
-                android:gravity="center"
                 android:text="+ 关 注"
                 android:textSize="@dimen/textsize_description"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_inner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="235dp" />
-    <include layout="@layout/line_thin"/>
+        android:layout_height="wrap_content"
+        android:paddingRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_inner"
+                android:layout_width="match_parent"
+                android:layout_height="235dp" />
+
+            <include layout="@layout/line_thin" />
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

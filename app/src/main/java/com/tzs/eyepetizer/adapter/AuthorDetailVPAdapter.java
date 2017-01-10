@@ -12,13 +12,10 @@ import java.util.List;
  */
 public class AuthorDetailVPAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments=new ArrayList<>();
-    private String[] titles;
 
-
-    public AuthorDetailVPAdapter(FragmentManager fm, List<Fragment> fragments, String[] titles) {
+    public AuthorDetailVPAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
-        this.titles = titles;
     }
 
     public void setFragments(List<Fragment> fragments) {
@@ -34,10 +31,5 @@ public class AuthorDetailVPAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragments.size();
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titles[position];
     }
 }

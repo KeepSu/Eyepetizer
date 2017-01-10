@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,34 +55,41 @@ public class SearchActivity extends AppCompatActivity {
     TextView textView2;
     //搜索词
     private String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+
         getSearchWordData();
-        key=et_search.getText().toString();
+
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH){
-                    Log.i("===","111111");
-                    textView.setVisibility(View.GONE);
-                    textView2.setVisibility(View.GONE);
-                    layout.setVisibility(View.GONE);
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    SearchFragment tf=new SearchFragment();
-                    Bundle bundle=new Bundle();
-                    bundle.putString("key",key);
-                    tf.setArguments(bundle);
-                    ft.replace(R.id.rl,tf);
-                    ft.commit();
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Log.i("===", "111111");
+                    key = et_search.getText().toString();
+                    toSearch(key);
                     return true;
                 }
                 return false;
             }
         });
 
+    }
+
+    private void toSearch(String key) {
+        textView.setVisibility(View.GONE);
+        textView2.setVisibility(View.GONE);
+        layout.setVisibility(View.GONE);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        SearchFragment tf = new SearchFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("key", key);
+        tf.setArguments(bundle);
+        ft.replace(R.id.rl, tf);
+        ft.commit();
     }
 
 
@@ -97,23 +105,38 @@ public class SearchActivity extends AppCompatActivity {
                             array = new JSONArray(s.trim());
                             for (int i = 0; i < array.length(); i++) {
                                 String string = array.optString(i);
-                                TextView textView = new TextView(SearchActivity.this);
-                                textView.setText(string);
-                                textView.setTextColor(Color.GRAY);
-                                textView.setPadding(10, 0, 10, 0);
+                                final TextView textView1 = new TextView(SearchActivity.this);
+                                textView1.setText(string);
+                                textView1.setBackgroundColor(0xffCCCCCC);
+                                textView1.setPadding(5, 5, 5, 5);
+                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
+                                        , ViewGroup.LayoutParams.WRAP_CONTENT);
+                                params.setMargins(0, 0, 20, 0);
+                                textView1.setLayoutParams(params);
+                                textView1.setClickable(true);
+                                textView1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Log.i("===", "2222222");
+                                        key = textView1.getText().toString();
+                                        toSearch(key);
+                                        Log.i("===", "key==" + key);
+                                    }
+                                });
                                 if (i <= 5) {
-                                    layout1.addView(textView);
+                                    layout1.addView(textView1);
                                 } else if (i > 5 && i <= 10) {
-                                    layout2.addView(textView);
+                                    layout2.addView(textView1);
                                 } else if (i > 10 && i <= 15) {
-                                    layout3.addView(textView);
+                                    layout3.addView(textView1);
                                 } else if (i > 15 && i <= 20) {
-                                    layout4.addView(textView);
+                                    layout4.addView(textView1);
                                 } else if (i > 20 && i < array.length()) {
-                                    layout5.addView(textView);
+                                    layout5.addView(textView1);
                                 }
 
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

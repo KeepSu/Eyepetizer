@@ -52,7 +52,7 @@ public class AuthorDetailFragment extends BaseFragment {
     private OnCallBack callBack;
 
     private boolean isFirst;
-    private int start = 10;
+    private int start =0;
     private int id;
     private String strategy;
 
@@ -65,7 +65,6 @@ public class AuthorDetailFragment extends BaseFragment {
         super.onAttach(context);
         this.context = context;
     }
-
 
     //解析作者详情的数据
     private void parseAuthorDetailData(int start, int id, String strategy) {
@@ -91,10 +90,12 @@ public class AuthorDetailFragment extends BaseFragment {
                     @Override
                     public void onNext(AuthorDetail authorDetail) {
                         Log.i("info", "===authorDetail====" + authorDetail);
+                        Log.i("info","adf11=="+authorDetail.getCount());
                         if (isFirst) {
                             callBack.OnCallBackData(authorDetail);
                             isFirst = false;
                         }
+
                         //添加数据到集合中
                         list.addAll(authorDetail.getItemList());
                         initData();

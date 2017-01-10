@@ -1,5 +1,7 @@
 package com.tzs.eyepetizer.entity;
 
+import com.tzs.eyepetizer.entity.select.ItemCollection;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -340,7 +342,7 @@ public class AuthorDetail implements Serializable{
             private Object webAdTrack;
             private long date;
             private Object promotion;
-            private Object label;
+            private ItemCollection.DataBean.HeaderBean.LabelBean label;
             private boolean collected;
             private boolean played;
             private List<PlayInfoBean> playInfo;
@@ -530,11 +532,11 @@ public class AuthorDetail implements Serializable{
                 this.promotion = promotion;
             }
 
-            public Object getLabel() {
+            public ItemCollection.DataBean.HeaderBean.LabelBean getLabel() {
                 return label;
             }
 
-            public void setLabel(Object label) {
+            public void setLabel(ItemCollection.DataBean.HeaderBean.LabelBean label) {
                 this.label = label;
             }
 

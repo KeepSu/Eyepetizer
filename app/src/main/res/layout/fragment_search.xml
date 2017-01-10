@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="输入标题或描述中的关键词找到更多的视频"
         android:textColor="@color/text_select"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:textStyle="bold"/>
 
-    <android.support.v7.widget.RecyclerView
+    <com.tzs.eyepetizer.view.PullRecyclerView
         android:layout_marginTop="15dp"
         android:layout_below="@+id/tv_info"
         android:id="@+id/search_recyclerView"

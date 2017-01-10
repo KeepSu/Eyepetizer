@@ -16,6 +16,7 @@ import com.tzs.eyepetizer.adapter.SearchRVAdapter;
 import com.tzs.eyepetizer.apiservice.HttpApiService;
 import com.tzs.eyepetizer.entity.Search;
 import com.tzs.eyepetizer.util.PathUtil;
+import com.tzs.eyepetizer.view.PullRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,12 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.tv_info)
     TextView tv_info;
     @BindView(R.id.search_recyclerView)
-    RecyclerView search_recyclerView;
+    PullRecyclerView search_recyclerView;
     private Context ctx;
-    private List<Search.ItemListBeanX.DataBeanX.ItemListBean> list = new ArrayList<>();
+    private List<Search.ItemListBean> list = new ArrayList<>();
     private SearchRVAdapter adapter;
-
+    private String key;
+    private int start=0;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -63,21 +65,31 @@ public class SearchFragment extends Fragment {
         adapter = new SearchRVAdapter(ctx);
         search_recyclerView.setAdapter(adapter);
         Bundle bundle = getArguments();
-        String key = bundle.getString("key");
-        getResultDatafromSearch(key);
+        key = bundle.getString("key");
+        Log.i("=====","SF==key="+ key);
+        getResultDatafromSearch(0,10,key);
+        //监听，当滑到底部的时候下载并加载下一页的数据
+        search_recyclerView.setOnScrollToButtomLinstener(new PullRecyclerView.OnScrollToButtomLinstener() {
+            @Override
+            public void onScrollToButtom() {
+                start += 10;
+                getResultDatafromSearch(start, 10, key);
+            }
+        });
     }
 
     /**
      * 获取搜索结果数据
      */
-    private void getResultDatafromSearch(String key) {
+    private void getResultDatafromSearch(int start,int num,final String key) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PathUtil.getFollowPth())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         HttpApiService apiService = retrofit.create(HttpApiService.class);
-        Observable<Search> observable = apiService.getSearchList(key);
+        Observable<Search> observable = apiService.getSearchList(String.valueOf(start)
+                ,String.valueOf(num),key);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Search>() {
@@ -94,8 +106,9 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onNext(Search search) {
                         Log.i("===", "search==" + search);
-                        Log.i("===", "count==" + search.getCount());
-                        list.addAll(search.getItemList().get(0).getData().getItemList());
+                        Log.i("===", "count==" + search.getTotal());
+                        tv_info.setText("-"+"「"+key+"」搜索结果共"+search.getTotal()+"个-");
+                        list.addAll(search.getItemList());
                         adapter.setList(list);
                     }
                 });

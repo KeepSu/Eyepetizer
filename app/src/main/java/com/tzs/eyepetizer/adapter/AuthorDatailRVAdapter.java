@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.entity.AuthorDetail;
 import com.tzs.eyepetizer.entity.Follow;
+import com.tzs.eyepetizer.entity.select.ItemCollection;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
 
@@ -57,6 +58,14 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
         //设置作者名字
         holder.tv_author.setText(lists.get(position).getData().getAuthor().getName());
         Log.i("==","==name=="+lists.get(position).getData().getAuthor().getName());
+        ItemCollection.DataBean.HeaderBean.LabelBean label = lists.get(position).getData().getLabel();
+        if (null!=label){
+            holder.tv_promotion.setVisibility(View.VISIBLE);
+            String text = (String) label.getText();
+            holder.tv_promotion.setText(text);
+        }else {
+            holder.tv_promotion.setVisibility(View.GONE);
+        }
         //设置背景图片
         ImageUtil.setImage(context,lists.get(position).getData().getCover().getFeed(),holder.iv_select_cover);
     }
@@ -79,6 +88,9 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
         //item的作者
         @BindView(R.id.tv_author)
         TextView tv_author;
+        //item的是否有全景
+        @BindView(R.id.tv_promotion)
+        TextView tv_promotion;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

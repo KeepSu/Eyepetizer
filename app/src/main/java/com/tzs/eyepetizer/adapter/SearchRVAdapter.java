@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.entity.Search;
+import com.tzs.eyepetizer.entity.select.ItemCollection;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
 
@@ -21,11 +22,11 @@ import java.util.List;
  */
 public class SearchRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAdapter.MyViewHolder>{
     private Context context;
-    private List<Search.ItemListBeanX.DataBeanX.ItemListBean> lists=new ArrayList<>();
+    private List<Search.ItemListBean> lists = new ArrayList<>();
     public SearchRVAdapter(Context context) {
         this.context = context;
     }
-    public void setList(List<Search.ItemListBeanX.DataBeanX.ItemListBean> list) {
+    public void setList(List<Search.ItemListBean> list) {
         this.lists = list;
         notifyDataSetChanged();
     }
@@ -38,8 +39,7 @@ public class SearchRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAdapter.
 
     @Override
     public void onBindViewHolder(AuthorDatailRVAdapter.MyViewHolder holder, int position) {
-
-        Search.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = lists.get(position).getData();
+        Search.ItemListBean.DataBean data = lists.get(position).getData();
         //设置标题
         holder.tv_title.setText(data.getTitle());
         Log.i("==","==title=="+data.getTitle());
@@ -50,8 +50,22 @@ public class SearchRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAdapter.
         Log.i("==","==type=="+"#"+data.getCategory()+" / "
                 + TimeUtil.getDurnig(duration));
         //设置作者名字
-        holder.tv_author.setText(data.getAuthor().getName());
-        Log.i("==","==name=="+data.getAuthor().getName());
+        Search.ItemListBean.DataBean.AuthorBean author = data.getAuthor();
+        if (null!=author){
+            holder.tv_author.setVisibility(View.VISIBLE);
+            holder.tv_author.setText(author.getName());
+            Log.i("==","==name=="+author.getName());
+        }else {
+            holder.tv_author.setVisibility(View.GONE);
+        }
+        ItemCollection.DataBean.HeaderBean.LabelBean label = data.getLabel();
+        if (null!=label){
+            holder.tv_promotion.setVisibility(View.VISIBLE);
+            String text = (String) label.getText();
+            holder.tv_promotion.setText(text);
+        }else {
+            holder.tv_promotion.setVisibility(View.GONE);
+        }
         //设置背景图片
         ImageUtil.setImage(context,data.getCover().getFeed(),holder.iv_select_cover);
     }
