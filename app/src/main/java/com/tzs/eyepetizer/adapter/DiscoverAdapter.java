@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.activity.AllClassifyActivity;
+import com.tzs.eyepetizer.activity.SubjectActivity;
 import com.tzs.eyepetizer.activity.WebActivity;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.util.DecodeUtil;
@@ -109,7 +110,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 squareCardviewHolder.recyclerView_inner.setLayoutManager(linearLayoutManager);
                 //判断是热门分类id=1、热门排行id=2、还是推荐作者id=3的内容，来设置不同的adapter
                 int id = data.getHeader().getId();
-                if (id == 1) {
+                if (id == 1) {//热门分类id=1
                     squareCardviewHolder.title_Discover.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {//点击事件，跳转进入所有分类页面
@@ -119,21 +120,21 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     DiscoverHotClassifyAdapter dhcAdapter = new DiscoverHotClassifyAdapter(mContext);
                     squareCardviewHolder.recyclerView_inner.setAdapter(dhcAdapter);
                     dhcAdapter.setList(itemList);
-                } else if (id == 2) {
+                } else if (id == 2) {//热门排行id=2
                     DiscoverHotRankAdapter dhrAdapter = new DiscoverHotRankAdapter(mContext);
                     squareCardviewHolder.recyclerView_inner.setAdapter(dhrAdapter);
                     dhrAdapter.setList(itemList);
-                }else if (id == 3) {
+                }else if (id == 3) {//推荐作者id=3
                     DiscoverRecommendAuthorAdapter draAdapter = new DiscoverRecommendAuthorAdapter(mContext);
                     squareCardviewHolder.recyclerView_inner.setAdapter(draAdapter);
                     draAdapter.setList(itemList);
                 }
                 break;
-            case BANNERCOLLECTION:
+            case BANNERCOLLECTION://热门专题
                 BannerCollectionViewHolder bcViewHolder = (BannerCollectionViewHolder) holder;
                 bcViewHolder.title_discover.setText(data.getHeader().getTitle());
                 mCount = data.getCount();
-                imageAdapter imgAdapter = new imageAdapter(itemList, mContext);
+                ImageAdapter imgAdapter = new ImageAdapter(itemList, mContext);
                 bcViewHolder.vp_coll.setOffscreenPageLimit(mCount);
                 bcViewHolder.vp_coll.setPageMargin(12);
                 bcViewHolder.vp_coll.setAdapter(imgAdapter);
@@ -156,6 +157,12 @@ public class DiscoverAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                 });
                 setIcon(0);//设置指示器
+                bcViewHolder.title_discover.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {//点击进入专题页
+                        mContext.startActivity(new Intent(mContext, SubjectActivity.class));
+                    }
+                });
                 break;
             case VIDEOCOLLECTION:
                 VideoCollectionViewHolder vcViewHolder = (VideoCollectionViewHolder) holder;

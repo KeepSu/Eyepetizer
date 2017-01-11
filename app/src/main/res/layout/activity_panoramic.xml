@@ -2,11 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_web"
+    android:id="@+id/activity_panoramic"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.tzs.eyepetizer.activity.WebActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.tzs.eyepetizer.activity.PanoramicActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,30 +15,25 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/iv_webBack"
+            android:id="@+id/iv_360Back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:onClick="onBack"
             android:gravity="center_vertical"
             android:src="@drawable/ic_action_back"/>
 
         <TextView
-            android:id="@+id/webTitle"
-            android:layout_width="280dp"
+            android:id="@+id/PanoramicTitle"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="网页的TITLE"
+            android:text="360° 全景"
             android:textColor="#000000"
             android:textSize="@dimen/textsize_title"
             android:textStyle="bold"
-            android:fontFamily="serif"
-            android:lines="1"
-            android:ellipsize="end"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
+            android:fontFamily="serif"/>
 
         <ImageView
-            android:id="@+id/iv_webShare"
+            android:id="@+id/iv_360Share"
             android:layout_width="50dp"
             android:layout_height="55dp"
             android:src="@drawable/ic_action_share_grey"
@@ -47,8 +43,19 @@
 
     <include layout="@layout/line_thin"/>
 
-    <WebView
-        android:id="@+id/webView"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        app:tabIndicatorColor="#5a5a5a"
+        app:tabSelectedTextColor="#000"
+        app:tabTextColor="#5a5a5a"
+        app:tabMode="fixed"/>
+
+    <include layout="@layout/line_thin"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
