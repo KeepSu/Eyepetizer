@@ -1,6 +1,5 @@
 package com.tzs.eyepetizer.activity;
 
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +22,6 @@ import io.vov.vitamio.widget.VideoView;
  * Vitamio视频播放框架Demo
  */
 public class PlayActivity extends AppCompatActivity implements MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener {
-    //视频地址
     private String path;
     private String videoName;
     private ProgressBar pb;
@@ -116,14 +114,5 @@ public class PlayActivity extends AppCompatActivity implements MediaPlayer.OnInf
         loadRateView.setText(percent + "%");
     }
 
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        //屏幕切换时，设置全屏
-        if (mVideoView != null) {
-            mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
-        }
-        super.onConfigurationChanged(newConfig);
-    }
 
 }

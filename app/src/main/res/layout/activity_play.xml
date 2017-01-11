@@ -33,16 +33,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#FFFFFF"
-            android:text="" />
+            android:text=""
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/load_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#FFFFFF"
-            android:text="" />
+            android:text=""
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 </RelativeLayout>

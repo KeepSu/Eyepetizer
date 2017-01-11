@@ -7,7 +7,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.tzs.eyepetizer"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -27,9 +27,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':library_refresh')
-    //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile project(':vitamio')
-    //    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile files('libs/MobCommons-2016.1222.1756.jar')
     compile files('libs/MobTools-2016.1222.1756.jar')
     compile files('libs/ShareSDK-Core-2.8.0.jar')
@@ -41,9 +39,11 @@ dependencies {
     compile files('libs/ShareSDK-Wechat-Core-2.8.0.jar')
     compile files('libs/ShareSDK-Wechat-Favorite-2.8.0.jar')
     compile files('libs/ShareSDK-Wechat-Moments-2.8.0.jar')
+    compile project(':common')
+    compile project(':commonwidget')
+    compile project(':videowidget')
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
-    compile 'com.android.support:cardview-v7:24.2.0'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.lzy.net:okhttpserver:1.0.3'
     compile 'com.google.code.gson:gson:2.2.4'
@@ -57,7 +57,8 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'io.reactivex:rxjava:1.2.4'
     compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.10'
+    compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }

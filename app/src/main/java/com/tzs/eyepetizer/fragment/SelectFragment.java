@@ -17,6 +17,7 @@ import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.activity.BaseActivity;
 import com.tzs.eyepetizer.activity.DailyActivity;
+import com.tzs.eyepetizer.activity.SearchActivity;
 import com.tzs.eyepetizer.adapter.SelectAdapter;
 import com.tzs.eyepetizer.callback.OnPullToRefreshListener;
 import com.tzs.eyepetizer.callback.OnScrollToBottomListener;
@@ -201,13 +202,11 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     /**
      * 点击事件的处理
      */
-    @OnClick({R.id.iv_search, R.id.iv_head})
+    @OnClick({R.id.iv_search})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
-                break;
-            case R.id.iv_head:
-                ((BaseActivity) context).transition(DailyActivity.class);
+                goToAnotherActivity(SearchActivity.class);
                 break;
         }
     }

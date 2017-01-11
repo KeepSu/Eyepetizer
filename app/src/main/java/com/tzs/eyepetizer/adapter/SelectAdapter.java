@@ -7,7 +7,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import com.tzs.eyepetizer.entity.select.SelectItem;
 import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
+import com.tzs.eyepetizer.util.AnimaUtil;
 import com.tzs.eyepetizer.util.DecodeUtil;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
@@ -256,15 +259,11 @@ public class SelectAdapter extends RecyclerView.Adapter {
         } else {
             holder.tv_author.setVisibility(View.GONE);
         }
-        //TODO
-        if (data.getPromotion() == null) {
+        if (data.getLabel() == null) {
             holder.tv_promotion.setVisibility(View.GONE);
-        } else if (data.getPromotion().getText().equals("广告")) {
-            holder.tv_promotion.setVisibility(View.VISIBLE);
-            holder.tv_promotion.setText("广告");
         } else {
             holder.tv_promotion.setVisibility(View.VISIBLE);
-            holder.tv_promotion.setText("360°全景");
+            holder.tv_promotion.setText(data.getLabel().getText());
         }
 
         holder.ly_video.setOnClickListener(new View.OnClickListener() {
@@ -274,24 +273,21 @@ public class SelectAdapter extends RecyclerView.Adapter {
                         VideoInfoActivity.class, data, holder.iv_select_cover, data.getId() + "");
             }
         });
-//        holder.ly_video.setOnClickListener(this);
-//        holder.ly_video.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        AnimaUtil.disappear(1000, holder.ly_video);
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        AnimaUtil.appear(1000, holder.ly_video);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        AnimaUtil.appear(1000, holder.ly_video);
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
+        holder.ly_video.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        AnimaUtil.disappear(600, holder.ly_video);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+                        AnimaUtil.appear(600, holder.ly_video);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     /**

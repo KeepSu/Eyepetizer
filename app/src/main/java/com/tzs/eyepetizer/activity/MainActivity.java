@@ -17,12 +17,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
-        implements RadioGroup.OnCheckedChangeListener{
+        implements RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.layout)
     FrameLayout layout;
     private RadioGroup rg;
-    private int mPrePosition=-1;//起始位置
+    private int mPrePosition = -1;//起始位置
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,26 +36,28 @@ public class MainActivity extends BaseActivity
 
     //初始化view
     protected void initView() {
-        rg= (RadioGroup) findViewById(R.id.rg);
+        rg = (RadioGroup) findViewById(R.id.rg);
 
     }
+
     //设置监听事件
     protected void setEvent() {
         showFragment(0);
-        Log.e("======","-======");
+        Log.e("======", "-======");
         rg.setOnCheckedChangeListener(this);
     }
 
     //RadioGroup的监听事件
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        for (int i = 0; i <group.getChildCount(); i++) {
+        for (int i = 0; i < group.getChildCount(); i++) {
             RadioButton button = (RadioButton) group.getChildAt(i);
-            if (button.isChecked()){
+            if (button.isChecked()) {
                 showFragment(i);
             }
         }
     }
+
     //Fragment的添加与隐藏
     private void showFragment(int position) {
         List<Fragment> fragmentList = FragmentUtil.getFragmentList();

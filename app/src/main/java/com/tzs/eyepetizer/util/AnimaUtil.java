@@ -1,5 +1,6 @@
 package com.tzs.eyepetizer.util;
 
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -12,7 +13,7 @@ import android.view.animation.ScaleAnimation;
 public class AnimaUtil {
 
     /**
-     * 逐渐消失的动画(只执行一次)
+     * 逐渐消失的动画
      */
     public static void disappear(long during, View view) {
         AlphaAnimation disappearAnimation = new AlphaAnimation(1, 0);
@@ -22,12 +23,11 @@ public class AnimaUtil {
     }
 
     /**
-     * 逐渐出现的动画(只执行一次)
+     * 逐渐出现的动画
      */
     public static void appear(long during, View view) {
         AlphaAnimation appearAnimation = new AlphaAnimation(0, 1);
         appearAnimation.setDuration(during);
-        appearAnimation.setFillAfter(true);
         view.startAnimation(appearAnimation);
     }
 

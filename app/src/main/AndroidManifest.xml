@@ -76,17 +76,13 @@
             </intent-filter>
         </activity>
 
-        <!-- 微信分享回调 -->
-        <!-- <activity -->
-        <!-- android:name=".wxapi.WXEntryActivity" -->
-        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar" -->
-        <!-- android:configChanges="keyboardHidden|orientation|screenSize" -->
-        <!-- android:exported="true" -->
-        <!-- android:screenOrientation="portrait" /> -->
-
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/dialog" />
+        <activity
+            android:name=".activity.PlayVrActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>
