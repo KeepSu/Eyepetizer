@@ -68,11 +68,9 @@ public class FollowFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_follow, container, false);
         //解析注解
         ButterKnife.bind(this,view);
-        Log.e("======","======FollowFragment========");
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
         //设置布局方式
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        //pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         pullToRefreshRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerView>() {
             @Override
             public void onRefresh(PullToRefreshBase<RecyclerView> refreshView) {

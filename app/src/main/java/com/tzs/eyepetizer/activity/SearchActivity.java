@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
     @BindView(R.id.et_search)
     EditText et_search;
     @BindView(R.id.layout)

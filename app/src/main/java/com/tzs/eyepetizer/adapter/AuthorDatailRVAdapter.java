@@ -10,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.BaseActivity;
+import com.tzs.eyepetizer.activity.VideoInfoActivity;
 import com.tzs.eyepetizer.entity.AuthorDetail;
 import com.tzs.eyepetizer.entity.Follow;
 import com.tzs.eyepetizer.entity.select.ItemCollection;
+import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
 import com.tzs.eyepetizer.util.ImageUtil;
 import com.tzs.eyepetizer.util.TimeUtil;
 
@@ -28,6 +31,8 @@ import butterknife.ButterKnife;
 public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAdapter.MyViewHolder>{
     private List<AuthorDetail.ItemListBean> lists=new ArrayList();
     private Context context;
+    private View view;
+
     public void setList(List<AuthorDetail.ItemListBean> list) {
         this.lists=list;
         notifyDataSetChanged();
@@ -39,12 +44,12 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_select_video,parent,false);
+        view = LayoutInflater.from(context).inflate(R.layout.item_select_video,parent,false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         Log.i("==","===lists.size()==="+lists.size());
         //设置标题
         holder.tv_title.setText(lists.get(position).getData().getTitle());
@@ -58,7 +63,7 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
         //设置作者名字
         holder.tv_author.setText(lists.get(position).getData().getAuthor().getName());
         Log.i("==","==name=="+lists.get(position).getData().getAuthor().getName());
-        ItemCollection.DataBean.HeaderBean.LabelBean label = lists.get(position).getData().getLabel();
+        ItemCollection.DataBean.HeaderBean.LabelBean label = (ItemCollection.DataBean.HeaderBean.LabelBean) lists.get(position).getData().getLabel();
         if (null!=label){
             holder.tv_promotion.setVisibility(View.VISIBLE);
             String text = (String) label.getText();
@@ -68,6 +73,15 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
         }
         //设置背景图片
         ImageUtil.setImage(context,lists.get(position).getData().getCover().getFeed(),holder.iv_select_cover);
+        //位置监听
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VideoBeanForClient client = (VideoBeanForClient) lists.get(holder.getAdapterPosition());
+                VideoBeanForClient.DataBean data = client.getData();
+                ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data);
+            }
+        });
     }
 
     @Override

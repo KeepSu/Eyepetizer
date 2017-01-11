@@ -1,7 +1,9 @@
 package com.tzs.eyepetizer.entity;
 
 import com.tzs.eyepetizer.entity.select.ItemCollection;
+import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -53,12 +55,12 @@ public class Search {
         this.itemList = itemList;
     }
 
-    public static class ItemListBean {
+    public static class ItemListBean extends VideoBeanForClient implements Serializable {
         /**
          * type : video
          * data : {"dataType":"VideoBeanForClient","id":3262,"title":"黑人希特勒","description":"今天是美国废除奴隶制 150 周年，肤色和种族依旧是人们争论的焦点。好在人类有幽默感，代表着不同种族爱的结晶的混血群体中，就有一位脱口秀达人，用诙谐的方式向大家讲述自己的故事。From 粉酷多","provider":{"name":"YouTube","alias":"youtube","icon":"http://img.kaiyanapp.com/fa20228bc5b921e837156923a58713f6.png"},"category":"综艺","author":null,"cover":{"feed":"http://img.kaiyanapp.com/ee52cd99f84330bd27c0acbe82d831d8.jpeg?imageMogr2/quality/100","detail":"http://img.kaiyanapp.com/ee52cd99f84330bd27c0acbe82d831d8.jpeg?imageMogr2/quality/100","blurred":"http://img.kaiyanapp.com/384b2a0f820f80145b3923745d59a315.jpeg?imageMogr2/quality/100","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=3262&editionType=default","duration":482,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=3262","forWeibo":"http://wandou.im/vh14w"},"releaseTime":1450368000000,"playInfo":[{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=3262&editionType=high"}],"consumption":{"collectionCount":4354,"shareCount":4217,"replyCount":45},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[{"id":50,"name":"脱口秀","actionUrl":"eyepetizer://tag/50/?title=%E8%84%B1%E5%8F%A3%E7%A7%80","adTrack":null},{"id":140,"name":"搞笑","actionUrl":"eyepetizer://tag/140/?title=%E6%90%9E%E7%AC%91","adTrack":null},{"id":504,"name":"笑cry","actionUrl":"eyepetizer://tag/504/?title=%E7%AC%91cry","adTrack":null},{"id":572,"name":"历史","actionUrl":"eyepetizer://tag/572/?title=%E5%8E%86%E5%8F%B2","adTrack":null}],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1450368000000,"promotion":null,"label":null,"collected":false,"played":false}
          */
-
+/*
         private String type;
         private DataBean data;
 
@@ -79,7 +81,7 @@ public class Search {
         }
 
         public static class DataBean {
-            /**
+            *//**
              * dataType : VideoBeanForClient
              * id : 3262
              * title : 黑人希特勒
@@ -108,7 +110,7 @@ public class Search {
              * label : null
              * collected : false
              * played : false
-             */
+             *//*
 
             private String dataType;
             private int id;
@@ -364,11 +366,11 @@ public class Search {
             }
 
             public static class ProviderBean {
-                /**
+                *//**
                  * name : YouTube
                  * alias : youtube
                  * icon : http://img.kaiyanapp.com/fa20228bc5b921e837156923a58713f6.png
-                 */
+                 *//*
 
                 private String name;
                 private String alias;
@@ -400,12 +402,12 @@ public class Search {
             }
 
             public static class CoverBean {
-                /**
+                *//**
                  * feed : http://img.kaiyanapp.com/ee52cd99f84330bd27c0acbe82d831d8.jpeg?imageMogr2/quality/100
                  * detail : http://img.kaiyanapp.com/ee52cd99f84330bd27c0acbe82d831d8.jpeg?imageMogr2/quality/100
                  * blurred : http://img.kaiyanapp.com/384b2a0f820f80145b3923745d59a315.jpeg?imageMogr2/quality/100
                  * sharing : null
-                 */
+                 *//*
 
                 private String feed;
                 private String detail;
@@ -446,10 +448,10 @@ public class Search {
             }
 
             public static class WebUrlBean {
-                /**
+                *//**
                  * raw : http://www.eyepetizer.net/detail.html?vid=3262
                  * forWeibo : http://wandou.im/vh14w
-                 */
+                 *//*
 
                 private String raw;
                 private String forWeibo;
@@ -472,11 +474,11 @@ public class Search {
             }
 
             public static class ConsumptionBean {
-                /**
+                *//**
                  * collectionCount : 4354
                  * shareCount : 4217
                  * replyCount : 45
-                 */
+                 *//*
 
                 private int collectionCount;
                 private int shareCount;
@@ -508,13 +510,13 @@ public class Search {
             }
 
             public static class PlayInfoBean {
-                /**
+                *//**
                  * height : 720
                  * width : 1280
                  * name : 高清
                  * type : high
                  * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=3262&editionType=high
-                 */
+                 *//*
 
                 private int height;
                 private int width;
@@ -564,12 +566,12 @@ public class Search {
             }
 
             public static class TagsBean {
-                /**
+                *//**
                  * id : 50
                  * name : 脱口秀
                  * actionUrl : eyepetizer://tag/50/?title=%E8%84%B1%E5%8F%A3%E7%A7%80
                  * adTrack : null
-                 */
+                 *//*
 
                 private int id;
                 private String name;
@@ -611,7 +613,7 @@ public class Search {
 
             public class AuthorBean {
 
-                /**
+                *//**
                  * id : 140
                  * icon : http://img.kaiyanapp.com/49388b30692bee747b3f511d9afa7ac0.jpeg
                  * name : devinsupertramp
@@ -621,7 +623,7 @@ public class Search {
                  * videoNum : 49
                  * adTrack : null
                  * follow : {"itemType":"author","itemId":140,"followed":false}
-                 */
+                 *//*
 
                 private int id;
                 private String icon;
@@ -706,11 +708,11 @@ public class Search {
                 }
 
                 public  class FollowBean {
-                    /**
+                    *//**
                      * itemType : author
                      * itemId : 140
                      * followed : false
-                     */
+                     *//*
 
                     private String itemType;
                     private int itemId;
@@ -741,6 +743,6 @@ public class Search {
                     }
                 }
             }
-        }
+        }*/
     }
 }

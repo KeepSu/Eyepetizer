@@ -76,8 +76,7 @@ public class AuthorDetailActivity extends BaseActivity {
     }
     //自定义TabLayout
     private void setCustomTabLayout() {
-        //设置选中指示器的颜色
-        tabLayout.setSelectedTabIndicatorColor(Color.RED);
+
         //设置为滚动模式
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         for (int i = 0; i < titles.length; i++) {
@@ -121,9 +120,7 @@ public class AuthorDetailActivity extends BaseActivity {
         tv_description.setText(authorDetail.getPgcInfo().getDescription());
         //点击关注
         boolean followed = authorDetail.getPgcInfo().getFollow().isFollowed();
-        if (followed) {
 
-        }
         //collapsingToolbarLayout设置相关标题，颜色
         collapsingToolbarLayout.setTitle(authorDetail.getPgcInfo().getName());
     }

@@ -2,17 +2,15 @@ package com.tzs.eyepetizer.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.test.mock.MockApplication;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.MyApplication;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.util.FileUtils;
 
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +55,11 @@ public class SetActivity extends BaseActivity {
                         .show();
                 break;
         }
+    }
+    //返回键
+    @OnClick(R.id.iv_back)
+    void onClick() {
+        finish();
     }
 
     /**
