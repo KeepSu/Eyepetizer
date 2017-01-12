@@ -3,7 +3,7 @@
     android:id="@+id/activity_related"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#a000"
+    android:background="#e444"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,20 +13,25 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/tv_title"
             style="@style/TitleLight"
-            android:textColor="@color/text_light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="发腮红的森红芳赛防嗮发森等" />
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="发腮红的森红芳赛防嗮发森等"
+            android:textColor="@color/text_light" />
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_down_white" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_related"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

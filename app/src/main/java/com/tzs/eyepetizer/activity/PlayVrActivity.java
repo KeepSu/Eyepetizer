@@ -1,8 +1,6 @@
 package com.tzs.eyepetizer.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 
 import com.google.vr.sdk.widgets.video.VrVideoEventListener;
@@ -11,12 +9,8 @@ import com.tzs.eyepetizer.R;
 
 import java.io.IOException;
 
-public class PlayVrActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
-    //VR视频
-    String videoPath = "http://video.quhuwai.cn/qj24.mp4";
-    /**
-     * The video view and its custom UI elements.
-     */
+public class PlayVrActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
+    String videoPath;
     protected VrVideoView videoWidgetView;
 
     SeekBar seekBar;
@@ -26,7 +20,9 @@ public class PlayVrActivity extends AppCompatActivity implements SeekBar.OnSeekB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_vr);
-        videoPath = getIntent().getStringExtra("data0");
+        initState();
+
+//        videoPath = getIntent().getStringExtra("data0");
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(this);
         videoWidgetView = (VrVideoView) findViewById(R.id.video_view);
@@ -34,7 +30,8 @@ public class PlayVrActivity extends AppCompatActivity implements SeekBar.OnSeekB
         VrVideoView.Options options = new VrVideoView.Options();
         options.inputType = VrVideoView.Options.TYPE_STEREO_OVER_UNDER;
         try {
-            videoWidgetView.loadVideo(Uri.parse(videoPath), options);
+//            videoWidgetView.loadVideo(Uri.parse(videoPath), options);
+            videoWidgetView.loadVideoFromAsset("videos/congo.mp4", options);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,23 +41,18 @@ public class PlayVrActivity extends AppCompatActivity implements SeekBar.OnSeekB
     @Override
     protected void onPause() {
         super.onPause();
-        // Prevent the view from rendering continuously when in the background.
         videoWidgetView.pauseRendering();
-        // If the video is playing when onPause() is called, the default behavior will be to pause
-        // the video and keep it paused when onResume() is called.
         isPaused = true;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Resume the 3D rendering.
         videoWidgetView.resumeRendering();
     }
 
     @Override
     protected void onDestroy() {
-        // Destroy the widget and free memory.
         videoWidgetView.shutdown();
         super.onDestroy();
     }
@@ -112,10 +104,6 @@ public class PlayVrActivity extends AppCompatActivity implements SeekBar.OnSeekB
             seekBar.setProgress((int) videoWidgetView.getCurrentPosition());
         }
 
-        /**
-         * Make the video play in a loop. This method could also be used to move to the next video in
-         * a playlist.
-         */
         @Override
         public void onCompletion() {
             videoWidgetView.seekTo(0);

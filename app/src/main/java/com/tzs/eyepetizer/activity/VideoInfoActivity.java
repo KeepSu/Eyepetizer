@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +88,25 @@ public class VideoInfoActivity extends BaseActivity {
         if (mVideo != null) {
             showData();
         }
+        tv_description.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float startY = 0;
+                float endY = 0;
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        endY = event.getY();
+                        if ((startY - endY) > 5) {
+                            transition(RelatedActivity.class, mVideo.getId() + "", mVideo.getTitle());
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     /**

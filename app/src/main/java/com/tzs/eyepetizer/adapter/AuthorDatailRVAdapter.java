@@ -63,7 +63,7 @@ public class AuthorDatailRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAd
         //设置作者名字
         holder.tv_author.setText(lists.get(position).getData().getAuthor().getName());
         Log.i("==","==name=="+lists.get(position).getData().getAuthor().getName());
-        ItemCollection.DataBean.HeaderBean.LabelBean label = (ItemCollection.DataBean.HeaderBean.LabelBean) lists.get(position).getData().getLabel();
+        VideoBeanForClient.DataBean.LabelBean label = lists.get(position).getData().getLabel();
         if (null!=label){
             holder.tv_promotion.setVisibility(View.VISIBLE);
             String text = (String) label.getText();

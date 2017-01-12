@@ -1,6 +1,7 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +31,13 @@ class VideoSetAdapter extends RecyclerView.Adapter {
     private List<VideoBeanForClient> list;
     private Context context;
     private LayoutInflater inflater;
+    public int flag = -1;
 
     public VideoSetAdapter(Context context, List<VideoBeanForClient> list) {
         inflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
+
     }
 
     @Override
@@ -45,6 +48,7 @@ class VideoSetAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+
         MyViewHolder myViewHolder = ((MyViewHolder) holder);
         final VideoBeanForClient.DataBean data = list.get(position).getData();
         myViewHolder.tv_inner_title.setText(data.getTitle());

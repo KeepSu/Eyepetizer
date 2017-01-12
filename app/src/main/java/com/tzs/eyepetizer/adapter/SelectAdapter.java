@@ -1,13 +1,11 @@
 package com.tzs.eyepetizer.adapter;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +20,6 @@ import com.tzs.eyepetizer.activity.AllAuthorActivity;
 import com.tzs.eyepetizer.activity.AllClassifyActivity;
 import com.tzs.eyepetizer.activity.AuthorDetailActivity;
 import com.tzs.eyepetizer.activity.BaseActivity;
-import com.tzs.eyepetizer.activity.DailyActivity;
 import com.tzs.eyepetizer.activity.VideoInfoActivity;
 import com.tzs.eyepetizer.activity.WebActivity;
 import com.tzs.eyepetizer.entity.select.Banner;
@@ -230,18 +227,18 @@ public class SelectAdapter extends RecyclerView.Adapter {
      */
     private void showDataType2(TextFooterHolder holder, TextFooter.DataBean data) {
         holder.tv_footer.setText(data.getText());
-        holder.tv_footer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    context.startActivity(new Intent(context, DailyActivity.class),
-                            ActivityOptions.makeSceneTransitionAnimation((BaseActivity) context).toBundle());
-                } else {
-                    context.startActivity(new Intent(context, DailyActivity.class));
-                }
-            }
-        });
-    }
+//        holder.tv_footer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    context.startActivity(new Intent(context, DailyActivity.class),
+//                            ActivityOptions.makeSceneTransitionAnimation((BaseActivity) context).toBundle());
+//                } else {
+//                    context.startActivity(new Intent(context, DailyActivity.class));
+//                }
+//    }
+//        });
+}
 
     /**
      * 展示video布局的数据
@@ -320,131 +317,131 @@ public class SelectAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-    /**
-     * video的模板类
-     */
-    static class VideoHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_select_cover)
-        ImageView iv_select_cover;
-        @BindView(R.id.tv_title)
-        TextView tv_title;
-        @BindView(R.id.tv_category_duration)
-        TextView tv_category_duration;
-        @BindView(R.id.tv_author)
-        TextView tv_author;
-        @BindView(R.id.tv_promotion)
-        TextView tv_promotion;
-        @BindView(R.id.ly_video)
-        RelativeLayout ly_video;
+/**
+ * video的模板类
+ */
+static class VideoHolder extends RecyclerView.ViewHolder {
+    @BindView(R.id.iv_select_cover)
+    ImageView iv_select_cover;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.tv_category_duration)
+    TextView tv_category_duration;
+    @BindView(R.id.tv_author)
+    TextView tv_author;
+    @BindView(R.id.tv_promotion)
+    TextView tv_promotion;
+    @BindView(R.id.ly_video)
+    RelativeLayout ly_video;
 
-        VideoHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    VideoHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 
-    /**
-     * 广告的模板类
-     */
-    static class BannerHolder extends RecyclerView.ViewHolder {
+/**
+ * 广告的模板类
+ */
+static class BannerHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_banner)
-        ImageView iv_banner;
+    @BindView(R.id.iv_banner)
+    ImageView iv_banner;
 
-        BannerHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    BannerHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 
-    /**
-     * TextFooter的模板类
-     */
-    static class TextFooterHolder extends RecyclerView.ViewHolder {
+/**
+ * TextFooter的模板类
+ */
+static class TextFooterHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_footer)
-        TextView tv_footer;
-        @BindView(R.id.ly_for_more)
-        LinearLayout ly_for_more;
+    @BindView(R.id.tv_footer)
+    TextView tv_footer;
+    @BindView(R.id.ly_for_more)
+    LinearLayout ly_for_more;
 
-        public TextFooterHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    public TextFooterHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 
-    /**
-     * TextHeader的模板类
-     */
-    static class TextHeaderHolder extends RecyclerView.ViewHolder {
+/**
+ * TextHeader的模板类
+ */
+static class TextHeaderHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_header)
-        TextView tv_header;
+    @BindView(R.id.tv_header)
+    TextView tv_header;
 
-        TextHeaderHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    TextHeaderHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 
-    /**
-     * ViderSetWithCover的模板类
-     */
-    static class VideoSetWithCoverHolder extends RecyclerView.ViewHolder {
+/**
+ * ViderSetWithCover的模板类
+ */
+static class VideoSetWithCoverHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_set_cover)
-        ImageView iv_set_cover;
-        @BindView(R.id.rv_video_set)
-        RecyclerView rv_video_set;
+    @BindView(R.id.iv_set_cover)
+    ImageView iv_set_cover;
+    @BindView(R.id.rv_video_set)
+    RecyclerView rv_video_set;
 
-        VideoSetWithCoverHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    VideoSetWithCoverHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 
-    /**
-     * ViderSetOfFollow的模板类
-     */
-    static class VideoSetOfFollowHolder extends RecyclerView.ViewHolder {
+/**
+ * ViderSetOfFollow的模板类
+ */
+static class VideoSetOfFollowHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_set_cover)
-        ImageView iv_set_cover;
-        @BindView(R.id.tv_title)
-        TextView tv_title;
-        @BindView(R.id.tv_description)
-        TextView tv_description;
-        @BindView(R.id.rv_author)
-        RecyclerView rv_author;
-        @BindView(R.id.rv_video_set)
-        RecyclerView rv_video_set;
+    @BindView(R.id.iv_set_cover)
+    ImageView iv_set_cover;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.tv_description)
+    TextView tv_description;
+    @BindView(R.id.rv_author)
+    RecyclerView rv_author;
+    @BindView(R.id.rv_video_set)
+    RecyclerView rv_video_set;
 
-        public VideoSetOfFollowHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    public VideoSetOfFollowHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 
-    /**
-     * AuthorWithCoverHolder的模板类
-     */
-    static class AuthorWithCoverHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_author_video_cover)
-        ImageView iv_author_video_cover;
-        @BindView(R.id.iv_author_video_head)
-        ImageView iv_author_video_head;
-        @BindView(R.id.tv_author_name)
-        TextView tv_author_name;
-        @BindView(R.id.tv_author_description)
-        TextView tv_author_description;
-        @BindView(R.id.tv_follow_author)
-        TextView tv_follow_author;
-        @BindView(R.id.rv_video_set)
-        RecyclerView rv_video_set;
+/**
+ * AuthorWithCoverHolder的模板类
+ */
+static class AuthorWithCoverHolder extends RecyclerView.ViewHolder {
+    @BindView(R.id.iv_author_video_cover)
+    ImageView iv_author_video_cover;
+    @BindView(R.id.iv_author_video_head)
+    ImageView iv_author_video_head;
+    @BindView(R.id.tv_author_name)
+    TextView tv_author_name;
+    @BindView(R.id.tv_author_description)
+    TextView tv_author_description;
+    @BindView(R.id.tv_follow_author)
+    TextView tv_follow_author;
+    @BindView(R.id.rv_video_set)
+    RecyclerView rv_video_set;
 
-        public AuthorWithCoverHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    public AuthorWithCoverHolder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
     }
+}
 }

@@ -60,7 +60,7 @@ public class SearchRVAdapter extends RecyclerView.Adapter<AuthorDatailRVAdapter.
             holder.tv_author.setVisibility(View.GONE);
         }
 
-        ItemCollection.DataBean.HeaderBean.LabelBean label = (ItemCollection.DataBean.HeaderBean.LabelBean) data.getLabel();
+        VideoBeanForClient.DataBean.LabelBean label = data.getLabel();
         if (null != label) {
             holder.tv_promotion.setVisibility(View.VISIBLE);
             String text = (String) label.getText();
