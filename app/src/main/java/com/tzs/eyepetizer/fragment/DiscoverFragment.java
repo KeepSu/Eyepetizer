@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.activity.AllClassifyActivity;
+import com.tzs.eyepetizer.activity.SearchActivity;
 import com.tzs.eyepetizer.adapter.DiscoverAdapter;
 import com.tzs.eyepetizer.entity.Discover;
 import com.tzs.eyepetizer.view.PullRecyclerView;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -36,6 +39,8 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     PullRecyclerView recyclerView_Discover;
     @BindView(R.id.tv_classify)
     TextView tv_classify;
+    @BindView(R.id.iv_search)
+    ImageView iv_serach;
 
     private Discover mDiscover;//解析出来的discover对象
     private DiscoverAdapter adapter;
@@ -49,7 +54,6 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
         ButterKnife.bind(this, view);
-        tv_classify.setOnClickListener(this);
         return view;
     }
 
@@ -85,11 +89,14 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    @Override
+    @OnClick({R.id.tv_classify, R.id.iv_search})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_classify://点击跳转进入所有分类
                 goToAnotherActivity(AllClassifyActivity.class);
+                break;
+            case R.id.iv_search://点击跳转进入搜索页
+                goToAnotherActivity(SearchActivity.class);
                 break;
         }
     }

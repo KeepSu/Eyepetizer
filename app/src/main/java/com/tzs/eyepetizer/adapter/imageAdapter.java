@@ -19,11 +19,11 @@ import java.util.List;
  * Created by TZS on 2017/1/3.
  */
 
-public class imageAdapter extends PagerAdapter {
+public class ImageAdapter extends PagerAdapter {
     private List<Discover.ItemListBeanX.DataBeanX.ItemListBean> data = new ArrayList();
     private Context mContext;
 
-    public imageAdapter(List<Discover.ItemListBeanX.DataBeanX.ItemListBean> data, Context context) {
+    public ImageAdapter(List<Discover.ItemListBeanX.DataBeanX.ItemListBean> data, Context context) {
         this.data = data;
         mContext = context;
     }
