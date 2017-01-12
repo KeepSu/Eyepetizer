@@ -71,12 +71,10 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        Log.e("===", "==position===" + position);
         //获取头部信息
         final Follow.ItemListBeanX.DataBeanX.HeaderBean header = list.get(position).getData().getHeader();
         //获取Item里面子Itemde数据
-        final List<Follow.ItemListBeanX.DataBeanX.ItemListBean> itemList = list.get(position).getData().getItemList();
-        Log.i("===", "==position===" + position);
+        Log.i("===", "==FRVposition===" + position);
         switch (getItemViewType(position)) {
             case FOLLOW_AUTHOR:
                 final AuthorViewHolder avh = (AuthorViewHolder) holder;
@@ -97,7 +95,8 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 avh.rv_inner.setLayoutManager(linearLayoutManager);
                 FollowRVInnerAdapter adapter = new FollowRVInnerAdapter(ctx);
                 avh.rv_inner.setAdapter(adapter);
-                adapter.setList(itemList);
+                Follow.ItemListBeanX itemListBeanX = list.get(position);
+                adapter.setList(itemListBeanX);
                 //作者详情页面的跳转
                 avh.rl_toAuthorDetail.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -106,13 +105,11 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         Bundle bundle=new Bundle();
                         int id = header.getId();
                         bundle.putSerializable("itemList", (Serializable) list);
-                        bundle.putInt("position",position);
                         bundle.putInt("id",id);
                         intent.putExtras(bundle);
                         ctx.startActivity(intent);
                     }
                 });
-
 
                 break;
             case FOLLOW_TYPE:
@@ -126,10 +123,7 @@ public class FollowRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 for (int i = 0; i < data.getCount(); i++) {
                     imgePath.add(data.getItemList().get(i).getData().getCover().getFeed());
                     titles.add(data.getItemList().get(i).getData().getTitle());
-                    Log.i("info", "title" + data.getItemList().get(i).getData().getTitle());
-                    //tvh.tv_content.setText(data.getItemList().get(i).getData().getTitle());
                 }
-
                 tvh.banner.setImageLoader(loader);
                 tvh.banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
                 tvh.banner.setImages(imgePath);

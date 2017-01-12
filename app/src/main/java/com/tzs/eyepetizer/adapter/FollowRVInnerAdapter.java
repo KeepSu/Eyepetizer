@@ -1,10 +1,7 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +28,10 @@ import butterknife.ButterKnife;
 public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdapter.MyViewHolder> {
     private static Context context;
     private LayoutInflater inflater;
-    private List<Follow.ItemListBeanX.DataBeanX.ItemListBean> list = new ArrayList<>();
-
-    public void setList(List<Follow.ItemListBeanX.DataBeanX.ItemListBean> list) {
-        this.list = list;
+    private  List<Follow.ItemListBeanX.DataBeanX.ItemListBean> list = new ArrayList<>();
+    private View view;
+    public void setList(Follow.ItemListBeanX beanX) {
+        list= beanX.getData().getItemList();
         notifyDataSetChanged();
     }
 
@@ -43,24 +40,29 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.follow_author_item, parent, false);
+        view = inflater.inflate(R.layout.follow_author_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         Follow.ItemListBeanX.DataBeanX.ItemListBean.DataBean data = list.get(position).getData();
         holder.tv_content.setText(data.getTitle());
         String category = data.getCategory();
-        Log.e("=====", "====category====" + category);
         int duration = data.getDuration();
-        Log.e("=====", "====duration====" + duration);
         String time = TimeUtil.getDurnig(duration);
         holder.tv_category.setText("#" + category + " / " + time);
         Glide.with(context).load(data.getCover().getFeed()).placeholder(R.drawable.pgc_default_avatar).into(holder.iv_image);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VideoBeanForClient client = (VideoBeanForClient) list.get(holder.getAdapterPosition());
+                VideoBeanForClient.DataBean data = client.getData();
+                ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data);
+            }
+        });
 
     }
 
@@ -69,7 +71,7 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
         return list.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_image)
         ImageView iv_image;
         @BindView(R.id.tv_content)
@@ -80,14 +82,6 @@ public class FollowRVInnerAdapter extends RecyclerView.Adapter<FollowRVInnerAdap
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    VideoBeanForClient client = (VideoBeanForClient) list.get(0);
-                    VideoBeanForClient.DataBean data = client.getData();
-                    ((BaseActivity) context).goToAnotherActivity(VideoInfoActivity.class, data);
-                }
-            });
         }
     }
 }

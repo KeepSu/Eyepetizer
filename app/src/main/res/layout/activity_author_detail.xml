@@ -49,7 +49,7 @@
                 android:orientation="horizontal"
                 android:background="#ffffff"
                 app:tabMinWidth="70dp"
-                app:tabIndicatorColor="@color/text_normal"
+                app:tabIndicatorColor="#5A5A5A"
                 app:tabSelectedTextColor="@color/text_select"
                 app:tabTextColor="@color/text_normal" />
 

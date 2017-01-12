@@ -1,6 +1,7 @@
 package com.tzs.eyepetizer.entity;
 
 import com.tzs.eyepetizer.entity.select.ItemCollection;
+import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
 
 import java.io.Serializable;
 import java.util.List;
@@ -220,8 +221,8 @@ public class AuthorDetail implements Serializable{
         }
     }
 
-    public static class ItemListBean implements Serializable{
-        @Override
+    public static class ItemListBean extends VideoBeanForClient implements Serializable{
+       /* @Override
         public String toString() {
             return "ItemListBean{" +
                     "data=" + data +
@@ -229,10 +230,10 @@ public class AuthorDetail implements Serializable{
                     '}';
         }
 
-        /**
+        *//**
          * type : video
          * data : {"dataType":"VideoBeanForClient","id":12094,"title":"Omelette 煎蛋卷","description":"Omelet，西式煎蛋卷。睡眼惺忪，披着睡袍，把喜欢的（冰箱里有的）食材切碎，和蛋一起滚平底锅，嫩滑的蛋饼温柔地包裹食材，一口咬下去，你中有我我中有你。怎么搞定这个厉害的蛋呢！企鹅教你做！","provider":{"name":"PGC","alias":"PGC","icon":""},"category":"开胃","author":{"id":176,"icon":"http://img.kaiyanapp.com/c2e2a3647e1d62a7f383f9ab25d08f8d.jpeg","name":"企鹅吃喝指南","description":"你身边最懂吃喝的好朋友","link":"","latestReleaseTime":1482932007000,"videoNum":37,"adTrack":null,"follow":{"itemType":"author","itemId":176,"followed":false}},"cover":{"feed":"http://img.kaiyanapp.com/8c28f96127e8cb09536892605729d151.jpeg?imageMogr2/quality/60","detail":"http://img.kaiyanapp.com/8c28f96127e8cb09536892605729d151.jpeg?imageMogr2/quality/60","blurred":"1","sharing":null},"playUrl":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12094&editionType=default","duration":98,"webUrl":{"raw":"http://www.eyepetizer.net/detail.html?vid=12094","forWeibo":"http://wandou.im/3kto5r"},"releaseTime":1482932007000,"playInfo":[{"height":480,"width":854,"name":"标清","type":"normal","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12094&editionType=normal"},{"height":720,"width":1280,"name":"高清","type":"high","url":"http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12094&editionType=high"}],"consumption":{"collectionCount":425,"shareCount":131,"replyCount":3},"campaign":null,"waterMarks":null,"adTrack":null,"tags":[],"type":"NORMAL","idx":0,"shareAdTrack":null,"favoriteAdTrack":null,"webAdTrack":null,"date":1482932007000,"promotion":null,"label":null,"collected":false,"played":false}
-         */
+         *//*
 
         private String type;
         private DataBean data;
@@ -288,7 +289,7 @@ public class AuthorDetail implements Serializable{
                         '}';
             }
 
-            /**
+            *//**
              * dataType : VideoBeanForClient
              * id : 12094
              * title : Omelette 煎蛋卷
@@ -317,7 +318,7 @@ public class AuthorDetail implements Serializable{
              * label : null
              * collected : false
              * played : false
-             */
+             *//*
 
             private String dataType;
             private int id;
@@ -582,11 +583,11 @@ public class AuthorDetail implements Serializable{
                             '}';
                 }
 
-                /**
+                *//**
                  * name : PGC
                  * alias : PGC
                  * icon :
-                 */
+                 *//*
 
                 private String name;
                 private String alias;
@@ -634,7 +635,7 @@ public class AuthorDetail implements Serializable{
                             '}';
                 }
 
-                /**
+                *//**
                  * id : 176
                  * icon : http://img.kaiyanapp.com/c2e2a3647e1d62a7f383f9ab25d08f8d.jpeg
                  * name : 企鹅吃喝指南
@@ -644,7 +645,7 @@ public class AuthorDetail implements Serializable{
                  * videoNum : 37
                  * adTrack : null
                  * follow : {"itemType":"author","itemId":176,"followed":false}
-                 */
+                 *//*
 
                 private int id;
                 private String icon;
@@ -729,11 +730,11 @@ public class AuthorDetail implements Serializable{
                 }
 
                 public static class FollowBeanX implements Serializable{
-                    /**
+                    *//**
                      * itemType : author
                      * itemId : 176
                      * followed : false
-                     */
+                     *//*
 
                     private String itemType;
                     private int itemId;
@@ -766,12 +767,12 @@ public class AuthorDetail implements Serializable{
             }
 
             public static class CoverBean implements Serializable{
-                /**
+                *//**
                  * feed : http://img.kaiyanapp.com/8c28f96127e8cb09536892605729d151.jpeg?imageMogr2/quality/60
                  * detail : http://img.kaiyanapp.com/8c28f96127e8cb09536892605729d151.jpeg?imageMogr2/quality/60
                  * blurred : 1
                  * sharing : null
-                 */
+                 *//*
 
                 private String feed;
                 private String detail;
@@ -812,10 +813,10 @@ public class AuthorDetail implements Serializable{
             }
 
             public static class WebUrlBean implements Serializable{
-                /**
+                *//**
                  * raw : http://www.eyepetizer.net/detail.html?vid=12094
                  * forWeibo : http://wandou.im/3kto5r
-                 */
+                 *//*
 
                 private String raw;
                 private String forWeibo;
@@ -838,11 +839,11 @@ public class AuthorDetail implements Serializable{
             }
 
             public static class ConsumptionBean implements Serializable{
-                /**
+                *//**
                  * collectionCount : 425
                  * shareCount : 131
                  * replyCount : 3
-                 */
+                 *//*
 
                 private int collectionCount;
                 private int shareCount;
@@ -874,13 +875,13 @@ public class AuthorDetail implements Serializable{
             }
 
             public static class PlayInfoBean implements Serializable{
-                /**
+                *//**
                  * height : 480
                  * width : 854
                  * name : 标清
                  * type : normal
                  * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12094&editionType=normal
-                 */
+                 *//*
 
                 private int height;
                 private int width;
@@ -928,6 +929,6 @@ public class AuthorDetail implements Serializable{
                     this.url = url;
                 }
             }
-        }
+        }*/
     }
 }
