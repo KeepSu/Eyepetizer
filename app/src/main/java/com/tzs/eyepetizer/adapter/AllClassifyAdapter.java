@@ -1,6 +1,7 @@
 package com.tzs.eyepetizer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tzs.eyepetizer.R;
+import com.tzs.eyepetizer.activity.PanoramicActivity;
+import com.tzs.eyepetizer.activity.SubjectActivity;
 import com.tzs.eyepetizer.entity.AllClassify;
 import com.tzs.eyepetizer.util.ImageUtil;
 
@@ -42,7 +45,7 @@ public class AllClassifyAdapter extends RecyclerView.Adapter<AllClassifyAdapter.
 
     @Override
     public void onBindViewHolder(AllClassifyViewHolder holder, int position) {
-        AllClassify.ItemListBean.DataBean data = mList.get(position).getData();
+        final AllClassify.ItemListBean.DataBean data = mList.get(position).getData();
         AllClassifyViewHolder acViewHolder = holder;
         boolean isShade = mList.get(position).getData().isShade();
         if (isShade) {
@@ -52,6 +55,18 @@ public class AllClassifyAdapter extends RecyclerView.Adapter<AllClassifyAdapter.
         }
         acViewHolder.tv_allClassify.setText(data.getTitle());
         ImageUtil.setImage(mContext, data.getImage(), acViewHolder.iv_allClassify);
+
+        //全部分类里面的点击事件
+        acViewHolder.iv_allClassify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (data.getId() == 0) {           //点击进入专题列表
+                    mContext.startActivity(new Intent(mContext, SubjectActivity.class));
+                } else if (data.getId() == 1) {         //点击360全景，进入全景列表页面
+                    mContext.startActivity(new Intent(mContext, PanoramicActivity.class));
+                }
+            }
+        });
     }
 
     @Override

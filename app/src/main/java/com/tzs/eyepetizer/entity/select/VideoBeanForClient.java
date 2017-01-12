@@ -81,7 +81,7 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
         private Object webAdTrack;
         private long date;
         private PromotionBean promotion;
-        private Object label;
+        private LabelBean label;
         private boolean collected;
         private boolean played;
         private List<PlayInfoBean> playInfo;
@@ -271,11 +271,11 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
             this.promotion = promotion;
         }
 
-        public Object getLabel() {
+        public LabelBean getLabel() {
             return label;
         }
 
-        public void setLabel(Object label) {
+        public void setLabel(LabelBean label) {
             this.label = label;
         }
 
@@ -810,6 +810,45 @@ public class VideoBeanForClient extends SelectItem implements Serializable {
 
             public void setText(String text) {
                 this.text = text;
+            }
+        }
+
+        public class LabelBean implements Serializable {
+            /**
+             * text : 360°全景
+             * card : 360°全景
+             * detail : 360°全景
+             */
+
+            private String text;
+            private String card;
+            private String detail;
+
+            public LabelBean() {
+            }
+
+            public String getText() {
+                return text;
+            }
+
+            public void setText(String text) {
+                this.text = text;
+            }
+
+            public String getCard() {
+                return card;
+            }
+
+            public void setCard(String card) {
+                this.card = card;
+            }
+
+            public String getDetail() {
+                return detail;
+            }
+
+            public void setDetail(String detail) {
+                this.detail = detail;
             }
         }
     }

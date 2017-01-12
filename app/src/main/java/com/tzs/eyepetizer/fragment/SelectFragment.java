@@ -1,8 +1,5 @@
 package com.tzs.eyepetizer.fragment;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +14,7 @@ import com.lzy.okhttputils.callback.StringCallback;
 import com.tzs.eyepetizer.R;
 import com.tzs.eyepetizer.activity.BaseActivity;
 import com.tzs.eyepetizer.activity.DailyActivity;
+import com.tzs.eyepetizer.activity.SearchActivity;
 import com.tzs.eyepetizer.adapter.SelectAdapter;
 import com.tzs.eyepetizer.callback.OnPullToRefreshListener;
 import com.tzs.eyepetizer.callback.OnScrollToBottomListener;
@@ -27,7 +25,6 @@ import com.tzs.eyepetizer.entity.select.TextFooter;
 import com.tzs.eyepetizer.entity.select.TextHeader;
 import com.tzs.eyepetizer.entity.select.VideoBeanForClient;
 import com.tzs.eyepetizer.util.TimeUtil;
-import com.tzs.eyepetizer.util.ToastUtil;
 import com.tzs.eyepetizer.view.PullScrollView;
 
 import org.json.JSONArray;
@@ -205,6 +202,7 @@ public class SelectFragment extends BaseFragment implements OnScrollToBottomList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
+                goToAnotherActivity(SearchActivity.class);
                 break;
             case R.id.iv_head:
                 ((BaseActivity) context).transition(DailyActivity.class);
